@@ -1,9 +1,7 @@
 package servlet;
 
 import bean.User;
-import uitls.DBUtils;
-import uitls.JDBCPool;
-import uitls.JDBCUtils;
+import utils.DBUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.logging.Logger;
 

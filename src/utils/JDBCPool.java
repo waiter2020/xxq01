@@ -1,9 +1,7 @@
-package uitls;
+package utils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Properties;
 import java.util.logging.Level;
