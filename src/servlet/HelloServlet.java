@@ -26,6 +26,9 @@ public class HelloServlet extends HttpServlet {
 
         int i=DBUtils.getObjectCount(User.class);
         logger.info(""+i);
+
+
+
     }
 
     @Override
