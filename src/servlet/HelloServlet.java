@@ -23,8 +23,9 @@ public class HelloServlet extends HttpServlet {
     Logger logger=Logger.getLogger(this.getClass().getName());
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("执行了hello方法");
 
+        int i=DBUtils.getObjectCount(User.class);
+        logger.info(""+i);
     }
 
     @Override

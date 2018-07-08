@@ -336,6 +336,59 @@ public class DBUtils {
             JDBCPool.close(connection);
         }
     }
+
+    public static int getObjectCount(Class cls) {
+        PreparedStatement preparedStatement = null;
+        Connection connection = JDBCPool.getConnection();
+        ResultSet rs=null;
+        String sql = "select count(*) from " + cls.getSimpleName();
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            int i =rs.getInt(1);
+            return i;
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+            return 0;
+        }finally {
+            close(connection,preparedStatement,rs);
+
+        }
+    }
+
+    public static PageBean getPage(PageBean pageBean,Class cls){
+        pageBean.setTotalCount(getObjectCount(cls));
+        pageBean.getPageData().clear();
+        PreparedStatement preparedStatement = null;
+        Connection connection = JDBCPool.getConnection();
+        ResultSet rs=null;
+        Field[] fi = cls.getDeclaredFields();
+        String sql = "select * from " + cls.getSimpleName()+" LIMIT "+(pageBean.getCurrentPage()-1)*pageBean.getPageCount()+","+pageBean.getPageCount();
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                Object obj=cls.newInstance();
+                for(Field f:fi)
+                {
+                    //表示可以访问类中的私有属性
+                    f.setAccessible(true);
+                    //调用类中指定属性的set方法赋值
+                    f.set(obj, rs.getObject(f.getName()));
+                }
+                pageBean.getPageData().add(obj);
+            }
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        }finally {
+            close(connection,preparedStatement,rs);
+
+        }
+        return pageBean;
+    }
 }
 
 
