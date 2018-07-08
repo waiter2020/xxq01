@@ -14,6 +14,11 @@ import java.util.logging.Logger;
  */
 public class DBUtils {
     private static final Logger loger = Logger.getLogger(JDBCPool.class.getName());
+
+    /**
+     * 私有构造，禁止实例化
+     */
+    private DBUtils(){}
     /**
      * 执行sql，成功返回true，失败返回false
      *

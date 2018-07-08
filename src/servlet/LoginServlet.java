@@ -23,7 +23,8 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         User byUserName = userService.findByUserName(username);
         request.getSession().setAttribute("loginInfo",byUserName);
-        request.getRequestDispatcher("/index.jsp").forward(request,response);
+        response.sendRedirect("/index.jsp");
+        //request.getRequestDispatcher("/index.jsp").forward(request,response);
     }
 
     @Override
