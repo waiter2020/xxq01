@@ -9,13 +9,13 @@ public class User {
     private int id;
     private String userName;
     private String passWd;
-    private String grade;
+    private int grade;
 
-    public String getGrade() {
+    public int getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(int grade) {
         this.grade = grade;
     }
 
@@ -63,6 +63,7 @@ public class User {
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", passWd='" + passWd + '\'' +
+                ", grade='" + grade + '\'' +
                 '}';
     }
 }
