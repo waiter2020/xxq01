@@ -1,5 +1,7 @@
 package utils;
 
+import utils.annotation.Column;
+
 import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.*;
@@ -116,8 +118,13 @@ public class DBUtils {
         Object obj=null;
         //获取类中的所有的属性
         Field[] fi=cl.getDeclaredFields();
+        String name = fi[0].getName();
+        Column annotation = fi[0].getAnnotation(Column.class);
+        if(annotation!=null){
+            name=annotation.name();
+        }
         //fi[0].getName()获取数据表中第一列字段
-        String sql="select * from "+cl.getSimpleName()+" where "+fi[0].getName()+" = ?";
+        String sql="select * from "+cl.getSimpleName()+" where "+name+" = ?";
         try{
             rs=executeQuerySQL(sql,String.valueOf(id));
             obj = BeanUtils.rsToBean(cl,rs);
@@ -145,6 +152,7 @@ public class DBUtils {
         ResultSet rs=null;
         //获取类中的所有的属性
         Field[] fi=cl.getDeclaredFields();
+
         String sql="select * from "+cl.getSimpleName()+" where "+name+" = ?";
         try{
             rs=executeQuerySQL(sql,value);
@@ -180,7 +188,12 @@ public class DBUtils {
         for(int i=1;i<fi.length;i++)
         {
             //获取列名
-            sb.append(fi[i].getName());
+            String name = fi[i].getName();
+            Column annotation = fi[0].getAnnotation(Column.class);
+            if(annotation!=null){
+                name=annotation.name();
+            }
+            sb.append(name);
             //最后一列不用加逗号
             if(i!=fi.length-1) {
                 sb.append(",");
@@ -235,7 +248,12 @@ public class DBUtils {
         for(int i=1;i<fi.length;i++)
         {
             //获取列名
-            sb.append(fi[i].getName());
+            String name = fi[i].getName();
+            Column annotation = fi[0].getAnnotation(Column.class);
+            if(annotation!=null){
+                name=annotation.name();
+            }
+            sb.append(name);
             sb.append(" =? ");
             //最后一列不用加逗号
             if(i!=fi.length-1) {
