@@ -11,7 +11,7 @@ import java.io.IOException;
  *
  * @author waiter
  */
-@WebServlet(name = "LogoutServlet",urlPatterns = "do_logout")
+@WebServlet(name = "LogoutServlet",urlPatterns = "/do_logout")
 public class LogoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

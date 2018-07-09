@@ -53,6 +53,7 @@ public class DBUtils {
         Connection connection =  JDBCPool.getConnection();
         PreparedStatement statement = null;
         ResultSet set=null;
+
         try {
             statement = connection.prepareStatement(sql);
             for (int i = 0, n = params.length; i < n; i++) {

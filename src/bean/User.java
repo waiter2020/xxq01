@@ -6,9 +6,9 @@ package bean;
  * @author waiter
  */
 public class User {
-    int id;
-    String userName;
-    String passWd;
+    private int id;
+    private String userName;
+    private String passWd;
 
 
     public User() {
