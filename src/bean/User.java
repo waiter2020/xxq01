@@ -9,7 +9,15 @@ public class User {
     private int id;
     private String userName;
     private String passWd;
+    private String grade;
 
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
 
     public User() {
     }
