@@ -18,6 +18,7 @@ public class DepartDaoImpl implements DepartDao{
 
     DepartDaoImpl(){}
 
+    @Override
     public LinkedList departList(){
         LinkedList list = null;
         list = DBUtils.getList(Depart.class);
@@ -27,16 +28,17 @@ public class DepartDaoImpl implements DepartDao{
             return list;
         }
     }
+    @Override
     public Depart findById(int staffid){
         LinkedList departName = DBUtils.getListBySome(Depart.class, "staffid", staffid+"");
+
         Depart depart = (Depart) departName.remove(0);
-        if(depart.getDepartname()==null){
+        if(depart==null){
             return null;
         }else{
             return depart;
         }
     }
-
     public Depart findByName(String departname){
         LinkedList departName = DBUtils.getListBySome(Depart.class, "departname", departname+"");
         if(departName.size()==0){
@@ -49,7 +51,10 @@ public class DepartDaoImpl implements DepartDao{
     public boolean departInsert(Depart depart){
         return DBUtils.insert(depart);
     }
+
+    @Override
     public boolean deleteByName(String departname){
+
         Depart depart=findByName(departname);
         if(depart.getDepartname()==null){
             return false;
@@ -58,12 +63,15 @@ public class DepartDaoImpl implements DepartDao{
         }
 
     }
+    @Override
+
     public boolean updateByName(String departname,Depart dp){
         Depart depart = findByName(departname);
         Depart dp2 = new Depart(depart.getId(),dp.getDepartname(),dp.getStaffid());
         return DBUtils.update(dp2);
     }
 
+    @Override
     public PageBean listPage(PageBean pageBean) {
         return DBUtils.getPage(pageBean,Depart.class);
     }

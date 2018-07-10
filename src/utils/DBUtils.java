@@ -411,7 +411,66 @@ public class DBUtils {
         return pageBean;
     }
 
+    /**
+     * 分页查询功能加强版，实现多条件筛选
+     * @param pageBean
+     * @param cls
+     * @param map map参数中key对应字段名，value对应字段值
+     * @return
+     */
+    public static PageBean getPageBySome(PageBean pageBean,Class cls,Map<String,String> map){
+        pageBean.setTotalCount(getObjectCount(cls));
+        pageBean.getPageData().clear();
+        ResultSet set=null;
+        String sql="select * from "+cls.getSimpleName()+" where ";
 
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            sql+=entry.getKey()+" = "+entry.getValue()+" AND ";
+        }
+        String substring = sql.substring(0, sql.length() - 4);
+        substring+=" LIMIT "+(pageBean.getCurrentPage()-1)*pageBean.getPageCount()+","+pageBean.getPageCount();
+
+        try {
+            set=executeQuerySQL(substring);
+            pageBean.getPageData().addAll(BeanUtils.rsToBeanList(cls,set));
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        }finally {
+            close(null,null,set);
+
+        }
+        return pageBean;
+    }
+
+    /**
+     * getList加强版，可实现多个查询条件
+     * @param cl
+     * @param map map参数中key对应字段名，value对应字段值
+     * @return
+     */
+    public static LinkedList getListBySome(Class cl,Map<String,String> map)
+    {
+        LinkedList list=null;
+        ResultSet rs=null;
+
+
+        String sql="select * from "+cl.getSimpleName()+" where ";
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            sql+=entry.getKey()+" = "+entry.getValue()+" AND ";
+        }
+        String substring = sql.substring(0, sql.length() - 4);
+        try{
+            rs=executeQuerySQL(substring);
+            list=BeanUtils.rsToBeanList(cl,rs);
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }finally{
+            DBUtils.close(null, null,rs);
+        }
+        return list;
+    }
 }
 
 
