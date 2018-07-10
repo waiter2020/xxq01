@@ -29,8 +29,9 @@ public class DepartDaoImpl implements DepartDao{
         }
     }
     @Override
-    public Depart findById(String staffid){
-        LinkedList departName = DBUtils.getListBySome(Depart.class, "staffid", staffid);
+    public Depart findById(int staffid){
+        LinkedList departName = DBUtils.getListBySome(Depart.class, "staffid", staffid+"");
+
         Depart depart = (Depart) departName.remove(0);
         if(depart==null){
             return null;
@@ -39,27 +40,35 @@ public class DepartDaoImpl implements DepartDao{
         }
     }
     public Depart findByName(String departname){
-        LinkedList departName = DBUtils.getListBySome(Depart.class,"departname",departname);
-        Depart depart = (Depart) departName.remove(0);
-        if(depart==null){
-            return null;
+        LinkedList departName = DBUtils.getListBySome(Depart.class, "departname", departname+"");
+        if(departName.size()==0){
+            return new Depart(0,"not exist",0);
         }else{
-            return depart;
+            return (Depart) departName.remove(0);
         }
     }
-    @Override
+
     public boolean departInsert(Depart depart){
         return DBUtils.insert(depart);
     }
+
     @Override
-    public boolean DeleteByName(String departname){
+    public boolean deleteByName(String departname){
+
         Depart depart=findByName(departname);
-        DBUtils.delete(Depart.class,depart.getId());
-        return true;
+        if(depart.getDepartname()==null){
+            return false;
+        }else{
+            return DBUtils.delete(Depart.class,depart.getId());
+        }
+
     }
     @Override
-    public boolean updateByName(Depart depart){
-        return DBUtils.update(depart);
+
+    public boolean updateByName(String departname,Depart dp){
+        Depart depart = findByName(departname);
+        Depart dp2 = new Depart(depart.getId(),dp.getDepartname(),dp.getStaffid());
+        return DBUtils.update(dp2);
     }
 
     @Override
