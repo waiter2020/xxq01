@@ -18,6 +18,10 @@ import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 
 /**
+ * 这是一个加密类
+ */
+
+/**
  * BCrypt implements OpenBSD-style Blowfish password hashing using
  * the scheme described in "A Future-Adaptable Password Scheme" by
  * Niels Provos and David Mazieres.
