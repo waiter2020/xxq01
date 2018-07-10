@@ -18,6 +18,7 @@ public class DepartDaoImpl implements DepartDao{
 
     DepartDaoImpl(){}
 
+    @Override
     public LinkedList departList(){
         LinkedList list = null;
         list = DBUtils.getList(Depart.class);
@@ -27,6 +28,7 @@ public class DepartDaoImpl implements DepartDao{
             return list;
         }
     }
+    @Override
     public Depart findById(String staffid){
         LinkedList departName = DBUtils.getListBySome(Depart.class, "staffid", staffid);
         Depart depart = (Depart) departName.remove(0);
@@ -45,18 +47,22 @@ public class DepartDaoImpl implements DepartDao{
             return depart;
         }
     }
+    @Override
     public boolean departInsert(Depart depart){
         return DBUtils.insert(depart);
     }
+    @Override
     public boolean DeleteByName(String departname){
         Depart depart=findByName(departname);
         DBUtils.delete(Depart.class,depart.getId());
         return true;
     }
+    @Override
     public boolean updateByName(Depart depart){
         return DBUtils.update(depart);
     }
 
+    @Override
     public PageBean listPage(PageBean pageBean) {
         return DBUtils.getPage(pageBean,Depart.class);
     }

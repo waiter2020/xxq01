@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="bean.Staff" %>
 <%@ page import="utils.PageBean" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
@@ -70,25 +71,33 @@
 									<th>年龄</th>
 									<th>岗位</th>
 									<th>工资</th>
+									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
-							<%
-								PageBean pageBean = (PageBean) request.getAttribute("page");
-								if(pageBean!=null){
-                                    LinkedList<Staff> pageData = pageBean.getPageData();
-                                    for(Staff l:pageData){
-                                        out.println("<tr>");
-                                        out.println("<td>"+l.getUserName()+"</td>");
-                                        out.println("<td>"+l.getStaffName()+"</td>");
-                                        out.println("<td>"+l.getPhoneNum()+"</td>");
-                                        out.println("<td>"+l.getAge()+"</td>");
-                                        out.println("<td>"+l.getStation()+"</td>");
-                                        out.println("<td>"+l.getwAges()+"</td>");
-                                        out.println("</tr>");
-                                    }
-                                }
-							%>
+                            <c:choose>
+                                <c:when test="${not empty requestScope.page.pageData}">
+                                    <c:forEach var="staff" items="${requestScope.page.pageData}" varStatus="vs">
+                                        <tr>
+                                            <td>${staff.userName }</td>
+                                            <td>${staff.staffName }</td>
+                                            <td>${staff.phoneNum}</td>
+                                            <td>${staff.age}</td>
+                                            <td>${staff.station}</td>
+                                            <td>${staff.wAges}</td>
+                                            <td>
+                                                <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/staff/list/delete?id=${staff.id}'" href="${pageContext.request.contextPath}/staff/list/delete?id=${staff.id}" class="btn btn-sm btn-danger ">辞退</button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    <tr>
+                                        <td colspan="3">对不起，没有你要找的数据</td>
+                                    </tr>
+                                </c:otherwise>
+                            </c:choose>
+
 							</tbody>
 						</table>
                         当前${requestScope.page.currentPage }/${requestScope.page.totalPage }页     &nbsp;&nbsp;
@@ -99,9 +108,7 @@
                         <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.totalPage}">末页</a>&nbsp;&nbsp;
 					</div>
 				</main>
-				<form id="deleteEmpForm"  method="post">
-					<input type="hidden" name="_method" value="delete"/>
-				</form>
+
 			</div>
 		</div>
 
@@ -118,12 +125,6 @@
 		<script>
 			feather.replace()
 		</script>
-		<script>
-			$(".deleteBtn").click(function(){
-			    //删除当前员工的
-			    $("#deleteEmpForm").attr("action",$(this).attr("del_uri")).submit();
-			    return false;
-            });
-		</script>
+
 	</body>
 </html>
