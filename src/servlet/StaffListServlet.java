@@ -29,20 +29,15 @@ public class StaffListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StaffService staffService = StaffService.getStaffService();
-        PageBean pageBean=null;
+        PageBean pageBean = new PageBean();
         String currentPage = request.getParameter("currentPage");
         if(currentPage!=null&&!currentPage.isEmpty()){
-            pageBean= (PageBean) request.getAttribute("page");
-        }
-        if (pageBean==null) {
-            pageBean=new PageBean();
-            User loginInfo = (User) request.getSession().getAttribute("loginInfo");
-            Staff byUserName = staffService.findByUserName(loginInfo.getUserName());
-            pageBean = staffService.findByPageAndDepartment(pageBean, byUserName.getDepartment());
-        }else {
             pageBean.setCurrentPage(Integer.parseInt(currentPage));
-            pageBean = staffService.findByPageAndDepartment(pageBean,((Staff)pageBean.getPageData().getFirst()).getDepartment());
         }
+        User loginInfo = (User) request.getSession().getAttribute("loginInfo");
+        Staff byUserName = staffService.findByUserName(loginInfo.getUserName());
+        pageBean = staffService.findByPageAndDepartment(pageBean, byUserName.getDepartment());
+
         request.setAttribute("page",pageBean);
         request.getRequestDispatcher("/staff/list.jsp").forward(request,response);
     }

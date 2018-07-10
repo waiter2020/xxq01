@@ -69,7 +69,7 @@
 									<th>电话</th>
 									<th>年龄</th>
 									<th>岗位</th>
-									<th>工龄</th>
+									<th>工资</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -89,26 +89,14 @@
                                     }
                                 }
 							%>
-								<%--<tr th:each="emp:${emps}">--%>
-									<%--<td th:text="${emp.id}"></td>--%>
-									<%--<td>[[${emp.lastName}]]</td>--%>
-									<%--<td th:text="${emp.email}"></td>--%>
-									<%--<td th:text="${emp.gender}==0?'女':'男'"></td>--%>
-									<%--<td th:text="${emp.department.departmentName}"></td>--%>
-									<%--<td th:text="${#dates.format(emp.birth, 'yyyy-MM-dd HH:mm')}"></td>--%>
-									<%--<td>--%>
-										<%--<a class="btn btn-sm btn-primary" th:href="@{/emp/}+${emp.id}">编辑</a>--%>
-										<%--<button th:attr="del_uri=@{/emp/}+${emp.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>--%>
-									<%--</td>--%>
-								<%--</tr>--%>
 							</tbody>
 						</table>
                         当前${requestScope.page.currentPage }/${requestScope.page.totalPage }页     &nbsp;&nbsp;
 
                         <a href="${pageContext.request.contextPath }/staff/list?currentPage=1">首页</a>&nbsp;&nbsp;
-                        <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.pageBean.currentPage-1}">上一页 </a>&nbsp;&nbsp;
-                        <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.pageBean.currentPage+1}">下一页 </a>&nbsp;&nbsp;
-                        <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.pageBean.totalPage}">末页</a>&nbsp;&nbsp;
+                        <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.currentPage>1?requestScope.page.currentPage-1:1}">上一页 </a>&nbsp;&nbsp;
+                        <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.currentPage<requestScope.page.totalPage?requestScope.page.currentPage+1:requestScope.page.totalPage}">下一页 </a>&nbsp;&nbsp;
+                        <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.totalPage}">末页</a>&nbsp;&nbsp;
 					</div>
 				</main>
 				<form id="deleteEmpForm"  method="post">
