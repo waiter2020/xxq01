@@ -76,4 +76,7 @@ public class BeanUtils {
         list.remove(null);
         return list;
     }
+
+
+
 }

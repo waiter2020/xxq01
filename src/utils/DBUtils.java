@@ -384,6 +384,34 @@ public class DBUtils {
         }
         return pageBean;
     }
+
+    /**
+     * 分页查询功能，通过某一字段的值筛选分页
+     * @param pageBean 工具类中的PageBean对象
+     * @param cls 实体类字节码文件
+     * @param name
+     * @param value
+     * @return
+     */
+    public static PageBean getPageBySome(PageBean pageBean,Class cls,String name,String value){
+        pageBean.setTotalCount(getObjectCount(cls));
+        pageBean.getPageData().clear();
+        ResultSet set=null;
+        String sql="select * from "+cls.getSimpleName()+" where "+name+" = ?"+" LIMIT "+(pageBean.getCurrentPage()-1)*pageBean.getPageCount()+","+pageBean.getPageCount();;
+        try {
+            set=executeQuerySQL(sql,value);
+            pageBean.getPageData().addAll(BeanUtils.rsToBeanList(cls,set));
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        }finally {
+            close(null,null,set);
+
+        }
+        return pageBean;
+    }
+
+
 }
 
 
