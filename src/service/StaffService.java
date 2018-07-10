@@ -27,4 +27,15 @@ public class StaffService {
         return staffDao.findByUserName(userName);
     }
 
+    public PageBean findByPageAndDepartmentAndIsWork(PageBean pageBean,int department,boolean iswork){
+       return staffDao.findByPageAndDepartmentAndIsWork(pageBean,department,iswork);
+    }
+
+    public boolean dismissStaff(int id){
+        boolean b = false;
+        Staff byId = staffDao.findById(id);
+        byId.setIsWork(false);
+        b = staffDao.save(byId);
+        return b;
+    }
 }

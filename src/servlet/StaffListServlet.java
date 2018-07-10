@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * Created by  waiter on 18-7-9  下午9:48.
@@ -20,6 +21,7 @@ import java.io.IOException;
  */
 @WebServlet(name = "StaffListServlet",urlPatterns = {"/staff/list"})
 public class StaffListServlet extends HttpServlet {
+    Logger logger=Logger.getLogger(this.getClass().getName());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +38,8 @@ public class StaffListServlet extends HttpServlet {
         }
         User loginInfo = (User) request.getSession().getAttribute("loginInfo");
         Staff byUserName = staffService.findByUserName(loginInfo.getUserName());
-        pageBean = staffService.findByPageAndDepartment(pageBean, byUserName.getDepartment());
+        logger.info("用户："+byUserName+"查询了员工列表");
+        pageBean = staffService.findByPageAndDepartmentAndIsWork(pageBean,byUserName.getDepartment(),true);
 
         request.setAttribute("page",pageBean);
         request.getRequestDispatcher("/staff/list.jsp").forward(request,response);

@@ -382,6 +382,7 @@ public class DBUtils {
             close(null,null,rs);
 
         }
+
         return pageBean;
     }
 
@@ -394,7 +395,9 @@ public class DBUtils {
      * @return
      */
     public static PageBean getPageBySome(PageBean pageBean,Class cls,String name,String value){
-        pageBean.setTotalCount(getObjectCount(cls));
+        Map<String,String> map = new TreeMap<>();
+        map.put(name, value);
+        pageBean.setTotalCount(getObjectCount(cls,map));
         pageBean.getPageData().clear();
         ResultSet set=null;
         String sql="select * from "+cls.getSimpleName()+" where "+name+" = ?"+" LIMIT "+(pageBean.getCurrentPage()-1)*pageBean.getPageCount()+","+pageBean.getPageCount();;
@@ -408,6 +411,7 @@ public class DBUtils {
             close(null,null,set);
 
         }
+
         return pageBean;
     }
 
@@ -419,7 +423,7 @@ public class DBUtils {
      * @return
      */
     public static PageBean getPageBySome(PageBean pageBean,Class cls,Map<String,String> map){
-        pageBean.setTotalCount(getObjectCount(cls));
+        pageBean.setTotalCount(getObjectCount(cls,map));
         pageBean.getPageData().clear();
         ResultSet set=null;
         String sql="select * from "+cls.getSimpleName()+" where ";
@@ -440,6 +444,7 @@ public class DBUtils {
             close(null,null,set);
 
         }
+
         return pageBean;
     }
 
@@ -470,6 +475,30 @@ public class DBUtils {
             DBUtils.close(null, null,rs);
         }
         return list;
+    }
+    public static int getObjectCount(Class cls,Map<String,String> map) {
+        PreparedStatement preparedStatement = null;
+        Connection connection = JDBCPool.getConnection();
+        ResultSet rs=null;
+        String sql = "select count(*) from " + cls.getSimpleName()+" WHERE ";
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            sql+=entry.getKey()+" = "+entry.getValue()+" AND ";
+        }
+        String substring = sql.substring(0, sql.length() - 4);
+        try {
+            preparedStatement = connection.prepareStatement(substring);
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            int i =rs.getInt(1);
+            return i;
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+            return 0;
+        }finally {
+            close(connection,preparedStatement,rs);
+
+        }
     }
 }
 
