@@ -12,7 +12,7 @@ public class Depart {
 
     public Depart(){}
 
-    public Depart(int id, String departname, int staffid) {
+    public Depart(int id,String departname, int staffid) {
         this.id = id;
         this.departname = departname;
         this.staffid = staffid;
