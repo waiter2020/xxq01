@@ -59,9 +59,9 @@
             </li>
             <li class="nav-item">
                 <a <%
-                    out.println("class=\""+ (activeUri.equals("emp")?"nav-link active":"nav-link")+"\"");
+                    out.println("class=\""+ (activeUri.equals("staff")?"nav-link active":"nav-link")+"\"");
                     %>
-                        href="${pageContext.request.contextPath}/emp/list">
+                        href="${pageContext.request.contextPath}/staff/list">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>

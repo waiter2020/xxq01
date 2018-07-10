@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findByUserName(String userName) {
         LinkedList userName1 = DBUtils.getListBySome(User.class, "userName", userName);
-        return (User) userName1.remove(0);
+        return userName1.size()>0?(User) userName1.remove(0):null;
     }
 
     public synchronized static UserDaoImpl getUserDaoImpl() {

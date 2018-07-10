@@ -14,6 +14,8 @@ public class UserService {
     private static final UserService userService=new UserService();
     private UserService(){}
 
+
+
     public User findByUserName(String userName){
 
         return userDao.findByUserName(userName);

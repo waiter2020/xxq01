@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="bean.Staff" %>
+<%@ page import="utils.PageBean" %>
 <!DOCTYPE html>
 <!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
@@ -46,7 +48,7 @@
 	<body>
 		<!--引入抽取的topbar-->
         <jsp:include page="${pageContext.request.contextPath}/commons/bar.jsp">
-            <jsp:param value="emp" name="activeUri"/>
+            <jsp:param value="staff" name="activeUri"/>
             <jsp:param name="title" value="员工列表"/>
         </jsp:include>
 
@@ -62,16 +64,31 @@
 						<table class="table table-striped table-sm">
 							<thead>
 								<tr>
-									<th>#</th>
-									<th>lastName</th>
-									<th>email</th>
-									<th>gender</th>
-									<th>department</th>
-									<th>birth</th>
-									<th>操作</th>
+									<th>工号</th>
+									<th>姓名</th>
+									<th>电话</th>
+									<th>年龄</th>
+									<th>岗位</th>
+									<th>工龄</th>
 								</tr>
 							</thead>
 							<tbody>
+							<%
+								PageBean pageBean = (PageBean) request.getAttribute("page");
+								if(pageBean!=null){
+                                    LinkedList<Staff> pageData = pageBean.getPageData();
+                                    for(Staff l:pageData){
+                                        out.println("<tr>");
+                                        out.println("<td>"+l.getUserName()+"</td>");
+                                        out.println("<td>"+l.getStaffName()+"</td>");
+                                        out.println("<td>"+l.getPhoneNum()+"</td>");
+                                        out.println("<td>"+l.getAge()+"</td>");
+                                        out.println("<td>"+l.getStation()+"</td>");
+                                        out.println("<td>"+l.getwAges()+"</td>");
+                                        out.println("</tr>");
+                                    }
+                                }
+							%>
 								<%--<tr th:each="emp:${emps}">--%>
 									<%--<td th:text="${emp.id}"></td>--%>
 									<%--<td>[[${emp.lastName}]]</td>--%>
@@ -86,6 +103,12 @@
 								<%--</tr>--%>
 							</tbody>
 						</table>
+                        当前${requestScope.page.currentPage }/${requestScope.page.totalPage }页     &nbsp;&nbsp;
+
+                        <a href="${pageContext.request.contextPath }/staff/list?currentPage=1">首页</a>&nbsp;&nbsp;
+                        <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.pageBean.currentPage-1}">上一页 </a>&nbsp;&nbsp;
+                        <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.pageBean.currentPage+1}">下一页 </a>&nbsp;&nbsp;
+                        <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.pageBean.totalPage}">末页</a>&nbsp;&nbsp;
 					</div>
 				</main>
 				<form id="deleteEmpForm"  method="post">
