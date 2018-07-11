@@ -72,7 +72,7 @@ public class DepartService {
 
     /**
      * 分页展示部门信息
-     * @param pageBean
+     * @param
      * @return PageBean
      */
     public PageBean listPage(PageBean pageBean){
