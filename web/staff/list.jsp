@@ -60,7 +60,10 @@
 
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2><a class="btn btn-sm btn-success" href="emp" >员工添加</a></h2>
+					<h2><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/staff/add.jsp" >员工添加</a></h2>
+                    <c:if test="${requestScope.get('msg')!=null}">
+                        <h2 class="btn btn-sm btn-danger">${requestScope.get("msg")}</h2>
+                    </c:if>
 					<div class="table-responsive">
 						<table class="table table-striped table-sm">
 							<thead>
@@ -68,6 +71,7 @@
 									<th>工号</th>
 									<th>姓名</th>
 									<th>电话</th>
+                                    <td>性别</td>
 									<th>年龄</th>
 									<th>岗位</th>
 									<th>工资</th>
@@ -82,6 +86,7 @@
                                             <td>${staff.userName }</td>
                                             <td>${staff.staffName }</td>
                                             <td>${staff.phoneNum}</td>
+                                            <td>${staff.sex==0?'男':'女'}</td>
                                             <td>${staff.age}</td>
                                             <td>${staff.station}</td>
                                             <td>${staff.wAges}</td>

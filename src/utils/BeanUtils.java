@@ -44,14 +44,20 @@ public class BeanUtils {
                     name=annotation1.name();
                 }
                 if (annotation != null) {
-
-                    f.set(obj,new Date(set.getDate(name).getTime()));
+                    java.sql.Date date = set.getDate(name);
+                    if (date==null){
+                        continue;
+                    }
+                    f.set(obj,new Date(date.getTime()));
 
 
                 }else {
-
+                    Object object = set.getObject(name);
+                    if(object==null){
+                        continue;
+                    }
                     //调用类中指定属性的set方法赋值
-                    f.set(obj, set.getObject(name));
+                    f.set(obj, object);
                 }
             }
         } catch (Exception e) {

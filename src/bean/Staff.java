@@ -22,6 +22,9 @@ public class Staff {
     private boolean isWork;
     @Column(name = "wages")
     private int wAges;
+
+
+    private int sex;
     public Staff(){}
 
     public Staff(String userName, String staffName, int department, int station, String phoneNum, int age, String idCard, boolean isWork, int wAges) {
@@ -116,6 +119,21 @@ public class Staff {
         this.wAges = wAges;
     }
 
+    public boolean isWork() {
+        return isWork;
+    }
+
+    public void setWork(boolean work) {
+        isWork = work;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
     @Override
     public String toString() {
         return "Staff{" +
