@@ -66,7 +66,6 @@
 								<tr>
 									<th>部门号</th>
 									<th>部门名</th>
-									<th>经理工号</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -78,7 +77,6 @@
                                         out.println("<tr>");
                                         out.println("<td>"+l.getId()+"</td>");
                                         out.println("<td>"+l.getDepartname()+"</td>");
-                                        out.println("<td>"+l.getStaffid()+"</td>");
                                         out.println("</tr>");
                                     }
                                 }
