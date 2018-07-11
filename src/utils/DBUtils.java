@@ -1,6 +1,7 @@
 package utils;
 
 import utils.annotation.Column;
+import utils.annotation.OneToOne;
 
 import java.lang.reflect.Field;
 import java.sql.*;
@@ -189,7 +190,9 @@ public class DBUtils {
         {
             //获取列名
             String name = fi[i].getName();
-            Column annotation = fi[0].getAnnotation(Column.class);
+            Column annotation = fi[i].getAnnotation(Column.class);
+
+
             if(annotation!=null){
                 name=annotation.name();
             }
@@ -216,8 +219,20 @@ public class DBUtils {
             for(int i=1;i<fi.length;i++)
             {
                 fi[i].setAccessible(true);
+                OneToOne annotation1 = fi[i].getAnnotation(OneToOne.class);
                 //第一列为主键，不用添加(对应数组下标是0)
-                pstmt.setObject(i,fi[i].get(obj));
+                if(annotation1!=null){
+                    Object o = fi[i].get(obj);
+                    if(o!=null) {
+                        Field[] declaredFields = o.getClass().getDeclaredFields();
+                        declaredFields[0].setAccessible(true);
+                        int anInt = declaredFields[0].getInt(o);
+                        //update(o);
+                        pstmt.setObject(i, anInt);
+                    }
+                }else {
+                    pstmt.setObject(i,fi[i].get(obj));
+                }
             }
             int row=pstmt.executeUpdate();
             if(row>0){
@@ -268,10 +283,24 @@ public class DBUtils {
             for(int i=1;i<fi.length;i++)
             {
                 fi[i].setAccessible(true);
-                pstmt.setObject(i,fi[i].get(obj));
+                OneToOne annotation1 = fi[i].getAnnotation(OneToOne.class);
+                //第一列为主键，不用添加(对应数组下标是0)
+                if(annotation1!=null){
+                    Object o = fi[i].get(obj);
+                    if(o!=null) {
+                        Field[] declaredFields = o.getClass().getDeclaredFields();
+                        declaredFields[0].setAccessible(true);
+                        int anInt = declaredFields[0].getInt(o);
+                        //update(o);
+                        pstmt.setObject(i, anInt);
+                    }
+                }else {
+                    pstmt.setObject(i, fi[i].get(obj));
+                }
             }
             fi[0].setAccessible(true);
             //主键是第一列
+
             pstmt.setObject(fi.length, fi[0].get(obj));
             int row=pstmt.executeUpdate();
             if(row>0){

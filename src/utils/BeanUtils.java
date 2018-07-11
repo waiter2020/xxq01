@@ -2,6 +2,7 @@ package utils;
 
 import utils.annotation.DateType;
 import utils.annotation.Column;
+import utils.annotation.OneToOne;
 
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
@@ -32,32 +33,43 @@ public class BeanUtils {
         Object obj= null;
         try {
             obj = cls.newInstance();
-            for(Field f:declaredFields)
-            {
+            for(Field f:declaredFields) {
                 String name = f.getName();
                 //访问类中的私有属性
                 f.setAccessible(true);
 
                 DateType annotation = f.getAnnotation(DateType.class);
                 Column annotation1 = f.getAnnotation(Column.class);
-                if(annotation1!=null){
-                    name=annotation1.name();
-                }
-                if (annotation != null) {
-                    java.sql.Date date = set.getDate(name);
-                    if (date==null){
-                        continue;
-                    }
-                    f.set(obj,new Date(date.getTime()));
-
-
-                }else {
+                OneToOne annotation2 = f.getAnnotation(OneToOne.class);
+                if (annotation2 != null) {
                     Object object = set.getObject(name);
-                    if(object==null){
-                        continue;
+                    if(object!=null) {
+                        Object objectById = DBUtils.getObjectById(annotation2.bean(), (int) object);
+                        if(objectById!=null){
+                            f.set(obj,objectById);
+                        }
                     }
-                    //调用类中指定属性的set方法赋值
-                    f.set(obj, object);
+
+                } else {
+                    if (annotation1 != null) {
+                        name = annotation1.name();
+                    }
+                    if (annotation != null) {
+                        java.sql.Date date = set.getDate(name);
+                        if (date == null) {
+                            continue;
+                        }
+                        f.set(obj, new Date(date.getTime()));
+
+
+                    } else {
+                        Object object = set.getObject(name);
+                        if (object == null) {
+                            continue;
+                        }
+                        //调用类中指定属性的set方法赋值
+                        f.set(obj, object);
+                    }
                 }
             }
         } catch (Exception e) {
