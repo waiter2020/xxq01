@@ -16,7 +16,7 @@ import java.util.LinkedList;
 public class DepartDaoImpl implements DepartDao{
     private static final DepartDaoImpl departDaoImpl = new DepartDaoImpl();
 
-    DepartDaoImpl(){}
+    private DepartDaoImpl(){}
 
 //    @Override
 //    public LinkedList departList(){

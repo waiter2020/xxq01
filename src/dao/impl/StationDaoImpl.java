@@ -11,8 +11,9 @@ import utils.PageBean;
  */
 public class StationDaoImpl implements StationDao{
     private static final StationDaoImpl stationDaoImpl = new StationDaoImpl();
-    StationDaoImpl(){}
+    private StationDaoImpl(){}
 
+    @Override
     public PageBean listPage(PageBean pageBean){
         return DBUtils.getPage(pageBean,Station.class);
     }

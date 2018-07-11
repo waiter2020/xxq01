@@ -476,6 +476,13 @@ public class DBUtils {
         }
         return list;
     }
+
+    /**
+     * 限定条件统计总数
+     * @param cls
+     * @param map
+     * @return
+     */
     public static int getObjectCount(Class cls,Map<String,String> map) {
         PreparedStatement preparedStatement = null;
         Connection connection = JDBCPool.getConnection();
@@ -490,6 +497,127 @@ public class DBUtils {
             rs = preparedStatement.executeQuery();
             rs.next();
             int i =rs.getInt(1);
+            return i;
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+            return 0;
+        }finally {
+            close(connection,preparedStatement,rs);
+
+        }
+    }
+
+    /**
+     * 分页查询功能，通过查询某一字段的值比value大筛选分页
+     * @param pageBean 工具类中的PageBean对象
+     * @param cls 实体类字节码文件
+     * @param name
+     * @param value
+     * @return
+     */
+    public static PageBean getPageByAfterSome(PageBean pageBean,Class cls,String name,String value){
+        Map<String,String> map = new TreeMap<>();
+        map.put(value, name);
+        pageBean.setTotalCount(getObjectCount(cls,map,">"));
+        pageBean.getPageData().clear();
+        ResultSet set=null;
+        String sql="select * from "+cls.getSimpleName()+" where "+name+" > ?"+" LIMIT "+(pageBean.getCurrentPage()-1)*pageBean.getPageCount()+","+pageBean.getPageCount();;
+        try {
+            set=executeQuerySQL(sql,value);
+            pageBean.getPageData().addAll(BeanUtils.rsToBeanList(cls,set));
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        }finally {
+            close(null,null,set);
+
+        }
+
+        return pageBean;
+    }
+
+    /**
+     * 分页查询功能，通过查询某一字段的值比value小筛选分页
+     * @param pageBean 工具类中的PageBean对象
+     * @param cls 实体类字节码文件
+     * @param name
+     * @param value
+     * @return
+     */
+    public static PageBean getPageByBeforSome(PageBean pageBean,Class cls,String name,String value){
+        Map<String,String> map = new TreeMap<>();
+        map.put(value, name);
+        pageBean.setTotalCount(getObjectCount(cls,map,"<"));
+        pageBean.getPageData().clear();
+        ResultSet set=null;
+        String sql="select * from "+cls.getSimpleName()+" where "+name+" < ?"+" LIMIT "+(pageBean.getCurrentPage()-1)*pageBean.getPageCount()+","+pageBean.getPageCount();;
+        try {
+            set=executeQuerySQL(sql,value);
+            pageBean.getPageData().addAll(BeanUtils.rsToBeanList(cls,set));
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        }finally {
+            close(null,null,set);
+
+        }
+
+        return pageBean;
+    }
+
+    /**
+     * 分页查询功能，通过查询某一字段的值比value小且比value大筛选分页
+     * @param pageBean 工具类中的PageBean对象
+     * @param cls 实体类字节码文件
+     * @param name
+     * @param value
+     * @return
+     */
+    public static PageBean getPageByBeforSomeAndAfterSome(PageBean pageBean,Class cls,String name,String value,String name1,String value1){
+        Map<String,String> map = new TreeMap<>();
+        map.put(value, name);
+        map.put(value1,name1);
+        pageBean.setTotalCount(getObjectCount(cls,map,">","<"));
+        pageBean.getPageData().clear();
+        ResultSet set=null;
+        String sql="select * from "+cls.getSimpleName()+" where "+name+" < ? "+" AND "+name1+" >? "+" LIMIT "+(pageBean.getCurrentPage()-1)*pageBean.getPageCount()+","+pageBean.getPageCount();;
+        try {
+            set=executeQuerySQL(sql,value,value1);
+            pageBean.getPageData().addAll(BeanUtils.rsToBeanList(cls,set));
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        }finally {
+            close(null,null,set);
+
+        }
+
+        return pageBean;
+    }
+
+
+    /**
+     * 限定条件统计总数
+     * @param cls
+     * @param map key和value值调换了
+     * @return
+     */
+    public static int getObjectCount(Class cls,Map<String,String> map,String ...op) {
+        PreparedStatement preparedStatement = null;
+        Connection connection = JDBCPool.getConnection();
+        ResultSet rs=null;
+        int i=0;
+        String sql = "select count(*) from " + cls.getSimpleName()+" WHERE ";
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            sql+=entry.getValue()+" "+op[i++]+" "+"'"+entry.getKey()+"'"+" AND ";
+        }
+        String substring = sql.substring(0, sql.length() - 4);
+        try {
+            preparedStatement = connection.prepareStatement(substring);
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            i =rs.getInt(1);
             return i;
         }catch (Exception e){
             loger.info(e.getMessage());
