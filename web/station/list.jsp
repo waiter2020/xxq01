@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="bean.Depart" %>
+<%@ page import="bean.Station" %>
 <%@ page import="utils.PageBean" %>
 <!DOCTYPE html>
 <!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
@@ -48,53 +48,53 @@
 	<body>
 		<!--引入抽取的topbar-->
         <jsp:include page="${pageContext.request.contextPath}/commons/bar.jsp">
-            <jsp:param value="depart" name="activeUri"/>
-            <jsp:param name="title" value="部门列表"/>
+            <jsp:param value="station" name="activeUri"/>
+            <jsp:param name="title" value="岗位列表"/>
         </jsp:include>
 
 
-		<div class="container-fluid">
-			<div class="row">
-				<!--引入侧边栏-->
+		div class="container-fluid">
+		<div class="row">
+			<!--引入侧边栏-->
 
 
-				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2><a class="btn btn-sm btn-success" href="emp" >部门添加</a></h2>
-					<div class="table-responsive">
-						<table class="table table-striped table-sm">
-							<thead>
-								<tr>
-									<th>部门号</th>
-									<th>部门名</th>
-								</tr>
-							</thead>
-							<tbody>
-							<%
-								PageBean pageBean = (PageBean) request.getAttribute("page");
-								if(pageBean!=null){
-                                    LinkedList<Depart> pageData = pageBean.getPageData();
-                                    for(Depart l:pageData){
-                                        out.println("<tr>");
-                                        out.println("<td>"+l.getId()+"</td>");
-                                        out.println("<td>"+l.getDepartname()+"</td>");
-                                        out.println("</tr>");
-                                    }
-                                }
-							%>
-							</tbody>
-						</table>
-                        当前${requestScope.page.currentPage }/${requestScope.page.totalPage }页     &nbsp;&nbsp;
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+				<h2><a class="btn btn-sm btn-success" href="emp" >岗位添加</a></h2>
+				<div class="table-responsive">
+					<table class="table table-striped table-sm">
+						<thead>
+						<tr>
+							<th>岗位号</th>
+							<th>岗位名</th>
+						</tr>
+						</thead>
+						<tbody>
+						<%
+							PageBean pageBean = (PageBean) request.getAttribute("page");
+							if(pageBean!=null){
+								LinkedList<Station> pageData = pageBean.getPageData();
+								for(Station l:pageData){
+									out.println("<tr>");
+									out.println("<td>"+l.getId()+"</td>");
+									out.println("<td>"+l.getStationname()+"</td>");
+									out.println("</tr>");
+								}
+							}
+						%>
+						</tbody>
+					</table>
+					当前${requestScope.page.currentPage }/${requestScope.page.totalPage }页     &nbsp;&nbsp;
 
-                        <a href="${pageContext.request.contextPath }/depart/list?currentPage=1">首页</a>&nbsp;&nbsp;
-                        <a href="${pageContext.request.contextPath }/depart/list?currentPage=${requestScope.page.currentPage>1?requestScope.page.currentPage-1:1}">上一页 </a>&nbsp;&nbsp;
-                        <a href="${pageContext.request.contextPath }/depart/list?currentPage=${requestScope.page.currentPage<requestScope.page.totalPage?requestScope.page.currentPage+1:requestScope.page.totalPage}">下一页 </a>&nbsp;&nbsp;
-                        <a href="${pageContext.request.contextPath }/depart/list?currentPage=${requestScope.page.totalPage}">末页</a>&nbsp;&nbsp;
-					</div>
-				</main>
-				<form id="deleteEmpForm"  method="post">
-					<input type="hidden" name="_method" value="delete"/>
-				</form>
-			</div>
+					<a href="${pageContext.request.contextPath }/station/list?currentPage=1">首页</a>&nbsp;&nbsp;
+					<a href="${pageContext.request.contextPath }/station/list?currentPage=${requestScope.page.currentPage>1?requestScope.page.currentPage-1:1}">上一页 </a>&nbsp;&nbsp;
+					<a href="${pageContext.request.contextPath }/station/list?currentPage=${requestScope.page.currentPage<requestScope.page.totalPage?requestScope.page.currentPage+1:requestScope.page.totalPage}">下一页 </a>&nbsp;&nbsp;
+					<a href="${pageContext.request.contextPath }/station/list?currentPage=${requestScope.page.totalPage}">末页</a>&nbsp;&nbsp;
+				</div>
+			</main>
+			<form id="deleteEmpForm"  method="post">
+				<input type="hidden" name="_method" value="delete"/>
+			</form>
+		</div>
 		</div>
 
 		<!-- Bootstrap core JavaScript

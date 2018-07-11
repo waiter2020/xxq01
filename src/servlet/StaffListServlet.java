@@ -39,7 +39,7 @@ public class StaffListServlet extends HttpServlet {
         User loginInfo = (User) request.getSession().getAttribute("loginInfo");
         Staff byUserName = staffService.findByUserName(loginInfo.getUserName());
         logger.info("用户："+byUserName+"查询了员工列表");
-        pageBean = staffService.findByPageAndDepartmentAndIsWork(pageBean,byUserName.getDepartment(),true);
+        pageBean = staffService.findByPageAndDepartmentAndIsWork(pageBean,byUserName.getDepartment().getId(),true);
 
         request.setAttribute("page",pageBean);
         request.getRequestDispatcher("/staff/list.jsp").forward(request,response);

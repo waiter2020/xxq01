@@ -1,6 +1,7 @@
 package utils;
 
 import utils.annotation.Column;
+import utils.annotation.OneToOne;
 
 import java.lang.reflect.Field;
 import java.sql.*;
@@ -189,7 +190,9 @@ public class DBUtils {
         {
             //获取列名
             String name = fi[i].getName();
-            Column annotation = fi[0].getAnnotation(Column.class);
+            Column annotation = fi[i].getAnnotation(Column.class);
+
+
             if(annotation!=null){
                 name=annotation.name();
             }
@@ -216,8 +219,20 @@ public class DBUtils {
             for(int i=1;i<fi.length;i++)
             {
                 fi[i].setAccessible(true);
+                OneToOne annotation1 = fi[i].getAnnotation(OneToOne.class);
                 //第一列为主键，不用添加(对应数组下标是0)
-                pstmt.setObject(i,fi[i].get(obj));
+                if(annotation1!=null){
+                    Object o = fi[i].get(obj);
+                    if(o!=null) {
+                        Field[] declaredFields = o.getClass().getDeclaredFields();
+                        declaredFields[0].setAccessible(true);
+                        int anInt = declaredFields[0].getInt(o);
+                        //update(o);
+                        pstmt.setObject(i, anInt);
+                    }
+                }else {
+                    pstmt.setObject(i,fi[i].get(obj));
+                }
             }
             int row=pstmt.executeUpdate();
             if(row>0){
@@ -268,10 +283,24 @@ public class DBUtils {
             for(int i=1;i<fi.length;i++)
             {
                 fi[i].setAccessible(true);
-                pstmt.setObject(i,fi[i].get(obj));
+                OneToOne annotation1 = fi[i].getAnnotation(OneToOne.class);
+                //第一列为主键，不用添加(对应数组下标是0)
+                if(annotation1!=null){
+                    Object o = fi[i].get(obj);
+                    if(o!=null) {
+                        Field[] declaredFields = o.getClass().getDeclaredFields();
+                        declaredFields[0].setAccessible(true);
+                        int anInt = declaredFields[0].getInt(o);
+                        //update(o);
+                        pstmt.setObject(i, anInt);
+                    }
+                }else {
+                    pstmt.setObject(i, fi[i].get(obj));
+                }
             }
             fi[0].setAccessible(true);
             //主键是第一列
+
             pstmt.setObject(fi.length, fi[0].get(obj));
             int row=pstmt.executeUpdate();
             if(row>0){
@@ -476,6 +505,13 @@ public class DBUtils {
         }
         return list;
     }
+
+    /**
+     * 限定条件统计总数
+     * @param cls
+     * @param map
+     * @return
+     */
     public static int getObjectCount(Class cls,Map<String,String> map) {
         PreparedStatement preparedStatement = null;
         Connection connection = JDBCPool.getConnection();
@@ -490,6 +526,127 @@ public class DBUtils {
             rs = preparedStatement.executeQuery();
             rs.next();
             int i =rs.getInt(1);
+            return i;
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+            return 0;
+        }finally {
+            close(connection,preparedStatement,rs);
+
+        }
+    }
+
+    /**
+     * 分页查询功能，通过查询某一字段的值比value大筛选分页
+     * @param pageBean 工具类中的PageBean对象
+     * @param cls 实体类字节码文件
+     * @param name
+     * @param value
+     * @return
+     */
+    public static PageBean getPageByAfterSome(PageBean pageBean,Class cls,String name,String value){
+        Map<String,String> map = new TreeMap<>();
+        map.put(value, name);
+        pageBean.setTotalCount(getObjectCount(cls,map,">"));
+        pageBean.getPageData().clear();
+        ResultSet set=null;
+        String sql="select * from "+cls.getSimpleName()+" where "+name+" > ?"+" LIMIT "+(pageBean.getCurrentPage()-1)*pageBean.getPageCount()+","+pageBean.getPageCount();;
+        try {
+            set=executeQuerySQL(sql,value);
+            pageBean.getPageData().addAll(BeanUtils.rsToBeanList(cls,set));
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        }finally {
+            close(null,null,set);
+
+        }
+
+        return pageBean;
+    }
+
+    /**
+     * 分页查询功能，通过查询某一字段的值比value小筛选分页
+     * @param pageBean 工具类中的PageBean对象
+     * @param cls 实体类字节码文件
+     * @param name
+     * @param value
+     * @return
+     */
+    public static PageBean getPageByBeforSome(PageBean pageBean,Class cls,String name,String value){
+        Map<String,String> map = new TreeMap<>();
+        map.put(value, name);
+        pageBean.setTotalCount(getObjectCount(cls,map,"<"));
+        pageBean.getPageData().clear();
+        ResultSet set=null;
+        String sql="select * from "+cls.getSimpleName()+" where "+name+" < ?"+" LIMIT "+(pageBean.getCurrentPage()-1)*pageBean.getPageCount()+","+pageBean.getPageCount();;
+        try {
+            set=executeQuerySQL(sql,value);
+            pageBean.getPageData().addAll(BeanUtils.rsToBeanList(cls,set));
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        }finally {
+            close(null,null,set);
+
+        }
+
+        return pageBean;
+    }
+
+    /**
+     * 分页查询功能，通过查询某一字段的值比value小且比value大筛选分页
+     * @param pageBean 工具类中的PageBean对象
+     * @param cls 实体类字节码文件
+     * @param name
+     * @param value
+     * @return
+     */
+    public static PageBean getPageByBeforSomeAndAfterSome(PageBean pageBean,Class cls,String name,String value,String name1,String value1){
+        Map<String,String> map = new TreeMap<>();
+        map.put(value, name);
+        map.put(value1,name1);
+        pageBean.setTotalCount(getObjectCount(cls,map,">","<"));
+        pageBean.getPageData().clear();
+        ResultSet set=null;
+        String sql="select * from "+cls.getSimpleName()+" where "+name+" < ? "+" AND "+name1+" >? "+" LIMIT "+(pageBean.getCurrentPage()-1)*pageBean.getPageCount()+","+pageBean.getPageCount();;
+        try {
+            set=executeQuerySQL(sql,value,value1);
+            pageBean.getPageData().addAll(BeanUtils.rsToBeanList(cls,set));
+        }catch (Exception e){
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        }finally {
+            close(null,null,set);
+
+        }
+
+        return pageBean;
+    }
+
+
+    /**
+     * 限定条件统计总数
+     * @param cls
+     * @param map key和value值调换了
+     * @return
+     */
+    public static int getObjectCount(Class cls,Map<String,String> map,String ...op) {
+        PreparedStatement preparedStatement = null;
+        Connection connection = JDBCPool.getConnection();
+        ResultSet rs=null;
+        int i=0;
+        String sql = "select count(*) from " + cls.getSimpleName()+" WHERE ";
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            sql+=entry.getValue()+" "+op[i++]+" "+"'"+entry.getKey()+"'"+" AND ";
+        }
+        String substring = sql.substring(0, sql.length() - 4);
+        try {
+            preparedStatement = connection.prepareStatement(substring);
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            i =rs.getInt(1);
             return i;
         }catch (Exception e){
             loger.info(e.getMessage());

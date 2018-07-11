@@ -1,6 +1,7 @@
 package bean;
 
 import utils.annotation.Column;
+import utils.annotation.OneToOne;
 
 /**
  * Created by  waiter on 18-7-9  下午9:02.
@@ -11,8 +12,10 @@ public class Staff {
     private int id;
     private String userName;
     private String staffName;
-    private int department;
-    private int station;
+    @OneToOne(bean = Depart.class)
+    private Depart department;
+    @OneToOne(bean = Station.class)
+    private Station station;
     @Column(name = "phoneNum")
     private String phoneNum;
     private int age;
@@ -22,9 +25,12 @@ public class Staff {
     private boolean isWork;
     @Column(name = "wages")
     private int wAges;
+
+
+    private int sex;
     public Staff(){}
 
-    public Staff(String userName, String staffName, int department, int station, String phoneNum, int age, String idCard, boolean isWork, int wAges) {
+    public Staff(String userName, String staffName, Depart department, Station station, String phoneNum, int age, String idCard, boolean isWork, int wAges) {
         this.userName = userName;
         this.staffName = staffName;
         this.department = department;
@@ -60,19 +66,19 @@ public class Staff {
         this.staffName = staffName;
     }
 
-    public int getDepartment() {
+    public Depart getDepartment() {
         return department;
     }
 
-    public void setDepartment(int department) {
+    public void setDepartment(Depart department) {
         this.department = department;
     }
 
-    public int getStation() {
+    public Station getStation() {
         return station;
     }
 
-    public void setStation(int station) {
+    public void setStation(Station station) {
         this.station = station;
     }
 
@@ -116,6 +122,21 @@ public class Staff {
         this.wAges = wAges;
     }
 
+    public boolean isWork() {
+        return isWork;
+    }
+
+    public void setWork(boolean work) {
+        isWork = work;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
     @Override
     public String toString() {
         return "Staff{" +

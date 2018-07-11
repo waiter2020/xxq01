@@ -40,6 +40,7 @@ public class JDBCPool {
             } catch (SQLException e) {
                 loger.log(Level.ALL,"数据库连接异常，请检查配置文件");
                 e.printStackTrace();
+                break;
             }
         }
     }
@@ -84,6 +85,7 @@ public class JDBCPool {
             } catch (SQLException e) {
                 loger.log(Level.ALL,"未知错误，添加连接出错");
                 e.printStackTrace();
+                break;
             }
         }
     }
@@ -108,6 +110,7 @@ public class JDBCPool {
             } catch (SQLException e) {
                 loger.log(Level.ALL,"刷新数据连接池异常");
                 e.printStackTrace();
+                break;
             }
         }
         active=Long.parseLong(props.getProperty("activeTime"))+System.currentTimeMillis();
