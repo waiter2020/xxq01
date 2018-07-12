@@ -1,5 +1,6 @@
 package dao;
 
+import bean.Office;
 import utils.PageBean;
 
 public interface OfficeDao {
@@ -14,4 +15,6 @@ public interface OfficeDao {
      * @return 符合日期范围的信息
      */
     PageBean findByDate(PageBean pageBean, Class cls, String name1, String value1, String name2, String value2);
+
+    boolean save(Office office);
 }

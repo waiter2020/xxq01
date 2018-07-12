@@ -19,14 +19,17 @@ import java.util.logging.Logger;
  *
  * @author waiter
  */
-@WebServlet(name = "StaffServlet", urlPatterns = {"/staff/list", "/staff/delete","/staff/change","/staff/add","/staff/transfer"})
+@WebServlet(name = "StaffServlet", urlPatterns = {"/staff/list", "/staff/delete","/staff/change",
+                                                "/staff/add","/staff/transfer","/staff/turn","/staff/select"})
 public class StaffServlet extends HttpServlet {
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private StaffService staffService = StaffService.getStaffService();
     private DepartService departService = DepartService.getDepartService();
     private UserService userService = UserService.getUserService();
     private StationService stationService = StationService.getStationService();
-    RecordService recordService = RecordService.getRecordService();
+    private RecordService recordService = RecordService.getRecordService();
+    private OfficeService officeService = OfficeService.getOfficeService();
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,6 +41,8 @@ public class StaffServlet extends HttpServlet {
             addStaff(request,response);
         }else if("transfer".equals(substring)){
             transferStaff(request,response);
+        }else if("turn".equals(substring)){
+            turnStaff(request,response);
         }
     }
 
@@ -55,6 +60,10 @@ public class StaffServlet extends HttpServlet {
             toTransferStaff(request, response);
         }else if ("change".equals(substring)) {
             toChangeStaff(request, response);
+        }else if("turn".equals(substring)){
+            turnStaff(request,response);
+        }else if ("select".equals(substring)){
+            toSelect(request,response);
         }
     }
 
@@ -116,6 +125,7 @@ public class StaffServlet extends HttpServlet {
         }
         request.getRequestDispatcher("/staff/list").forward(request, response);
     }
+
 
     /**
      * post方法，修改员工的几个信息
@@ -268,4 +278,27 @@ public class StaffServlet extends HttpServlet {
         request.getRequestDispatcher("/staff/transfer.jsp").forward(request,response);
     }
 
+    /**
+     * 员工转正，post和get都可以
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void turnStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        String state = request.getParameter("state");
+        Staff byId = staffService.findById(Integer.parseInt(id));
+        if(byId!=null){
+            boolean save = officeService.save(byId, Integer.parseInt(state));
+            if(save){
+                request.setAttribute("msg","变更成功");
+            }
+        }
+        request.getRequestDispatcher("/staff/list").forward(request,response);
+    }
+
+    protected void toSelect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect("/staff/select.jsp");
+    }
 }

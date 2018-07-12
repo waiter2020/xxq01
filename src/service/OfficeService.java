@@ -1,9 +1,12 @@
 package service;
 
 import bean.Office;
+import bean.Staff;
 import dao.OfficeDao;
 import dao.impl.OfficeDaoImpl;
 import utils.PageBean;
+
+import java.util.Date;
 
 /**
  * @ Author     ：Bzy.
@@ -26,6 +29,10 @@ public class OfficeService {
      */
     PageBean findByDate(PageBean pageBean, Class cls, String name1, String value1, String name2, String value2){
         return officeDao.findByDate(pageBean,cls,name1,value1,name2,value2);
+    }
+
+    public boolean save(Staff staff,int state){
+        return officeDao.save(new Office(staff,new Date(),state));
     }
 
     public static OfficeService getOfficeService(){
