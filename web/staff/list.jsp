@@ -1,84 +1,58 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="bean.Staff" %>
-<%@ page import="utils.PageBean" %>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dream</title>
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="">
-		<meta name="author" content="">
-
-		<title>Dashboard Template for Bootstrap</title>
-		<!-- Bootstrap core CSS -->
-        <link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom styles for this template -->
-        <link href="${pageContext.request.contextPath}/static/css/dashboard.css" rel="stylesheet">
-		<style type="text/css">
-			/* Chart.js */
-			
-			@-webkit-keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
-			}
-			
-			@keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
-			}
-			
-			.chartjs-render-monitor {
-				-webkit-animation: chartjs-render-animation 0.001s;
-				animation: chartjs-render-animation 0.001s;
-			}
-		</style>
-	</head>
-
-	<body>
-		<!--引入抽取的topbar-->
-        <jsp:include page="${pageContext.request.contextPath}/commons/bar.jsp">
-            <jsp:param value="staff" name="activeUri"/>
-            <jsp:param name="title" value="员工列表"/>
-        </jsp:include>
+    <%--引入css文件--%>
+    <link href="${pageContext.request.contextPath}static/new/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}static/new/css/font-awesome.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}static/new/css/custom-styles.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
 
-		<div class="container-fluid">
-			<div class="row">
-				<!--引入侧边栏-->
+</head>
+<body>
+    <div id="wrapper">
 
+        <%--引入导航栏--%>
+        <jsp:include page="../new/top.jsp" flush="true"/>
+        <%--引入侧边栏    --%>
+        <jsp:include page="../new/aside.jsp" flush="true"/>
 
-				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/staff/add.jsp" >员工添加</a></h2>
-                    <c:if test="${requestScope.get('msg')!=null}">
-                        <h2 class="btn btn-sm btn-danger">${requestScope.get("msg")}</h2>
-                    </c:if>
-					<div class="table-responsive">
-						<table class="table table-striped table-sm">
-							<thead>
-								<tr>
-									<th>工号</th>
-									<th>姓名</th>
-									<th>电话</th>
-                                    <td>性别</td>
-									<th>年龄</th>
-									<th>岗位</th>
-									<th>工资</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <%--表格标题--%>
+			    <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            员工列表
+                        </h1>
+                    </div>
+                </div>
+                <%--操作按钮    --%>
+                    <div>
+                        <h2 style="float: left"><a class="btn btn-sm btn-success" href="emp" >添加员工</a></h2>
+                    </div>
+                <%--表格--%>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                            <tr>
+                                <th>工号</th>
+                                <th>姓名</th>
+                                <th>电话</th>
+                                <td>性别</td>
+                                <th>年龄</th>
+                                <th>岗位</th>
+                                <th>工资</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             <c:choose>
                                 <c:when test="${not empty requestScope.page.pageData}">
                                     <c:forEach var="staff" items="${requestScope.page.pageData}" varStatus="vs">
@@ -90,11 +64,14 @@
                                             <td>${staff.age}</td>
                                             <td>${staff.station.stationName}</td>
                                             <td>${staff.wAges}</td>
-                                            <c:if test="${staff.userName !=sessionScope.get('loginInfo').userName}">
-                                            <td>
-                                                <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/staff/list/delete?id=${staff.id}'" href="${pageContext.request.contextPath}/staff/list/delete?id=${staff.id}" class="btn btn-sm btn-danger ">辞退</button>
-                                            </td>
-                                            </c:if>
+                                            <%--<c:if test="${staff.userName !=sessionScope.get('loginInfo').userName}">--%>
+                                                <td>
+                                                    <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/staff/list/delete?id=${staff.id}'" href="${pageContext.request.contextPath}/staff/list/delete?id=${staff.id}" class="btn btn-sm btn-danger ">辞退</button>
+                                                    <button type="button" class="btn btn-sm btn-danger">修改</button>
+                                                    <button type="button" class="btn btn-sm btn-danger">转正</button>
+                                                    <button type="button" class="btn btn-sm btn-danger">调动</button>
+                                                </td>
+                                            <%--</c:if>--%>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
@@ -105,33 +82,24 @@
                                 </c:otherwise>
                             </c:choose>
 
-							</tbody>
-						</table>
+                            </tbody>
+                        </table>
+                        <%--页码--%>
                         当前${requestScope.page.currentPage }/${requestScope.page.totalPage }页     &nbsp;&nbsp;
-
                         <a href="${pageContext.request.contextPath }/staff/list?currentPage=1">首页</a>&nbsp;&nbsp;
                         <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.currentPage>1?requestScope.page.currentPage-1:1}">上一页 </a>&nbsp;&nbsp;
                         <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.currentPage<requestScope.page.totalPage?requestScope.page.currentPage+1:requestScope.page.totalPage}">下一页 </a>&nbsp;&nbsp;
                         <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.totalPage}">末页</a>&nbsp;&nbsp;
-					</div>
-				</main>
+                    </div>
+				</div>
+            </div>
+        </div>
 
-			</div>
-		</div>
 
-		<!-- Bootstrap core JavaScript
-    ================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-        <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.slim.min.js"></script>
-        <script type="text/javascript"  src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
-        <script type="text/javascript"  src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
-
-        <!-- Icons -->
-        <script type="text/javascript"  src="${pageContext.request.contextPath}/static/js/feather.min.js"></script>
-
-		<script>
-			feather.replace()
-		</script>
-
-	</body>
+    <%--引入js文件--%>
+    <script src="${pageContext.request.contextPath}static/new/js/jquery-1.10.2.js"></script>
+    <script src="${pageContext.request.contextPath}static/new/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}static/new/js/jquery.metisMenu.js"></script>
+    <script src="${pageContext.request.contextPath}static/new/js/custom-scripts.js"></script>
+</body>
 </html>
