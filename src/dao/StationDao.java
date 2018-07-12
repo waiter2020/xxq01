@@ -3,6 +3,8 @@ package dao;
 import bean.Station;
 import utils.PageBean;
 
+import java.util.LinkedList;
+
 public interface StationDao {
     /**
      * 岗位分页查询方法
@@ -32,4 +34,8 @@ public interface StationDao {
      * @return 是否删除成功
      */
     boolean deleteByName(String stationName);
+
+    Station findById(int id);
+
+    LinkedList findAll();
 }

@@ -22,6 +22,17 @@ public class UserDaoImpl implements UserDao {
         return userName1.size()>0?(User) userName1.remove(0):null;
     }
 
+    @Override
+    public boolean save(User user) {
+        boolean b;
+        if(user.getId()>0){
+            b=DBUtils.update(user);
+        }else {
+            b=DBUtils.insert(user);
+        }
+        return b;
+    }
+
     public synchronized static UserDaoImpl getUserDaoImpl() {
         return userDaoImpl;
     }

@@ -5,6 +5,8 @@ import dao.StationDao;
 import dao.impl.StationDaoImpl;
 import utils.PageBean;
 
+import java.util.LinkedList;
+
 /**
  * @ Author     ：Bzy.
  * @ Date       ：Created in 下午1:01 18-7-11
@@ -51,6 +53,14 @@ public class StationService {
         return stationDao.deleteByName(stationName);
     }
 
+
+    public Station findById(int id){
+        return stationDao.findById(id);
+    }
+
+    public LinkedList<Station> findAll(){
+        return stationDao.findAll();
+    }
 
     public static StationService getStationService(){
         return stationService;

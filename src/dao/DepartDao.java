@@ -57,4 +57,9 @@ public interface DepartDao {
      * @return PageBean
      */
     PageBean listPage(PageBean pageBean);
+
+    Depart findById(int id);
+
+    LinkedList<Depart> findAll();
+
 }

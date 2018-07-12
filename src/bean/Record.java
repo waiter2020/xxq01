@@ -21,7 +21,7 @@ public class Record {
     @DateType
     private Date date;
 
-    public Record(){}
+    public Record(Staff byId, String mark, String stationName, String result, Date date){}
 
     public Record( int mark, String source, String result, Date date) {
         this.mark = mark;

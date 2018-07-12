@@ -51,6 +51,17 @@ public class DepartDaoImpl implements DepartDao{
     public PageBean listPage(PageBean pageBean) {
         return DBUtils.getPage(pageBean,Depart.class);
     }
+
+    @Override
+    public Depart findById(int id) {
+        return (Depart) DBUtils.getObjectById(Depart.class,id);
+    }
+
+    @Override
+    public LinkedList<Depart> findAll() {
+        return DBUtils.getList(Depart.class);
+    }
+
     public static DepartDaoImpl getDepartDaoImpl() {
         return departDaoImpl;
     }

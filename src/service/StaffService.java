@@ -42,4 +42,8 @@ public class StaffService {
     public Staff findById(int id){
         return staffDao.findById(id);
     }
+
+    public boolean save(Staff staff){
+        return staffDao.save(staff);
+    }
 }

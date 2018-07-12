@@ -47,6 +47,16 @@ public class StationDaoImpl implements StationDao{
 
     }
 
+    @Override
+    public Station findById(int id) {
+        return (Station) DBUtils.getObjectById(Station.class,id);
+    }
+
+    @Override
+    public LinkedList<Station> findAll() {
+        return DBUtils.getList(Station.class);
+    }
+
 
     public static StationDaoImpl getStationDao(){
         return stationDaoImpl;
