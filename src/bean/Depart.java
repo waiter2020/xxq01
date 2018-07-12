@@ -13,10 +13,16 @@ public class Depart {
     private int id;
     @Column(name = "departname")
     private String departName;
+    private String describe;
     @Count(name = "department",bean = Staff.class)
     private int count;
 
     public Depart(){}
+
+    public Depart(String departName, String describe) {
+        this.departName = departName;
+        this.describe = describe;
+    }
 
     public Depart(String departName) {
         this.departName = departName;
@@ -36,7 +42,13 @@ public class Depart {
     }
 
 
+    public String getDescribe() {
+        return describe;
+    }
 
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
 
     public int getId() {
         return id;

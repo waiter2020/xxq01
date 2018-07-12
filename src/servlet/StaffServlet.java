@@ -298,6 +298,13 @@ public class StaffServlet extends HttpServlet {
         request.getRequestDispatcher("/staff/list").forward(request,response);
     }
 
+    /**
+     * 直接重定向到查询页
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void toSelect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendRedirect("/staff/select.jsp");
     }
