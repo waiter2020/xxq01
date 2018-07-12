@@ -2,6 +2,7 @@ package utils;
 
 import utils.annotation.DateType;
 import utils.annotation.Column;
+import utils.annotation.ManyToOne;
 import utils.annotation.OneToOne;
 
 import java.lang.reflect.Field;
@@ -17,23 +18,26 @@ import java.util.LinkedList;
  */
 public class BeanUtils {
 
-    private BeanUtils(){}
+    private BeanUtils() {
+    }
+
     /**
      * 把从数据库查询到的结果集中的一行数据注入到一个实体类对象中
+     *
      * @param cls 实体类的class字节码文件，如User.class
      * @param set 结果集，会取当前游标所在下一行数据进行注入
      * @return 返回实体类对应对象，出错或查询不到结果时为null
      * @throws SQLException 若set为空或set的游标已在末尾则抛出
      */
-    public static Object rsToBean(Class cls , ResultSet set) throws SQLException {
-        if(set==null||!set.next()){
+    public static Object rsToBean(Class cls, ResultSet set) throws SQLException {
+        if (set == null || !set.next()) {
             return null;
         }
         Field[] declaredFields = cls.getDeclaredFields();
-        Object obj= null;
+        Object obj = null;
         try {
             obj = cls.newInstance();
-            for(Field f:declaredFields) {
+            for (Field f : declaredFields) {
                 String name = f.getName();
                 //访问类中的私有属性
                 f.setAccessible(true);
@@ -41,60 +45,69 @@ public class BeanUtils {
                 DateType annotation = f.getAnnotation(DateType.class);
                 Column annotation1 = f.getAnnotation(Column.class);
                 OneToOne annotation2 = f.getAnnotation(OneToOne.class);
-                if (annotation2 != null) {
+                ManyToOne annotation3 = f.getAnnotation(ManyToOne.class);
+                if (annotation1 != null) {
+                    name = annotation1.name();
+                }
+                if (annotation3 != null) {
                     Object object = set.getObject(name);
-                    if(object!=null) {
-                        Object objectById = DBUtils.getObjectById(annotation2.bean(), (int) object);
-                        if(objectById!=null){
-                            f.set(obj,objectById);
+                    if (object != null) {
+                        Object objectById = DBUtils.getObjectById(annotation3.bean(), (int) object);
+                        if (objectById != null) {
+                            f.set(obj, objectById);
                         }
                     }
+                } else if (annotation2 != null) {
+                    Object object = set.getObject(name);
+                    if (object != null) {
+                        Object objectById = DBUtils.getObjectById(annotation2.bean(), (int) object);
+                        if (objectById != null) {
+                            f.set(obj, objectById);
+                        }
+                    }
+
+                }else if (annotation != null) {
+                    java.sql.Date date = set.getDate(name);
+                    if (date == null) {
+                        continue;
+                    }
+                    f.set(obj, new Date(date.getTime()));
+
 
                 } else {
-                    if (annotation1 != null) {
-                        name = annotation1.name();
+                    Object object = set.getObject(name);
+                    if (object == null) {
+                        continue;
                     }
-                    if (annotation != null) {
-                        java.sql.Date date = set.getDate(name);
-                        if (date == null) {
-                            continue;
-                        }
-                        f.set(obj, new Date(date.getTime()));
-
-
-                    } else {
-                        Object object = set.getObject(name);
-                        if (object == null) {
-                            continue;
-                        }
-                        //调用类中指定属性的set方法赋值
-                        f.set(obj, object);
-                    }
+                    //调用类中指定属性的set方法赋值
+                    f.set(obj, object);
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return obj;
     }
+
     /**
      * 把从数据库查询到的结果集中的一行数据注入到一个实体类对象链表中
+     *
      * @param cls 实体类的class字节码文件，如User.class
      * @param set 结果集
      * @return 返回实体类对应对象链表，出错或查询不到结果时为null
      * @throws SQLException 若set为空或set的游标已在末尾则抛出
      */
-    public static LinkedList rsToBeanList(Class cls , ResultSet set) throws SQLException {
+    public static LinkedList rsToBeanList(Class cls, ResultSet set) throws SQLException {
         LinkedList list = new LinkedList();
         Object o;
         do {
-             o = rsToBean(cls, set);
-             list.add(o);
-        }while (o!=null);
+            o = rsToBean(cls, set);
+            list.add(o);
+        } while (o != null);
         list.remove(null);
         return list;
     }
-
 
 
 }

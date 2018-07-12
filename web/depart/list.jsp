@@ -76,7 +76,7 @@
                                     for(Depart l:pageData){
                                         out.println("<tr>");
                                         out.println("<td>"+l.getId()+"</td>");
-                                        out.println("<td>"+l.getDepartname()+"</td>");
+                                        out.println("<td>"+l.getDepartName()+"</td>");
                                         out.println("</tr>");
                                     }
                                 }

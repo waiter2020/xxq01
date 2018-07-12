@@ -18,6 +18,12 @@ public class User {
     private String pwd;
     private int grade;
 
+    public User(String userName, Staff staff, String pwd, int grade) {
+        this.userName = userName;
+        this.staff = staff;
+        this.pwd = pwd;
+        this.grade = grade;
+    }
 
     public Staff getStaff() {
         return staff;

@@ -88,7 +88,7 @@
                                             <td>${staff.phoneNum}</td>
                                             <td>${staff.sex==0?'男':'女'}</td>
                                             <td>${staff.age}</td>
-                                            <td>${staff.station}</td>
+                                            <td>${staff.station.stationName}</td>
                                             <td>${staff.wAges}</td>
                                             <c:if test="${staff.userName !=sessionScope.get('loginInfo').userName}">
                                             <td>
