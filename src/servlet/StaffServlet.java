@@ -19,9 +19,9 @@ import java.util.logging.Logger;
  *
  * @author waiter
  */
-@WebServlet(name = "StaffServlet",urlPatterns = {"/staff/list","/staff/delete"})
+@WebServlet(name = "StaffServlet", urlPatterns = {"/staff/list", "/staff/delete"})
 public class StaffServlet extends HttpServlet {
-    Logger logger=Logger.getLogger(this.getClass().getName());
+    Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,62 +32,71 @@ public class StaffServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         String substring = uri.substring(7, uri.length());
-        if("list".equals(substring)){
-            getStaffList(request,response);
-        }else if ("delete".equals(substring)){
-            dismissStaff(request,response);
+        if ("list".equals(substring)) {
+            getStaffList(request, response);
+        } else if ("delete".equals(substring)) {
+            dismissStaff(request, response);
         }
     }
 
     /**
      * 获取员工列表
+     *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void getStaffList(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+    protected void getStaffList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         StaffService staffService = StaffService.getStaffService();
         PageBean pageBean = new PageBean();
         String currentPage = request.getParameter("currentPage");
-        if(currentPage!=null&&!currentPage.isEmpty()){
+        if (currentPage != null && !currentPage.isEmpty()) {
             pageBean.setCurrentPage(Integer.parseInt(currentPage));
         }
         User loginInfo = (User) request.getSession().getAttribute("loginInfo");
         Staff byUserName = staffService.findByUserName(loginInfo.getUserName());
-        logger.info("用户："+byUserName+"查询了员工列表");
-        pageBean = staffService.findByPageAndDepartmentAndIsWork(pageBean,byUserName.getDepartment().getId(),true);
+        logger.info("用户：" + byUserName + "查询了员工列表");
+        pageBean = staffService.findByPageAndDepartmentAndIsWork(pageBean, byUserName.getDepartment().getId(), true);
 
-        request.setAttribute("page",pageBean);
-        request.getRequestDispatcher("/staff/list.jsp").forward(request,response);
+        request.setAttribute("page", pageBean);
+        request.getRequestDispatcher("/staff/list.jsp").forward(request, response);
     }
 
     /**
      * 辞退员工
+     *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void dismissStaff(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    protected void dismissStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         StaffService staffService = StaffService.getStaffService();
         String id = request.getParameter("id");
         User loginInfo = (User) request.getSession().getAttribute("loginInfo");
 
-        if(id!=null){
-            if (loginInfo.getId()!=Integer.parseInt(id)) {
-                boolean b = staffService.dismissStaff(Integer.parseInt(id));
-                if (b) {
-                    request.setAttribute("msg", "成功辞退员工");
+        if (id != null) {
+            if (loginInfo.getId() != Integer.parseInt(id)) {
+                Staff byId = staffService.findById(Integer.parseInt(id));
+                if (byId != null) {
+                    if (byId.getDepartment().getId() != loginInfo.getStaff().getDepartment().getId()) {
+                        request.getRequestDispatcher("/staff/list").forward(request, response);
+                    } else {
+                        boolean b = staffService.dismissStaff(Integer.parseInt(id));
+                        if (b) {
+                            request.setAttribute("msg", "成功辞退员工");
 
-                    logger.info(loginInfo + "辞退了" + id + "员工");
-                } else {
-                    request.setAttribute("msg", "未知错误");
+                            logger.info(loginInfo + "辞退了" + id + "员工");
+                        } else {
+                            request.setAttribute("msg", "未知错误");
+                        }
+                    }
                 }
             }
         }
-        request.getRequestDispatcher("/staff/list").forward(request,response);
+        request.getRequestDispatcher("/staff/list").forward(request, response);
     }
 }

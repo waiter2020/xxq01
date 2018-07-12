@@ -38,4 +38,8 @@ public class StaffService {
         b = staffDao.save(byId);
         return b;
     }
+
+    public Staff findById(int id){
+        return staffDao.findById(id);
+    }
 }

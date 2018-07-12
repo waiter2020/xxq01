@@ -20,6 +20,14 @@ public class StationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String uri = request.getRequestURI();
+        String substring = uri.substring(9, uri.length());
+        if ("list".equals(substring)) {
+            getStationList(request, response);
+        }
+    }
+
+    protected void getStationList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StationService stationService = StationService.getStationService();
         PageBean pageBean = new PageBean();
         String currentPage = request.getParameter("currentPage");

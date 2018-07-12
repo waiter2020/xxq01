@@ -20,6 +20,14 @@ public class DepartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String uri = request.getRequestURI();
+        String substring = uri.substring(8, uri.length());
+        if ("list".equals(substring)) {
+            getDpartList(request, response);
+        }
+    }
+
+    protected void getDpartList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DepartService departService = DepartService.getDepartService();
         PageBean pageBean = new PageBean();
         String currentPage = request.getParameter("currentPage");
