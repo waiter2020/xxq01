@@ -38,7 +38,7 @@ public class Station {
     public String toString() {
         return "Station{" +
                 "id=" + id +
-                ", stationname='" + stationName + '\'' +
+                ", stationName='" + stationName + '\'' +
                 '}';
     }
 }

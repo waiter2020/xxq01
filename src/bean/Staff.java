@@ -140,19 +140,21 @@ public class Staff {
     public void setSex(int sex) {
         this.sex = sex;
     }
+
     @Override
     public String toString() {
         return "Staff{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", staffName='" + staffName + '\'' +
-                ", department='" + departMent + '\'' +
-                ", station='" + station + '\'' +
+                ", departMent=" + departMent +
+                ", station=" + station +
                 ", phoneNum='" + phoneNum + '\'' +
                 ", age=" + age +
                 ", idCard='" + idCard + '\'' +
                 ", isWork=" + isWork +
                 ", wAges=" + wAges +
+                ", sex=" + sex +
                 '}';
     }
 }
