@@ -201,8 +201,8 @@ public class DBUtils {
         Class clz = obj.getClass();
         //获取类中的所有的属性
         Field[] fi = clz.getDeclaredFields();
-        String sb ;
-        sb="insert into "+clz.getSimpleName()+"(";
+        String sb;
+        sb = "insert into " + clz.getSimpleName() + "(";
         //主键为第一列，是自增的，有默认值，不需要添加
         for (int i = 1; i < fi.length; i++) {
             //获取列名
@@ -210,7 +210,7 @@ public class DBUtils {
             //获取注解
             Column annotation = fi[i].getAnnotation(Column.class);
             Count annotation2 = fi[i].getAnnotation(Count.class);
-            if(annotation2!=null){
+            if (annotation2 != null) {
                 continue;
             }
             //判断
@@ -218,20 +218,20 @@ public class DBUtils {
                 //更改列名
                 name = annotation.name();
             }
-            sb+=name+",";
+            sb += name + ",";
 
         }
-        sb=sb.substring(0,sb.length()-1);
-        sb+=") values(";
+        sb = sb.substring(0, sb.length() - 1);
+        sb += ") values(";
         for (int i = 1; i < fi.length; i++) {
-            sb+="?";
+            sb += "?";
             //最后一列不用加逗号
             if (i != fi.length - 1) {
-                sb+=",";
+                sb += ",";
             }
         }
-        sb=sb.substring(0,sb.length()-2);
-        sb+=")";
+        sb = sb.substring(0, sb.length() - 2);
+        sb += ")";
 
         System.out.println(sb);
         try {
@@ -244,11 +244,11 @@ public class DBUtils {
                 OneToOne annotation1 = fi[i].getAnnotation(OneToOne.class);
                 ManyToOne annotation = fi[i].getAnnotation(ManyToOne.class);
                 Count annotation2 = fi[i].getAnnotation(Count.class);
-                if(annotation2!=null){
+                if (annotation2 != null) {
                     continue;
                 }
                 //第一列为主键，不用添加(对应数组下标是0)
-                if(annotation!=null){
+                if (annotation != null) {
                     //获取此属性值
                     Object o = fi[i].get(obj);
                     if (o != null) {
@@ -261,7 +261,7 @@ public class DBUtils {
                         //update(o);
                         pstmt.setObject(i, anInt);
                     }
-                }else if (annotation1 != null) {
+                } else if (annotation1 != null) {
                     //获取此属性值
                     Object o = fi[i].get(obj);
                     if (o != null) {
@@ -296,31 +296,31 @@ public class DBUtils {
      * @param obj 对应的实体类对象
      */
     public static boolean update(Object obj) {
-        int k=0;
+        int k = 0;
         boolean flag = false;
         Connection conn = JDBCPool.getConnection();
         PreparedStatement pstmt = null;
         Class clz = obj.getClass();
         //获取类中的所有的属性
         Field[] fi = clz.getDeclaredFields();
-        String sb ;
-        sb="update "+clz.getSimpleName()+" set ";
+        String sb;
+        sb = "update " + clz.getSimpleName() + " set ";
         for (int i = 1; i < fi.length; i++) {
             //获取列名
             String name = fi[i].getName();
             Column annotation = fi[i].getAnnotation(Column.class);
             Count annotation2 = fi[i].getAnnotation(Count.class);
-            if(annotation2!=null){
+            if (annotation2 != null) {
                 k++;
                 continue;
             }
             if (annotation != null) {
                 name = annotation.name();
             }
-            sb+=name+" = ?  ,";
+            sb += name + " = ?  ,";
         }
-        sb=sb.substring(0,sb.length()-2);
-        sb+=" where "+fi[0].getName()+" =? ";
+        sb = sb.substring(0, sb.length() - 2);
+        sb += " where " + fi[0].getName() + " =? ";
         try {
             pstmt = conn.prepareStatement(sb.toString());
             for (int i = 1; i < fi.length; i++) {
@@ -328,7 +328,7 @@ public class DBUtils {
                 OneToOne annotation1 = fi[i].getAnnotation(OneToOne.class);
                 ManyToOne annotation = fi[i].getAnnotation(ManyToOne.class);
                 Count annotation2 = fi[i].getAnnotation(Count.class);
-                if(annotation2!=null){
+                if (annotation2 != null) {
                     continue;
                 }
                 //第一列为主键，不用添加(对应数组下标是0)
@@ -357,7 +357,7 @@ public class DBUtils {
             fi[0].setAccessible(true);
             //主键是第一列
 
-            pstmt.setObject(fi.length-k, fi[0].get(obj));
+            pstmt.setObject(fi.length - k, fi[0].get(obj));
             int row = pstmt.executeUpdate();
             if (row > 0) {
                 flag = true;
@@ -384,19 +384,19 @@ public class DBUtils {
         //获取类中的所有的属性
         Field[] fi = clz.getDeclaredFields();
 
-        for (Field f:fi){
+        for (Field f : fi) {
             OneToOne annotation = f.getAnnotation(OneToOne.class);
-            if(annotation!=null){
+            if (annotation != null) {
                 f.setAccessible(true);
                 Object objectById = getObjectById(clz, id);
-                if(objectById!=null) {
+                if (objectById != null) {
                     try {
                         Object o = f.get(objectById);
                         if (o != null) {
                             Field[] declaredFields = o.getClass().getDeclaredFields();
                             declaredFields[0].setAccessible(true);
                             int anInt = declaredFields[0].getInt(o);
-                            delete(o.getClass(),anInt);
+                            delete(o.getClass(), anInt);
                         }
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();

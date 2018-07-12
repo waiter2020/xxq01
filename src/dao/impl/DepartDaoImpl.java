@@ -18,34 +18,14 @@ public class DepartDaoImpl implements DepartDao{
 
     private DepartDaoImpl(){}
 
-//    @Override
-//    public LinkedList departList(){
-//        LinkedList list = null;
-//        list = DBUtils.getList(Depart.class);
-//        if(list==null){
-//            return null;
-//        }else{
-//            return list;
-//        }
-//    }
-//    @Override
-//    public Depart findById(int staffid){
-//        LinkedList departName = DBUtils.getListBySome(Depart.class, "staffid", staffid+"");
-//
-//        Depart depart = (Depart) departName.remove(0);
-//        if(depart==null){
-//            return null;
-//        }else{
-//            return depart;
-//        }
-//    }
+
     @Override
-    public Depart findByName(String departname){
-        LinkedList departName = DBUtils.getListBySome(Depart.class, "departname", departname+"");
-        if(departName.size()==0){
+    public Depart findByName(String departName){
+        LinkedList listBySome = DBUtils.getListBySome(Depart.class, "departname", departName+"");
+        if(listBySome.size()==0){
             return new Depart(0,"not exist");
         }else{
-            return (Depart) departName.remove(0);
+            return (Depart) listBySome.remove(0);
         }
     }
 
@@ -55,9 +35,9 @@ public class DepartDaoImpl implements DepartDao{
     }
 
     @Override
-    public boolean deleteByName(String departname){
+    public boolean deleteByName(String departName){
 
-        Depart depart=findByName(departname);
+        Depart depart=findByName(departName);
         if(depart.getDepartName()==null){
             return false;
         }else{
@@ -65,13 +45,7 @@ public class DepartDaoImpl implements DepartDao{
         }
 
     }
-//    @Override
-//
-//    public boolean updateByName(String departname,Depart dp){
-//        Depart depart = findByName(departname);
-//        Depart dp2 = new Depart(depart.getId(),dp.getDepartname(),dp.getStaffid());
-//        return DBUtils.update(dp2);
-//    }
+
 
     @Override
     public PageBean listPage(PageBean pageBean) {
