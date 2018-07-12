@@ -2,8 +2,7 @@
 <%@ page import="bean.Depart" %>
 <%@ page import="utils.PageBean" %>
 <!DOCTYPE html>
-<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,14 +11,10 @@
 		<meta name="author" content="">
 
 		<title>Dashboard Template for Bootstrap</title>
-		<!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom styles for this template -->
         <link href="${pageContext.request.contextPath}/static/css/dashboard.css" rel="stylesheet">
+		<%--我也不知道这是个什么东西--%>
 		<style type="text/css">
-			/* Chart.js */
-			
 			@-webkit-keyframes chartjs-render-animation {
 				from {
 					opacity: 0.99
@@ -28,7 +23,7 @@
 					opacity: 1
 				}
 			}
-			
+
 			@keyframes chartjs-render-animation {
 				from {
 					opacity: 0.99
@@ -37,7 +32,7 @@
 					opacity: 1
 				}
 			}
-			
+
 			.chartjs-render-monitor {
 				-webkit-animation: chartjs-render-animation 0.001s;
 				animation: chartjs-render-animation 0.001s;
