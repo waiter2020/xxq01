@@ -9,9 +9,11 @@
     <title>Dream</title>
 
     <%--引入css文件--%>
-    <link href="${pageContext.request.contextPath}static/new/css/bootstrap.css" rel="stylesheet"/>
-    <link href="${pageContext.request.contextPath}static/new/css/font-awesome.css" rel="stylesheet"/>
-    <link href="${pageContext.request.contextPath}static/new/css/custom-styles.css" rel="stylesheet"/>
+
+    <link href="${pageContext.request.contextPath}/static/new/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/static/new/css/font-awesome.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/static/new/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/static/new/css/custom-styles.css" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
 
 
@@ -105,9 +107,9 @@
 
 
 <%--引入js文件--%>
-<script src="${pageContext.request.contextPath}static/new/js/jquery-1.10.2.js"></script>
-<script src="${pageContext.request.contextPath}static/new/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}static/new/js/jquery.metisMenu.js"></script>
-<script src="${pageContext.request.contextPath}static/new/js/custom-scripts.js"></script>
+<script src="${pageContext.request.contextPath}/static/new/js/jquery-1.10.2.js"></script>
+<script src="${pageContext.request.contextPath}/static/new/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/new/js/jquery.metisMenu.js"></script>
+<script src="${pageContext.request.contextPath}/static/new/js/custom-scripts.js"></script>
 </body>
 </html>
