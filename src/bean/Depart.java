@@ -2,6 +2,7 @@ package bean;
 
 
 import utils.annotation.Column;
+import utils.annotation.Count;
 
 /**
  * @ Author     ：Bzy.
@@ -12,13 +13,30 @@ public class Depart {
     private int id;
     @Column(name = "departname")
     private String departName;
+    @Count(name = "department",bean = Staff.class)
+    private int count;
 
     public Depart(){}
 
-    public Depart(int id,String departName) {
+    public Depart(String departName) {
+        this.departName = departName;
+    }
+
+    public Depart(int id, String departName) {
         this.id = id;
         this.departName = departName;
     }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+
+
 
     public int getId() {
         return id;
@@ -41,7 +59,8 @@ public class Depart {
     public String toString() {
         return "Depart{" +
                 "id=" + id +
-                ", departname='" + departName + '\'' +
+                ", departName='" + departName + '\'' +
+                ", count=" + count +
                 '}';
     }
 }

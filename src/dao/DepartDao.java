@@ -53,7 +53,7 @@ public interface DepartDao {
 
     /**
      * 分页展示部门信息
-     *
+     * @param pageBean
      * @return PageBean
      */
     PageBean listPage(PageBean pageBean);

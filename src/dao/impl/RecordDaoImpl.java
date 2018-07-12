@@ -35,7 +35,6 @@ public class RecordDaoImpl implements RecordDao {
 
     @Override
     public PageBean findPageByEndDateBeforAndStartAfter(PageBean pageBean, Date endDate, Date startDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         java.sql.Date startDates = new java.sql.Date(startDate.getTime());
         java.sql.Date endDates = new java.sql.Date(endDate.getTime());
         return DBUtils.getPageByBeforSomeAndAfterSome(pageBean, Record.class,"date",endDates.toString(),"date",startDates.toString());

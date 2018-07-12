@@ -39,5 +39,10 @@ public interface StaffDao {
      */
     Staff findById(int id);
 
+    /**
+     * 保存一个员工
+     * @param staff
+     * @return
+     */
     boolean save(Staff staff);
 }

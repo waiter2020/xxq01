@@ -2,6 +2,7 @@ package bean;
 
 import utils.annotation.Column;
 import utils.annotation.DateType;
+import utils.annotation.ManyToOne;
 
 import java.util.Date;
 
@@ -12,9 +13,8 @@ import java.util.Date;
  */
 public class Record {
     private int id;
-    private String userName;
-    @Column(name = "staffname")
-    private String staffName;
+    @ManyToOne(bean = Staff.class)
+    private Staff staff;
     private int mark;
     private String source;
     private String result;
@@ -23,9 +23,15 @@ public class Record {
 
     public Record(){}
 
-    public Record(String userName, String staffName, int mark, String source, String result, Date date) {
-        this.userName = userName;
-        this.staffName = staffName;
+    public Record( int mark, String source, String result, Date date) {
+        this.mark = mark;
+        this.source = source;
+        this.result = result;
+        this.date = date;
+    }
+
+    public Record(Staff staff, int mark, String source, String result, Date date) {
+        this.staff=staff;
         this.mark = mark;
         this.source = source;
         this.result = result;
@@ -40,20 +46,12 @@ public class Record {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public Staff getStaff() {
+        return staff;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getStaffName() {
-        return staffName;
-    }
-
-    public void setStaffName(String staffName) {
-        this.staffName = staffName;
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 
     public int getMark() {
@@ -92,8 +90,7 @@ public class Record {
     public String toString() {
         return "Record{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", staffName='" + staffName + '\'' +
+                ", staff=" + staff +
                 ", mark=" + mark +
                 ", source='" + source + '\'' +
                 ", result='" + result + '\'' +
