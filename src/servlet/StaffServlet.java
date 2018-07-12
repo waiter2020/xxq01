@@ -148,6 +148,22 @@ public class StaffServlet extends HttpServlet {
     }
 
     /**
+     * 修改员工信息中转，需要提供参数员工id
+     * 例如url后加？id=1
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void toThangeStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        Staff byId = staffService.findById(Integer.parseInt(id));
+        request.setAttribute("change",byId);
+        request.getRequestDispatcher("/staff/change.jsp").forward(request,response);
+    }
+
+
+    /**
      * 添加员工接口，post方法
      * @param request
      * @param response
