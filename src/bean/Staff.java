@@ -1,6 +1,7 @@
 package bean;
 
 import utils.annotation.Column;
+import utils.annotation.ManyToOne;
 import utils.annotation.OneToOne;
 
 /**
@@ -12,9 +13,10 @@ public class Staff {
     private int id;
     private String userName;
     private String staffName;
-    @OneToOne(bean = Depart.class)
-    private Depart department;
-    @OneToOne(bean = Station.class)
+    @ManyToOne(bean = Depart.class)
+    @Column(name = "department")
+    private Depart departMent;
+    @ManyToOne(bean = Station.class)
     private Station station;
     @Column(name = "phoneNum")
     private String phoneNum;
@@ -30,10 +32,10 @@ public class Staff {
     private int sex;
     public Staff(){}
 
-    public Staff(String userName, String staffName, Depart department, Station station, String phoneNum, int age, String idCard, boolean isWork, int wAges) {
+    public Staff(String userName, String staffName, Depart departMent, Station station, String phoneNum, int age, String idCard, boolean isWork, int wAges) {
         this.userName = userName;
         this.staffName = staffName;
-        this.department = department;
+        this.departMent = departMent;
         this.station = station;
         this.phoneNum = phoneNum;
         this.age = age;
@@ -41,6 +43,7 @@ public class Staff {
         this.isWork = isWork;
         this.wAges = wAges;
     }
+
 
     public int getId() {
         return id;
@@ -67,11 +70,11 @@ public class Staff {
     }
 
     public Depart getDepartment() {
-        return department;
+        return departMent;
     }
 
     public void setDepartment(Depart department) {
-        this.department = department;
+        this.departMent = department;
     }
 
     public Station getStation() {
@@ -143,7 +146,7 @@ public class Staff {
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", staffName='" + staffName + '\'' +
-                ", department='" + department + '\'' +
+                ", department='" + departMent + '\'' +
                 ", station='" + station + '\'' +
                 ", phoneNum='" + phoneNum + '\'' +
                 ", age=" + age +

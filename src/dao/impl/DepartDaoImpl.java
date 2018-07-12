@@ -58,7 +58,7 @@ public class DepartDaoImpl implements DepartDao{
     public boolean deleteByName(String departname){
 
         Depart depart=findByName(departname);
-        if(depart.getDepartname()==null){
+        if(depart.getDepartName()==null){
             return false;
         }else{
             return DBUtils.delete(Depart.class,depart.getId());

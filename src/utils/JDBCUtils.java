@@ -51,6 +51,10 @@ public class JDBCUtils {
                 props.getProperty("password"));
     }
 
+    /**
+     * 获取配置
+     * @return
+     */
     public static Properties getProps() {
         return props;
     }

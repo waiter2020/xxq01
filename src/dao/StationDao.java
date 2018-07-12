@@ -21,15 +21,15 @@ public interface StationDao {
 
     /**
      *
-     * @param stationname
+     * @param stationName
      * @return 通过岗位名查询信息
      */
-    Station findByName(String stationname);
+    Station findByName(String stationName);
 
     /**
      * 通过岗位名删除信息
-     * @param stationname
+     * @param stationName
      * @return 是否删除成功
      */
-    boolean deleteByName(String stationname);
+    boolean deleteByName(String stationName);
 }

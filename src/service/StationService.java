@@ -35,20 +35,20 @@ public class StationService {
 
     /**
      *
-     * @param stationname
+     * @param stationName
      * @return 通过岗位名查询信息
      */
-    public Station findByName(String stationname){
-        return stationDao.findByName(stationname);
+    public Station findByName(String stationName){
+        return stationDao.findByName(stationName);
     }
 
     /**
      * 通过岗位名删除信息
-     * @param stationname
+     * @param stationName
      * @return 是否删除成功
      */
-    public boolean deleteByName(String stationname){
-        return stationDao.deleteByName(stationname);
+    public boolean deleteByName(String stationName){
+        return stationDao.deleteByName(stationName);
     }
 
 

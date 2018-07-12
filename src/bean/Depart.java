@@ -1,6 +1,8 @@
 package bean;
 
 
+import utils.annotation.Column;
+
 /**
  * @ Author     ：Bzy.
  * @ Date       ：Created in 下午7:46 18-7-9
@@ -8,13 +10,14 @@ package bean;
  */
 public class Depart {
     private int id;
-    private String departname;
+    @Column(name = "departname")
+    private String departName;
 
     public Depart(){}
 
-    public Depart(int id,String departname) {
+    public Depart(int id,String departName) {
         this.id = id;
-        this.departname = departname;
+        this.departName = departName;
     }
 
     public int getId() {
@@ -25,12 +28,12 @@ public class Depart {
         this.id = id;
     }
 
-    public String getDepartname() {
-        return departname;
+    public String getDepartName() {
+        return departName;
     }
 
-    public void setDepartname(String departname) {
-        this.departname = departname;
+    public void setDepartName(String departName) {
+        this.departName = departName;
     }
 
 
@@ -38,7 +41,7 @@ public class Depart {
     public String toString() {
         return "Depart{" +
                 "id=" + id +
-                ", departname='" + departname + '\'' +
+                ", departname='" + departName + '\'' +
                 '}';
     }
 }

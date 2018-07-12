@@ -27,19 +27,19 @@ public class StationDaoImpl implements StationDao{
     }
 
     @Override
-    public Station findByName(String stationname){
-        LinkedList stationName = DBUtils.getListBySome(Station.class, "stationname", stationname+"");
-        if(stationName.size()==0){
+    public Station findByName(String stationName){
+        LinkedList listBySome = DBUtils.getListBySome(Station.class, "stationname", stationName+"");
+        if(listBySome.size()==0){
             return new Station(0,"not exist");
         }else{
-            return (Station) stationName.remove(0);
+            return (Station) listBySome.remove(0);
         }
     }
     @Override
     public boolean deleteByName(String stationname){
 
         Station station=findByName(stationname);
-        if(station.getStationname()==null){
+        if(station.getStationName()==null){
             return false;
         }else{
             return DBUtils.delete(Station.class,station.getId());
