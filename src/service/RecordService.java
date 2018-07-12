@@ -22,7 +22,7 @@ public class RecordService {
     }
 
     public boolean save(Staff staff,int mark,String source, String result){
-        return recordDao.save(new Record(staff.getUserName(),staff.getStaffName(),mark,source,result,new Date()));
+        return recordDao.save(new Record(staff,mark,source,result,new Date()));
     }
 
     public PageBean findPageByEndDateBeforAndStartDateAfter(PageBean pageBean,Date endDate,Date startDate){

@@ -1,15 +1,15 @@
 package utils;
 
-import utils.annotation.DateType;
-import utils.annotation.Column;
-import utils.annotation.ManyToOne;
-import utils.annotation.OneToOne;
+import bean.Staff;
+import utils.annotation.*;
 
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by  waiter on 18-7-9  上午8:29.
@@ -46,6 +46,17 @@ public class BeanUtils {
                 Column annotation1 = f.getAnnotation(Column.class);
                 OneToOne annotation2 = f.getAnnotation(OneToOne.class);
                 ManyToOne annotation3 = f.getAnnotation(ManyToOne.class);
+                Count annotation4 = f.getAnnotation(Count.class);
+
+                if(annotation4!=null){
+                    int anInt = set.getInt(declaredFields[0].getName());
+                    Map<String,String> map = new TreeMap<>();
+                    map.put(annotation4.name(),anInt+"");
+                    int objectCount = DBUtils.getObjectCount(annotation4.bean(), map);
+                    f.set(obj, objectCount);
+                    continue;
+                }
+
                 if (annotation1 != null) {
                     name = annotation1.name();
                 }
