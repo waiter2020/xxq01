@@ -53,6 +53,8 @@ public class StaffServlet extends HttpServlet {
             toAddStaff(request,response);
         }else if("transfer".equals(substring)) {
             toTransferStaff(request, response);
+        }else if ("change".equals(substring)) {
+            toChangeStaff(request, response);
         }
     }
 
@@ -155,7 +157,7 @@ public class StaffServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    protected void toThangeStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void toChangeStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         Staff byId = staffService.findById(Integer.parseInt(id));
         request.setAttribute("change",byId);

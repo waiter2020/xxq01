@@ -38,7 +38,7 @@
             </div>
             <%--操作按钮    --%>
             <div>
-                <h2 style="float: left"><a class="btn btn-sm btn-success" href="emp">添加员工</a></h2>
+                <h2 style="float: left"><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/staff/add.jsp" >添加员工</a></h2>
             </div>
             <%--表格--%>
             <div class="table-responsive">
