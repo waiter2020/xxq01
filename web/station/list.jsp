@@ -76,7 +76,7 @@
 								for(Station l:pageData){
 									out.println("<tr>");
 									out.println("<td>"+l.getId()+"</td>");
-									out.println("<td>"+l.getStationname()+"</td>");
+									out.println("<td>"+l.getStationName()+"</td>");
 									out.println("</tr>");
 								}
 							}

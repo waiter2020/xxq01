@@ -12,17 +12,18 @@ import java.util.Date;
 public class Office {
     private int id;
     private String userName;
-    private String staffname;
+    @Column(name = "staffname")
+    private String staffName;
     @DateType
     private Date date;
     private int state;
 
     public Office(){}
 
-    public Office(int id, String usernName, String staffname, Date date, int state) {
+    public Office(int id, String userName, String staffName, Date date, int state) {
         this.id = id;
-        this.userName = usernName;
-        this.staffname = staffname;
+        this.userName = userName;
+        this.staffName = staffName;
         this.date = date;
         this.state = state;
     }
@@ -43,12 +44,12 @@ public class Office {
         this.userName = usernName;
     }
 
-    public String getStaffname() {
-        return staffname;
+    public String getStaffName() {
+        return staffName;
     }
 
-    public void setStaffname(String staffname) {
-        this.staffname = staffname;
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
     }
 
     public Date getDate() {
@@ -72,7 +73,7 @@ public class Office {
         return "Office{" +
                 "id=" + id +
                 ", usernName='" + userName + '\'' +
-                ", staffname='" + staffname + '\'' +
+                ", staffname='" + staffName + '\'' +
                 ", date=" + date +
                 ", state=" + state +
                 '}';

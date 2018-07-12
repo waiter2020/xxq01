@@ -1,6 +1,7 @@
 package bean;
 
 import utils.annotation.Column;
+import utils.annotation.OneToOne;
 
 /**
  * Created by  waiter on 18-7-6.
@@ -11,11 +12,28 @@ import utils.annotation.Column;
 public class User {
     private int id;
     private String userName;
+    @OneToOne(bean = Staff.class)
+    private Staff staff;
     @Column(name = "passWd")
     private String pwd;
     private int grade;
 
 
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
 
     public int getGrade() {
         return grade;

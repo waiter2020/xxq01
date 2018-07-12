@@ -1,18 +1,21 @@
 package bean;
 
+import utils.annotation.Column;
+
 /**
  * @ Author     ：Bzy.
  * @ Date       ：Created in 下午7:40 18-7-10
  */
 public class Station {
     private int id;
-    private String stationname;
+    @Column(name = "stationname")
+    private String stationName;
 
     public Station(){}
 
-    public Station(int id, String stationname) {
+    public Station(int id, String stationName) {
         this.id = id;
-        this.stationname = stationname;
+        this.stationName = stationName;
     }
 
     public int getId() {
@@ -23,19 +26,19 @@ public class Station {
         this.id = id;
     }
 
-    public String getStationname() {
-        return stationname;
+    public String getStationName() {
+        return stationName;
     }
 
-    public void setStationname(String stationname) {
-        this.stationname = stationname;
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
     }
 
     @Override
     public String toString() {
         return "Station{" +
                 "id=" + id +
-                ", stationname='" + stationname + '\'' +
+                ", stationname='" + stationName + '\'' +
                 '}';
     }
 }
