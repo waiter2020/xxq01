@@ -92,7 +92,7 @@
                                             <td>${staff.wAges}</td>
                                             <c:if test="${staff.userName !=sessionScope.get('loginInfo').userName}">
                                             <td>
-                                                <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/staff/list/delete?id=${staff.id}'" href="${pageContext.request.contextPath}/staff/list/delete?id=${staff.id}" class="btn btn-sm btn-danger ">辞退</button>
+                                                <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/staff/delete?id=${staff.id}'" href="${pageContext.request.contextPath}/staff/list/delete?id=${staff.id}" class="btn btn-sm btn-danger ">辞退</button>
                                             </td>
                                             </c:if>
                                         </tr>
