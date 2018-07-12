@@ -27,6 +27,8 @@ public class Staff {
     private boolean isWork;
     @Column(name = "wages")
     private int wAges;
+    private String email;
+    private String address;
 
 
     private int sex;
@@ -44,6 +46,29 @@ public class Staff {
         this.wAges = wAges;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Depart getDepartMent() {
+        return departMent;
+    }
+
+    public void setDepartMent(Depart departMent) {
+        this.departMent = departMent;
+    }
 
     public int getId() {
         return id;
