@@ -70,6 +70,10 @@ public class StationService {
         return stationDao.findAll();
     }
 
+    public PageBean getPageByDepart(PageBean pageBean,int depart){
+        return stationDao.getPageByDepart(pageBean,depart);
+    }
+
     public static StationService getStationService(){
         return stationService;
     }

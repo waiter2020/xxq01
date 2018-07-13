@@ -14,6 +14,8 @@ public interface StationDao {
     PageBean listPage(PageBean pageBean);
 
 
+    PageBean getPageByDepart(PageBean pageBean,int depart);
+
     /**
      * 插入岗位信息
      * @param station
@@ -47,4 +49,7 @@ public interface StationDao {
      * @return
      */
     LinkedList findAll();
+
+
+
 }

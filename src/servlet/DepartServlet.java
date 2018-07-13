@@ -30,7 +30,7 @@ public class DepartServlet extends HttpServlet {
         String uri = request.getRequestURI();
         String substring = uri.substring(8, uri.length());
         if ("list".equals(substring)) {
-            getDpartList(request, response);
+            getDpartPage(request, response);
         }
     }
 
@@ -41,7 +41,7 @@ public class DepartServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    protected void getDpartList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void getDpartPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PageBean pageBean = new PageBean();
         String currentPage = request.getParameter("currentPage");
         if(currentPage!=null&&!currentPage.isEmpty()){
@@ -54,6 +54,13 @@ public class DepartServlet extends HttpServlet {
         request.getRequestDispatcher("/depart/list.jsp").forward(request,response);
     }
 
+    /**
+     * 添加岗位
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void addDepart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String departName = request.getParameter("departName");
         String describe = request.getParameter("describe");
@@ -63,6 +70,8 @@ public class DepartServlet extends HttpServlet {
         }else {
             request.setAttribute("msg","添加失败，请检查输入信息");
         }
-        getDpartList(request,response);
+        getDpartPage(request,response);
     }
+
+
 }

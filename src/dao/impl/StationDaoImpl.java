@@ -20,6 +20,11 @@ public class StationDaoImpl implements StationDao{
         return DBUtils.getPage(pageBean,Station.class);
     }
 
+    @Override
+    public PageBean getPageByDepart(PageBean pageBean,int depart) {
+        return DBUtils.getPageBySome(pageBean,Station.class,"depart",depart+"");
+    }
+
 
     @Override
     public boolean stationInsert(Station station){
