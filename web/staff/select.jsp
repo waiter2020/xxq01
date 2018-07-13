@@ -315,7 +315,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        员工管理 <small>员工添加</small>
+                        员工管理 <small>员工查询</small>
                     </h1>
                 </div>
             </div>
@@ -326,7 +326,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            添加员工信息
+                            查询员工信息
                         </div>
                         <c:if test="${requestScope.get('msg')!=null}">
                             <h2 class="btn btn-sm btn-danger">${requestScope.get("msg")}</h2>
@@ -352,4 +352,3 @@
 
 </body>
 </html>
-
