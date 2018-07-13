@@ -335,22 +335,19 @@
 
                         <div class="panel-body">
                             <div class="row">
-                                <form>
+                                <form action="${pageContext.request.contextPath}/staff/transfer" method="post">
                                 <div class="col-lg-6">
                                     <%--<form role="form">--%>
+                                    <input name="mark" type="hidden" value="3"/>
+                                    <input name="id" type="hidden" value="${staff.id}"/>
                                         <div class="form-group">
-                                            <label for="disabledSelect-depart">原部门</label>
-                                            <select id="disabledSelect-depart" class="form-control">
-                                                <option>开发部</option>
-                                            </select>
+                                            <label for="disabledInput-depart">原部门</label>
+                                            <input class="form-control" id="disabledInput-depart" type="text"  placeholder="${staff.departMent.departName}" disabled="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="disabledSelect-position">原职位</label>
-                                            <select id="disabledSelect-position" class="form-control">
-                                                <option>副经理</option>
-                                            </select>
+                                            <label for="disabledInput-station">原职位</label>
+                                            <input class="form-control" id="disabledInput-station" type="text" placeholder="${staff.station.stationName}" disabled="">
                                         </div>
-
 
                                     <%--</form>--%>
                                 </div>
@@ -359,21 +356,37 @@
                                     <%--<form role="form">--%>
                                         <div class="form-group">
                                             <label for="disabledSelect-depart1">新部门</label>
-                                            <select id="disabledSelect-depart1" class="form-control">
-                                                <option>人事部</option>
+                                            <select id="disabledSelect-depart1" name="resDepart" class="form-control">
+                                                <c:choose>
+                                                    <c:when test="${not empty requestScope.departs}">
+                                                        <c:forEach var="departs" items="${requestScope.departs}" varStatus="vs">
+                                                            <option value="${departs.id}">${departs.departName}</option>
+                                                        </c:forEach>
+                                                    </c:when>
+                                                </c:choose>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="disabledSelect-position1">新职位</label>
-                                            <select id="disabledSelect-position1" class="form-control">
-                                                <option>经理</option>
+                                            <select id="disabledSelect-position1" name="resStation" class="form-control">
+                                                <c:choose>
+                                                    <c:when test="${not empty requestScope.stations}">
+                                                        <c:forEach var="stations" items="${requestScope.stations}" varStatus="vs">
+                                                            <option value="${stations.id}">${stations.stationName}</option>
+                                                        </c:forEach>
+                                                    </c:when>
+                                                </c:choose>
                                             </select>
                                         </div>
 
 
                                     <%--</form>--%>
                                 </div>
-                                <button type="submit" class="btn btn-primary" style="height: 30px;margin-left: 48%">调动</button>
+                                <button type="submit"
+
+                                        class="btn btn-primary"
+                                        style="height: 30px;margin-left: 48%">调动
+                                </button>
                                 </form>
                             </div>
                         </div>
