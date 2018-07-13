@@ -302,7 +302,7 @@ public class StaffServlet extends HttpServlet {
         Staff byId = staffService.findById(Integer.parseInt(id));
         if(byId!=null){
         Office lastByStaff = officeService.findLastByStaff(byId.getId());
-        if(lastByStaff!=null&&lastByStaff.getState()==1){
+        if(lastByStaff!=null&&lastByStaff.getState()!=1){
             boolean save = officeService.save(byId, 1);
             if(save){
                 request.setAttribute("msg","变更成功");
