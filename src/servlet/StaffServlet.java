@@ -137,9 +137,12 @@ public class StaffServlet extends HttpServlet {
     protected void changeStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         String staffName = request.getParameter("staffName");
+        String idCard = request.getParameter("idCard");
         String phoneNum = request.getParameter("phoneNum");
         String wAges = request.getParameter("wAges");
         String age = request.getParameter("age");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
         if(id==null||"".equals(id)){
             request.getRequestDispatcher("/staff/change.jsp").forward(request,response);
             return;
@@ -149,6 +152,9 @@ public class StaffServlet extends HttpServlet {
         byId.setPhoneNum(phoneNum);
         byId.setwAges(Integer.parseInt(wAges));
         byId.setAge(Integer.parseInt(age));
+        byId.setEmail(email);
+        byId.setAddress(address);
+        byId.setIdCard(idCard);
         boolean save = staffService.save(byId);
         if(save){
             request.setAttribute("msg","修改成功");

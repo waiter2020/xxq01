@@ -87,4 +87,6 @@ public class UserServlet extends HttpServlet {
         request.getRequestDispatcher("/user/change_pwd.jsp").forward(request,response);
 
     }
+
+
 }
