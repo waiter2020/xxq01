@@ -177,6 +177,10 @@ public class StaffServlet extends HttpServlet {
         String id = request.getParameter("id");
         Staff byId = staffService.findById(Integer.parseInt(id));
         request.setAttribute("change",byId);
+        LinkedList<Station> all = stationService.findAll();
+        request.setAttribute("stations",all);
+        LinkedList<Depart> all1 = departService.findAll();
+        request.setAttribute("departs",all1);
         request.getRequestDispatcher("/staff/change.jsp").forward(request,response);
     }
 
