@@ -5,6 +5,8 @@ import dao.OfficeDao;
 import utils.DBUtils;
 import utils.PageBean;
 
+import java.util.LinkedList;
+
 /**
  * @ Author     ：Bzy.
  * @ Date       ：Created in 下午4:25 18-7-11
@@ -22,6 +24,15 @@ public class OfficeDaoImpl implements OfficeDao{
     @Override
     public boolean save(Office office) {
         return DBUtils.insert(office);
+    }
+
+    @Override
+    public Office findLastByStaff(int staff) {
+        LinkedList listBySome = DBUtils.getListBySome(Office.class, "staff", staff + "");
+        if(listBySome==null){
+            return null;
+        }
+        return (Office) listBySome.getLast();
     }
 
 

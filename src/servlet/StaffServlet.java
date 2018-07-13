@@ -286,6 +286,9 @@ public class StaffServlet extends HttpServlet {
      * @throws IOException
      */
     protected void toTransferStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        Staff byId = staffService.findById(Integer.parseInt(id));
+        request.setAttribute("staff",byId);
         LinkedList<Station> all = stationService.findAll();
         request.setAttribute("stations",all);
         LinkedList<Depart> all1 = departService.findAll();
@@ -302,14 +305,17 @@ public class StaffServlet extends HttpServlet {
      */
     protected void turnStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-        String state = request.getParameter("state");
         Staff byId = staffService.findById(Integer.parseInt(id));
-
         if(byId!=null){
-            boolean save = officeService.save(byId, Integer.parseInt(state));
+        Office lastByStaff = officeService.findLastByStaff(byId.getId());
+        if(lastByStaff!=null&&lastByStaff.getState()==1){
+            boolean save = officeService.save(byId, 1);
             if(save){
                 request.setAttribute("msg","变更成功");
             }
+        }else {
+            request.setAttribute("msg","变更失败");
+        }
         }
         getStaffList(request,response);
     }

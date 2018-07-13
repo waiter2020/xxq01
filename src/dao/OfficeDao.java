@@ -23,5 +23,5 @@ public interface OfficeDao {
      */
     boolean save(Office office);
 
-
+    Office findLastByStaff(int staff);
 }

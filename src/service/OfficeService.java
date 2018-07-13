@@ -41,6 +41,11 @@ public class OfficeService {
         return officeDao.save(new Office(staff,new Date(),state));
     }
 
+    public Office findLastByStaff(int staff){
+        return officeDao.findLastByStaff(staff);
+    }
+
+
     public static OfficeService getOfficeService(){
         return officeService;
     }
