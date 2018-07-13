@@ -123,7 +123,7 @@ public class StaffServlet extends HttpServlet {
                 }
             }
         }
-        request.getRequestDispatcher("/staff/list").forward(request, response);
+        getStaffList(request,response);
     }
 
 
@@ -161,7 +161,7 @@ public class StaffServlet extends HttpServlet {
             request.getRequestDispatcher("/staff/list").forward(request, response);
         }else {
             request.setAttribute("msg","修改出错，请检查参数是否有误");
-            request.getRequestDispatcher("/staff/change.jsp").forward(request, response);
+            toChangeStaff(request,response);
         }
     }
 
@@ -217,7 +217,7 @@ public class StaffServlet extends HttpServlet {
             getStaffList(request,response);
         }else {
             request.setAttribute("msg","添加出错，请检查参数是否有误");
-            request.getRequestDispatcher("/staff/add.jsp").forward(request, response);
+            toAddStaff(request,response);
         }
 
     }
