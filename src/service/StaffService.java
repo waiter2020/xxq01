@@ -77,6 +77,10 @@ public class StaffService {
         return staffDao.save(staff);
     }
 
+    public PageBean findPageByDepartAndStation(PageBean pageBean, int depart, int station){
+        return staffDao.findPageByDepartAndStation(pageBean,depart,station);
+    }
+
     public static StaffService getStaffService() {
         return staffService;
     }

@@ -48,6 +48,14 @@ public class StaffDaoImpl implements StaffDao {
         }
     }
 
+    @Override
+    public PageBean findPageByDepartAndStation(PageBean pageBean, int depart, int station) {
+        Map<String,String> map = new TreeMap<>();
+        map.put("department",depart+"");
+        map.put("station",station+"");
+        return DBUtils.getPageBySome(pageBean,Staff.class,map);
+    }
+
     public synchronized static StaffDaoImpl getStaffDao() {
         return staffDao;
     }

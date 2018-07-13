@@ -45,4 +45,7 @@ public interface StaffDao {
      * @return
      */
     boolean save(Staff staff);
+
+    PageBean findPageByDepartAndStation(PageBean pageBean,int depart,int station);
+
 }
