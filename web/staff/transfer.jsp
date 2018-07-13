@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: bzy
-  Date: 18-7-12
-  Time: 下午10:07
+  Date: 18-7-13
+  Time: 下午2:47
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
@@ -315,7 +315,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        员工管理 <small>员工添加</small>
+                        员工管理 <small>员工调动</small>
                     </h1>
                 </div>
             </div>
@@ -326,73 +326,56 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            添加员工信息
+                            员工调动操作
                         </div>
                         <c:if test="${requestScope.get('msg')!=null}">
                             <h2 class="btn btn-sm btn-danger">${requestScope.get("msg")}</h2>
                         </c:if>
 
 
-
                         <div class="panel-body">
-
                             <div class="row">
-
-                                <form role="form">
-
-                                    <div class="col-lg-6">
+                                <form>
+                                <div class="col-lg-6">
+                                    <%--<form role="form">--%>
                                         <div class="form-group">
-                                            <label>姓名</label>
-                                            <input class="form-control">
+                                            <label for="disabledSelect-depart">原部门</label>
+                                            <select id="disabledSelect-depart" class="form-control">
+                                                <option>开发部</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="disabledSelect-position">原职位</label>
+                                            <select id="disabledSelect-position" class="form-control">
+                                                <option>副经理</option>
+                                            </select>
                                         </div>
 
+
+                                    <%--</form>--%>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <%--<form role="form">--%>
                                         <div class="form-group">
-                                            <label>年龄</label>
-                                            <input class="form-control">
+                                            <label for="disabledSelect-depart1">新部门</label>
+                                            <select id="disabledSelect-depart1" class="form-control">
+                                                <option>人事部</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="disabledSelect-position1">新职位</label>
+                                            <select id="disabledSelect-position1" class="form-control">
+                                                <option>经理</option>
+                                            </select>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>性别</label>
-                                            <input class="form-control">
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label>身份证号</label>
-                                            <input class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>联系方式</label>
-                                            <input class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>工号</label>
-                                            <input class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>部门</label>
-                                            <input class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>岗位</label>
-                                            <input class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>薪酬</label>
-                                            <input class="form-control">
-                                        </div>
-                                    </div>
-
+                                    <%--</form>--%>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="height: 30px;margin-left: 48%">调动</button>
                                 </form>
-
                             </div>
-
                         </div>
 
                     </div>

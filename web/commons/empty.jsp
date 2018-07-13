@@ -331,70 +331,9 @@
                         <c:if test="${requestScope.get('msg')!=null}">
                             <h2 class="btn btn-sm btn-danger">${requestScope.get("msg")}</h2>
                         </c:if>
-
-
-
-                        <div class="panel-body">
-
-                            <div class="row">
-
-                                <form role="form">
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>姓名</label>
-                                            <input class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>年龄</label>
-                                            <input class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>性别</label>
-                                            <input class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>身份证号</label>
-                                            <input class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>联系方式</label>
-                                            <input class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>工号</label>
-                                            <input class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>部门</label>
-                                            <input class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>岗位</label>
-                                            <input class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>薪酬</label>
-                                            <input class="form-control">
-                                        </div>
-                                    </div>
-
-                                </form>
-
+                            <div class="panel-body">
+                                <%--页面主体--%>
                             </div>
-
-                        </div>
-
                     </div>
 
                 </div>

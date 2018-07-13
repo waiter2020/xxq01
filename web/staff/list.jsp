@@ -324,13 +324,14 @@
                         <c:if test="${requestScope.get('msg')!=null}">
                             <h2 class="btn btn-sm btn-danger">${requestScope.get("msg")}</h2>
                         </c:if>
+
                         <div class="panel-body">
                             <table class="table table-striped table-sm">
                                 <thead>
                                 <tr>
-                                    <th>工号</th>
+                                    <th>工号<small style=" color: gray">&nbsp;&nbsp;点击修改</small></th>
                                     <th>姓名</th>
-                                    <th>电话</th>
+                                    <th>联系方式</th>
                                     <th>性别</th>
                                     <th>年龄</th>
                                     <th>身份证号</th>
@@ -345,7 +346,7 @@
                                     <c:when test="${not empty requestScope.page.pageData}">
                                         <c:forEach var="staff" items="${requestScope.page.pageData}" varStatus="vs">
                                             <tr>
-                                                <td>${staff.userName }</td>
+                                                <td><a href="${pageContext.request.contextPath}/staff/change?id=${staff.id}">${staff.userName }</a></td>
                                                 <td>${staff.staffName }</td>
                                                 <td>${staff.phoneNum}</td>
                                                 <td>${staff.sex==0?'男':'女'}</td>
@@ -357,10 +358,24 @@
 
                                                 <td>
                                                     <c:if test="${staff.userName !=sessionScope.get('loginInfo').userName}">
+                                                        <%--<button type="button"--%>
+                                                                <%--onclick="window.location.href='${pageContext.request.contextPath}/staff/change?id=${staff.id}'"--%>
+                                                                <%--href="${pageContext.request.contextPath}/staff/change?id=${staff.id}"--%>
+                                                                <%--class="btn btn-primary">修改--%>
+                                                        <%--</button>--%>
                                                         <button type="button"
-                                                                onclick="window.location.href='${pageContext.request.contextPath}/staff/change?id=${staff.id}'"
-                                                                href="${pageContext.request.contextPath}/staff/change?id=${staff.id}"
-                                                                class="btn btn-sm btn-danger">修改
+                                                                class="btn btn-primary"
+                                                                style="height: 30px">转正
+                                                        </button>
+                                                        <button type="button"
+                                                                onclick="window.location.href='${pageContext.request.contextPath}/staff/transfer?id=${staff.id}'"
+                                                                href="${pageContext.request.contextPath}/staff/transfer?id=${staff.id}"
+                                                                class="btn btn-primary"
+                                                                style="height: 30px">调动
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-primary"
+                                                                style="height: 30px">辞退
                                                         </button>
                                                     </c:if>
                                                 </td>
@@ -384,14 +399,16 @@
                             <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.currentPage<requestScope.page.totalPage?requestScope.page.currentPage+1:requestScope.page.totalPage}">下一页 </a>&nbsp;&nbsp;
                             <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.totalPage}">末页</a>&nbsp;&nbsp;
                             <button type="button"
-                                    style="margin-left: 540px"
+                                    style="margin-left: 553px;height: 30px"
                                     onclick="window.location.href='${pageContext.request.contextPath}/staff/add'"
-                                    href="${pageContext.request.contextPath}/staff/add">添加
+                                    href="${pageContext.request.contextPath}/staff/add"
+                                    class="btn btn-primary">添加
                             </button>
                             <button type="button"
-                                    style="margin-left: 48px"
+                                    style="margin-left: 1px;height: 30px"
                                     onclick="window.location.href='${pageContext.request.contextPath}/staff/select'"
-                                    href="${pageContext.request.contextPath}/staff/select">查询
+                                    href="${pageContext.request.contextPath}/staff/select"
+                                    class="btn btn-primary">查询
                             </button>
                         </div>
                     </div>

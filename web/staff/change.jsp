@@ -18,7 +18,7 @@
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
-    <link href="${pageContext.request.contextPath}/static/css/hucc.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/static   /css/hucc.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -310,7 +310,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="page-header">
-                                个人信息 <small>查看或修改.</small>
+                                个人信息 <small>信息修改</small>
                             </h1>
                         </div>
                     </div>
@@ -320,6 +320,9 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    修改员工个人信息
+                                </div>
                                 <!--<div class="panel-heading">-->
                                 <!--基本信息表-->
                                 <!--</div>-->
@@ -327,7 +330,7 @@
 
                                     <div class="row">
 
-
+                                        <form role="form">
 
                                         <div class="col-lg-6">
 
@@ -338,150 +341,85 @@
                                             @以 placeholder 显示 : 姓名 员工号 性别
                                             @以 option 显示 : 部门 职位
                                             -->
-                                            <h4>个人基本信息</h4>
 
-                                            <form role="form">
-                                                <fieldset disabled="">
 
                                                     <div class="form-group">
-                                                        <label for="disabledInput-name">姓名</label>
-                                                        <input class="form-control" id="disabledInput-name" type="text" placeholder="刘鑫" disabled="">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="disabledInput-sex">性别</label>
-                                                        <input class="form-control" id="disabledInput-sex" type="text" placeholder="男" disabled="">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="disabledInput-id">员工号</label>
+                                                        <label for="disabledInput-id">工号</label>
                                                         <input class="form-control" id="disabledInput-id" type="text" placeholder="1501020415" disabled="">
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="disabledSelect-depart">部门</label>
-                                                        <select id="disabledSelect-depart" class="form-control">
-                                                            <option>开发部</option>
-                                                        </select>
+                                                        <label>姓名</label>
+                                                        <input class="form-control">
                                                     </div>
-
                                                     <div class="form-group">
-                                                        <label for="disabledSelect-position">职位</label>
-                                                        <select id="disabledSelect-position" class="form-control">
-                                                            <option>董事长</option>
+                                                        <label>证件</label>
+                                                        <input class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="disabledSelect-depart1">年龄</label>
+                                                        <select id="disabledSelect-depart1" class="form-control">
+                                                            <option>22</option>
                                                         </select>
                                                     </div>
-                                                    <!-- 一个假的提交按钮 -->
-                                                    <div align="center">
-                                                        <button type="submit" class="btn btn-primary"  >修改</button>
+
+                                                    <label>薪酬</label>
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" class="form-control">
+                                                        <span class="input-group-addon">.00</span>
                                                     </div>
-                                                </fieldset>
-                                            </form>
 
 
 
 
 
-
-                                            <h4>个人附加信息</h4>
-                                            <!-- 以下为样式表 可删除不用
-                                                1. 输入不同情况 的 反应
-
-                                             -->
-                                            <form role="form">
-                                                <div class="form-group has-success">
-                                                    <label class="control-label" for="inputSuccess">正确输入</label>
-                                                    <input type="text" class="form-control" id="inputSuccess">
-                                                </div>
-                                                <div class="form-group has-warning">
-                                                    <label class="control-label" for="inputWarning">警告</label>
-                                                    <input type="text" class="form-control" id="inputWarning">
-                                                </div>
-                                                <div class="form-group has-error">
-                                                    <label class="control-label" for="inputError">输入错误</label>
-                                                    <input type="text" class="form-control" id="inputError">
-                                                </div>
-                                            </form>
-
-                                            <h4>Input Groups</h4>
-                                            <form role="form">
-                                                <div class="form-group input-group">
-                                                    <span class="input-group-addon">@</span>
-                                                    <input type="text" class="form-control" placeholder="Username">
-                                                </div>
-                                                <div class="form-group input-group">
-                                                    <input type="text" class="form-control">
-                                                    <span class="input-group-addon">.00</span>
-                                                </div>
-                                                <div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-eur"></i>
-                                            </span>
-                                                    <input type="text" class="form-control" placeholder="Font Awesome Icon">
-                                                </div>
-                                                <div class="form-group input-group">
-                                                    <span class="input-group-addon">$</span>
-                                                    <input type="text" class="form-control">
-                                                    <span class="input-group-addon">.00</span>
-                                                </div>
-                                                <div class="form-group input-group">
-                                                    <input type="text" class="form-control">
-                                                    <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-                                                </button>
-                                            </span>
-                                                </div>
-                                            </form>
                                         </div>
-                                        <!-- /.col-lg-6 (nested) -->
-
 
                                         <!-- 以下可变信息表
 
                                         -->
                                         <div class="col-lg-6">
-                                            <h4>个人可变信息</h4>
-                                            <form role="form">
+
+
                                                 <div class="form-group">
-                                                    <label>Telephone Number</label>
+                                                    <label>联系方式</label>
                                                     <input class="form-control">
-                                                    <p class="help-block">Example block-level help text here.</p>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>@EMAL</label>
+                                                    <label>@EMAL<small class="form-control-static">&nbsp;&nbsp;例:email@example.com</small></label>
                                                     <input class="form-control" placeholder="Enter text">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>其形式如:</label>
-                                                    <p class="form-control-static">email@example.com</p>
-                                                </div>
-
-                                                <div class="form-group">
                                                     <label>详细住址:</label>
-                                                    <textarea class="form-control" rows="3"></textarea>
+                                                    <textarea class="form-control" rows="3" style="height: 130px"></textarea>
                                                 </div>
 
-                                                <div align="center">
-                                                    <button type="submit" value ="submit" class="btn btn-default">修改</button>
-                                                    <button type="reset"  value="reset"  class="btn btn-default">重置</button>
+                                                <div style="margin-left: 160px">
+                                                    <button type="submit" value ="submit" class="btn btn-primary"  >修改</button>
+                                                    <button type="reset"  value="reset"  class="btn btn-primary" style="margin-left: 20px">重置</button>
+
                                                 </div>
-                                            </form>
+
+
+
+
                                         </div>
-
-
-
+                                        </form>
 
                                     </div>
-                                    <!-- /.row (nested) -->
                                 </div>
-                                <!-- /.panel-body -->
+
+
+
+
+
                             </div>
-                            <!-- /.panel -->
+
                         </div>
-                        <!-- /.col-lg-12 -->
                     </div>
-                    <footer><p><!--Copyright &copy; All rights reserved。--> Serendipity-Life</p></footer>
+                    <footer><p></p></footer>
                 </div>
-                <!-- /. PAGE INNER  -->
             </div>
 
 
