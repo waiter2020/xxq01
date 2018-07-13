@@ -247,31 +247,22 @@ public class StaffServlet extends HttpServlet {
      */
     protected void transferStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String mark = request.getParameter("mark");
-        String result = request.getParameter("result");
+        //员工id
         String id = request.getParameter("id");
-        //得给我传一个部门或岗位的id
-        String result_id = request.getParameter("result_id");
+        //各id
+        String srcStation = request.getParameter("srcStation");
+        String resStation = request.getParameter("resStation");
+        String srcDepart = request.getParameter("srcDepart");
+        String resDepart = request.getParameter("resDepart");
         Staff byId = staffService.findById(Integer.parseInt(id));
-        if("1".equals(mark)){
-            boolean save = recordService.save(byId, Integer.parseInt(mark), byId.getStation().getStationName(), result);
-            if(save){
-                Station byId1 = stationService.findById(Integer.parseInt(result_id));
-                byId.setStation(byId1);
-                boolean save1 = staffService.save(byId);
-                if(save1){
-                    request.setAttribute("msg","变动成功");
-                }
-            }
-        }else {
-            boolean save = recordService.save(byId, Integer.parseInt(mark), byId.getDepartment().getDepartName(), result);
-            if(save){
-                Depart byId1 = departService.findById(Integer.parseInt(result_id));
-                byId.setDepartment(byId1);
-                boolean save1 = staffService.save(byId);
-                if(save1){
-                    request.setAttribute("msg","变动成功");
-                }
-            }
+        Station srcStations = stationService.findById(Integer.parseInt(srcStation));
+        Station resStations = stationService.findById(Integer.parseInt(resStation));
+        Depart depart = departService.findById(Integer.parseInt(srcDepart));
+        Depart depart1 = departService.findById(Integer.parseInt(resDepart));
+
+        boolean save = recordService.save(byId, Integer.parseInt(mark), srcStations, resStations, depart, depart1);
+        if(save){
+            request.setAttribute("msg","变动成功");
         }
 
         getStaffList(request,response);

@@ -1,5 +1,6 @@
 package bean;
 
+import utils.annotation.Column;
 import utils.annotation.DateType;
 import utils.annotation.ManyToOne;
 
@@ -22,14 +23,20 @@ public class Record {
      * 变动类型
      */
     private int mark;
-    /**
-     * 原岗位
-     */
-    private String source;
-    /**
-     * 变动后岗位
-     */
-    private String result;
+
+    @ManyToOne(bean = Station.class)
+    @Column(name = "src_station")
+    private Station srcStation;
+    @ManyToOne(bean = Station.class)
+    @Column(name = "res_station")
+    private Station resStation;
+    @ManyToOne(bean = Depart.class)
+    @Column(name = "src_depart")
+    private Depart srcDepart;
+    @ManyToOne(bean = Depart.class)
+    @Column(name = "res_depart")
+    private Depart resDepart;
+
     /**
      * 变动日期
      */
@@ -38,19 +45,58 @@ public class Record {
 
     public Record(Staff byId, String mark, String stationName, String result, Date date){}
 
-    public Record( int mark, String source, String result, Date date) {
+    public Record(Staff staff, int mark, Station srcStation, Station resStation, Depart srcDepart, Depart resDepart, Date date) {
+        this.staff = staff;
         this.mark = mark;
-        this.source = source;
-        this.result = result;
+        this.srcStation = srcStation;
+        this.resStation = resStation;
+        this.srcDepart = srcDepart;
+        this.resDepart = resDepart;
         this.date = date;
     }
 
-    public Record(Staff staff, int mark, String source, String result, Date date) {
+    public Record(int mark, Date date) {
+        this.mark = mark;
+
+        this.date = date;
+    }
+
+    public Record(Staff staff, int mark, Date date) {
         this.staff=staff;
         this.mark = mark;
-        this.source = source;
-        this.result = result;
         this.date = date;
+    }
+
+    public Station getSrcStation() {
+        return srcStation;
+    }
+
+    public void setSrcStation(Station srcStation) {
+        this.srcStation = srcStation;
+    }
+
+    public Station getResStation() {
+        return resStation;
+    }
+
+    public void setResStation(Station resStation) {
+        this.resStation = resStation;
+    }
+
+    public Depart getSrcDepart() {
+        return srcDepart;
+    }
+
+    public void setSrcDepart(Depart srcDepart) {
+        this.srcDepart = srcDepart;
+    }
+
+    public Depart getResDepart() {
+        return resDepart;
+    }
+
+    public void setResDepart(Depart resDepart) {
+        this.resDepart = resDepart;
     }
 
     public int getId() {
@@ -77,21 +123,7 @@ public class Record {
         this.mark = mark;
     }
 
-    public String getSource() {
-        return source;
-    }
 
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
 
     public Date getDate() {
         return date;
@@ -107,8 +139,7 @@ public class Record {
                 "id=" + id +
                 ", staff=" + staff +
                 ", mark=" + mark +
-                ", source='" + source + '\'' +
-                ", result='" + result + '\'' +
+
                 ", date=" + date +
                 '}';
     }

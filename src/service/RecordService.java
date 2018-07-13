@@ -1,7 +1,9 @@
 package service;
 
+import bean.Depart;
 import bean.Record;
 import bean.Staff;
+import bean.Station;
 import dao.RecordDao;
 import dao.impl.RecordDaoImpl;
 import utils.PageBean;
@@ -30,12 +32,10 @@ public class RecordService {
      *
      * @param staff
      * @param mark
-     * @param source
-     * @param result
      * @return
      */
-    public boolean save(Staff staff,int mark,String source, String result){
-        return recordDao.save(new Record(staff,mark,source,result,new Date()));
+    public boolean save(Staff staff, int mark, Station srcStation, Station resStation, Depart srcDepart, Depart resDepart){
+        return recordDao.save(new Record(staff,mark,srcStation,resStation,srcDepart,resDepart,new Date()));
     }
 
     /**
