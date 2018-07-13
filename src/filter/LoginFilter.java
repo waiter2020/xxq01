@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author waiter
  */
-@WebFilter(filterName = "LoginFilter",urlPatterns = "/*")
+//@WebFilter(filterName = "LoginFilter",urlPatterns = "/*")
 public class LoginFilter implements Filter {
     ServletContext servletContext;
     Logger logger=Logger.getLogger(this.getClass().getName());

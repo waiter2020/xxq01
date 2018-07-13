@@ -13,6 +13,7 @@ public class Depart {
     private int id;
     @Column(name = "departname")
     private String departName;
+    @Column(name = "describ")
     private String describe;
     @Count(name = "department",bean = Staff.class)
     private int count;
