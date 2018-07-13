@@ -209,7 +209,7 @@ public class StaffServlet extends HttpServlet {
         boolean save1 = userService.save(user);
         if(save&&save1){
             request.setAttribute("msg","添加成功");
-            request.getRequestDispatcher("/staff/list").forward(request, response);
+            getStaffList(request,response);
         }else {
             request.setAttribute("msg","添加出错，请检查参数是否有误");
             request.getRequestDispatcher("/staff/add.jsp").forward(request, response);
@@ -269,7 +269,7 @@ public class StaffServlet extends HttpServlet {
             }
         }
 
-        request.getRequestDispatcher("/staff/list").forward(request,response);
+        getStaffList(request,response);
     }
 
     /**
@@ -305,7 +305,7 @@ public class StaffServlet extends HttpServlet {
                 request.setAttribute("msg","变更成功");
             }
         }
-        request.getRequestDispatcher("/staff/list").forward(request,response);
+        getStaffList(request,response);
     }
 
     /**

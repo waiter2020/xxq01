@@ -63,6 +63,6 @@ public class DepartServlet extends HttpServlet {
         }else {
             request.setAttribute("msg","添加失败，请检查输入信息");
         }
-        request.getRequestDispatcher("/depart/list.jsp").forward(request,response);
+        getDpartList(request,response);
     }
 }
