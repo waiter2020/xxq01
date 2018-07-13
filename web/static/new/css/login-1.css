@@ -1,0 +1,76 @@
+.container{
+				padding: 3em 0;
+				
+			}
+			.user-login{
+				width: 30%;
+				margin: 0 auto;
+				/*background:aqua ;*/
+				border-radius: 0.8em;
+				-moz-border-radius: 0.8em;
+				-o-border-radius: 0.8em;
+				-webkit-border-radius: 0.8em;
+			}
+			.user-login h1{
+				font-size:1.2em;
+				color: white;
+				background: blue;
+				padding: 1.4em 0em ;
+				text-align: center;
+				border-top-left-radius:0.6em ;
+				border-top-right-radius:0.6em ;
+			}
+			.user-login p{
+				color: #767676;
+				font-size: 1em;
+				padding-bottom: 15px ;
+				
+			}
+			
+			.form-login{
+				padding: 2% 2.5em;
+				background: #8F9091;
+			}
+			.form-login li{
+				list-style: none;
+				width:90%;
+				margin: 0 auto;
+				border: 1px solid #767676;
+			}
+			.form-login li.base{
+				margin-bottom: 15px;
+			}
+			
+			.user-login input[type="text"],.user-login input[type="password"]{
+				width:82;
+				padding: 0.7em 0.7em;
+				color: #8f9091;
+				font-size: 15px;
+				outline: none;
+				background: #FFFFFF;
+				border: none;
+
+			}
+			
+			.submit-login{
+				margin-top: 2.3em;
+				
+			}
+			
+			.user-login input[type="submit"]{
+				font-size: 18px;
+				font-weight: 400;
+				color: #FFFFFF;
+				display: inline-block;
+				padding: 0.9em 0.9em ;
+				width:100%;
+				cursor: pointer;
+				border: none;
+				outline: none;
+				background:orange ;
+				border-radius:0.3em ;
+			}
+			.user-login input[type="submit"]:hover{
+				background: #0000FF;
+				opacity: 0;
+			}

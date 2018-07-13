@@ -21,6 +21,10 @@ public class UserService {
         return userDao.findByUserName(userName);
     }
 
+    public boolean save(User user){
+        return userDao.save(user);
+    }
+
     public static UserService getUserService(){
         return userService;
     }

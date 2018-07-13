@@ -56,9 +56,15 @@ public class LoginServlet extends HttpServlet {
             logger.info(request.getRemoteAddr()+"尝试使用用户"+username+"登录失败");
             request.getRequestDispatcher("/login.jsp").forward(request,response);
         }else if (BCrypt.checkpw(request.getParameter("password"),byUserName.getPassWd())){
-            logger.info(request.getRemoteAddr()+"尝试使用用户"+username+"登录成功");
-            request.getSession().setAttribute("loginInfo",byUserName);
-            response.sendRedirect("/index.jsp");
+            if(byUserName.getStaff().getIsWork()) {
+                logger.info(request.getRemoteAddr() + "尝试使用用户" + username + "登录成功");
+                request.getSession().setAttribute("loginInfo", byUserName);
+                response.sendRedirect("/index.jsp");
+            }else {
+                logger.info(request.getRemoteAddr() + "尝试使用用户" + username + "登录失败");
+                request.setAttribute("msg","您已离职");
+                request.getRequestDispatcher("/login.jsp").forward(request,response);
+            }
         }else {
             request.setAttribute("msg","用户名或密码错误");
             logger.info(request.getRemoteAddr()+"尝试使用用户"+username+"登录失败");

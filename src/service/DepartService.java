@@ -79,7 +79,21 @@ public class DepartService {
         return departDao.listPage(pageBean);
     }
 
+    public boolean addDepart(Depart depart){
+        return departDao.departInsert(depart);
+    }
+
+    public Depart findById(int id){
+        return departDao.findById(id);
+    }
+
+    public LinkedList<Depart> findAll(){
+        return departDao.findAll();
+    }
+
     public static DepartService getDepartService(){
         return departService;
     }
+
+
 }

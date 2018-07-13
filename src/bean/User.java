@@ -92,8 +92,9 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
-                ", passWd='" + pwd + '\'' +
-                ", grade='" + grade + '\'' +
+                ", staff=" + staff +
+                ", pwd='" + pwd + '\'' +
+                ", grade=" + grade +
                 '}';
     }
 }

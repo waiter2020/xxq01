@@ -15,4 +15,5 @@ public interface UserDao {
      */
     User findByUserName(String userName);
 
+    boolean save(User user);
 }

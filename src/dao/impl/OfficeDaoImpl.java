@@ -19,6 +19,10 @@ public class OfficeDaoImpl implements OfficeDao{
         return pageBean;
     }
 
+    @Override
+    public boolean save(Office office) {
+        return DBUtils.insert(office);
+    }
 
 
     public static OfficeDaoImpl getOfficeDaoImpl(){

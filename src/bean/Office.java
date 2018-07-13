@@ -2,6 +2,7 @@ package bean;
 
 import utils.annotation.Column;
 import utils.annotation.DateType;
+import utils.annotation.ManyToOne;
 
 import java.util.Date;
 
@@ -11,19 +12,23 @@ import java.util.Date;
  */
 public class Office {
     private int id;
-    private String userName;
-    @Column(name = "staffname")
-    private String staffName;
+    @ManyToOne(bean = Staff.class)
+    private Staff staff;
     @DateType
     private Date date;
     private int state;
 
     public Office(){}
 
-    public Office(int id, String userName, String staffName, Date date, int state) {
+    public Office(int id,Staff staff, Date date, int state) {
         this.id = id;
-        this.userName = userName;
-        this.staffName = staffName;
+        this.date = date;
+        this.state = state;
+        this.staff=staff;
+    }
+
+    public Office(Staff staff, Date date, int state) {
+        this.staff = staff;
         this.date = date;
         this.state = state;
     }
@@ -36,21 +41,6 @@ public class Office {
         this.id = id;
     }
 
-    public String getUsernName() {
-        return userName;
-    }
-
-    public void setUsernName(String usernName) {
-        this.userName = usernName;
-    }
-
-    public String getStaffName() {
-        return staffName;
-    }
-
-    public void setStaffName(String staffName) {
-        this.staffName = staffName;
-    }
 
     public Date getDate() {
         return date;
@@ -72,8 +62,7 @@ public class Office {
     public String toString() {
         return "Office{" +
                 "id=" + id +
-                ", usernName='" + userName + '\'' +
-                ", staffname='" + staffName + '\'' +
+                ", staff=" + staff +
                 ", date=" + date +
                 ", state=" + state +
                 '}';

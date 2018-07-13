@@ -1,0 +1,17 @@
+/*
+    @auther randall Hu
+
+*/
+
+
+    /*使footer 居中
+     后期请添加 字体 与图标
+     */
+    footer{
+          text-align:center;
+      }
+    .btn-default:hover{
+        color: #fff;
+        background-color: #428bca;
+        border-color: #357ebd;
+    }
