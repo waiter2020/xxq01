@@ -253,17 +253,16 @@ public class StaffServlet extends HttpServlet {
         //员工id
         String id = request.getParameter("id");
         //各id
-        String srcStation = request.getParameter("srcStation");
+        //String srcStation = request.getParameter("srcStation");
         String resStation = request.getParameter("resStation");
-        String srcDepart = request.getParameter("srcDepart");
+        //String srcDepart = request.getParameter("srcDepart");
         String resDepart = request.getParameter("resDepart");
         Staff byId = staffService.findById(Integer.parseInt(id));
-        Station srcStations = stationService.findById(Integer.parseInt(srcStation));
+
         Station resStations = stationService.findById(Integer.parseInt(resStation));
-        Depart depart = departService.findById(Integer.parseInt(srcDepart));
         Depart depart1 = departService.findById(Integer.parseInt(resDepart));
 
-        boolean save = recordService.save(byId, Integer.parseInt(mark), srcStations, resStations, depart, depart1);
+        boolean save = recordService.save(byId, Integer.parseInt(mark), byId.getStation(), resStations, byId.getDepartMent(), depart1);
         if(save){
             request.setAttribute("msg","变动成功");
         }
