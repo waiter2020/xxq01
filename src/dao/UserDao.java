@@ -15,5 +15,10 @@ public interface UserDao {
      */
     User findByUserName(String userName);
 
+    /**
+     * 保存一个用户
+     * @param user
+     * @return
+     */
     boolean save(User user);
 }

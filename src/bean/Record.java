@@ -1,6 +1,5 @@
 package bean;
 
-import utils.annotation.Column;
 import utils.annotation.DateType;
 import utils.annotation.ManyToOne;
 
@@ -10,14 +9,30 @@ import java.util.Date;
  * Created by  waiter on 18-7-11  上午11:22.
  *
  * @author waiter
+ * 变动记录表
  */
 public class Record {
     private int id;
+    /**
+     * 变动员工
+     */
     @ManyToOne(bean = Staff.class)
     private Staff staff;
+    /**
+     * 变动类型
+     */
     private int mark;
+    /**
+     * 原岗位
+     */
     private String source;
+    /**
+     * 变动后岗位
+     */
     private String result;
+    /**
+     * 变动日期
+     */
     @DateType
     private Date date;
 

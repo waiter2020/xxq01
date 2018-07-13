@@ -19,8 +19,8 @@ import java.util.logging.Logger;
  */
 @WebServlet(name = "LoginServlet",urlPatterns = {"/do_login","/do_logout"})
 public class LoginServlet extends HttpServlet {
-    UserService userService=UserService.getUserService();
-    Logger logger=Logger.getLogger(this.getClass().getName());
+    private UserService userService=UserService.getUserService();
+    private Logger logger=Logger.getLogger(this.getClass().getName());
 
 
     @Override
