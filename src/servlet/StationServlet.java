@@ -45,7 +45,7 @@ public class StationServlet extends HttpServlet {
             }
 
             pageBean = stationService.listPage(pageBean);
-
+            request.setAttribute("depart",depart);
             request.setAttribute("page", pageBean);
         }
         request.getRequestDispatcher("/station/list.jsp").forward(request,response);
