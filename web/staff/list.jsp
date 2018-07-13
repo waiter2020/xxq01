@@ -389,7 +389,9 @@
                                     href="${pageContext.request.contextPath}/staff/add">添加
                             </button>
                             <button type="button"
-                                    style="margin-left: 48px">查询
+                                    style="margin-left: 48px"
+                                    onclick="window.location.href='${pageContext.request.contextPath}/staff/select'"
+                                    href="${pageContext.request.contextPath}/staff/select">查询
                             </button>
                         </div>
                     </div>
