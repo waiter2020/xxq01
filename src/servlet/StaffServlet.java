@@ -263,7 +263,10 @@ public class StaffServlet extends HttpServlet {
         Depart depart1 = departService.findById(Integer.parseInt(resDepart));
 
         boolean save = recordService.save(byId, Integer.parseInt(mark), byId.getStation(), resStations, byId.getDepartMent(), depart1);
-        if(save){
+        byId.setDepartment(depart1);
+        byId.setStation(resStations);
+        boolean save1 = staffService.save(byId);
+        if(save&&save1){
             request.setAttribute("msg","变动成功");
         }
 
