@@ -8,30 +8,70 @@ import utils.annotation.OneToOne;
  * Created by  waiter on 18-7-9  下午9:02.
  *
  * @author waiter
+ * 员工类
  */
 public class Staff {
+    /**
+     * 员工id
+     */
     private int id;
+    /**
+     * 员工工号
+     */
     private String userName;
+    /**
+     * 员工名
+     */
     private String staffName;
+    /**
+     * 所属部门
+     */
     @ManyToOne(bean = Depart.class)
     @Column(name = "department")
     private Depart departMent;
+    /**
+     * 所属岗位
+     */
     @ManyToOne(bean = Station.class)
     private Station station;
+    /**
+     * 联系电话
+     */
     @Column(name = "phoneNum")
     private String phoneNum;
+    /**
+     * 年龄
+     */
     private int age;
+    /**
+     * 身份证号
+     */
     @Column(name = "idcard")
     private String idCard;
+    /**
+     * 工作状态
+     */
     @Column(name = "iswork")
     private boolean isWork;
+    /**
+     * 工资
+     */
     @Column(name = "wages")
     private int wAges;
+    /**
+     * 邮箱
+     */
     private String email;
+    /**
+     * 住址
+     */
     private String address;
 
-
+    /**
+     * 性别
+     */
     private int sex;
+
     public Staff(){}
 
     public Staff(String userName, String staffName, Depart departMent, Station station, String phoneNum, int age, String idCard, boolean isWork, int wAges) {

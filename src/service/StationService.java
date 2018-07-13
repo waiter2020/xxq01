@@ -53,11 +53,19 @@ public class StationService {
         return stationDao.deleteByName(stationName);
     }
 
-
+    /**
+     * 通过id查找岗位
+     * @param id
+     * @return
+     */
     public Station findById(int id){
         return stationDao.findById(id);
     }
 
+    /**
+     * 获取所有岗位列表
+     * @return
+     */
     public LinkedList<Station> findAll(){
         return stationDao.findAll();
     }

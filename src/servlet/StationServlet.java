@@ -13,6 +13,7 @@ import java.io.IOException;
 
 @WebServlet(name = "StationServlet",urlPatterns = {"/station/list"})
 public class StationServlet extends HttpServlet {
+    private StationService stationService = StationService.getStationService();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -28,7 +29,7 @@ public class StationServlet extends HttpServlet {
     }
 
     protected void getStationList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        StationService stationService = StationService.getStationService();
+
         PageBean pageBean = new PageBean();
         String currentPage = request.getParameter("currentPage");
         if(currentPage!=null&&!currentPage.isEmpty()){

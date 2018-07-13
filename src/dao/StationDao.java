@@ -35,7 +35,16 @@ public interface StationDao {
      */
     boolean deleteByName(String stationName);
 
+    /**
+     * 通过id查找一个岗位
+     * @param id
+     * @return
+     */
     Station findById(int id);
 
+    /**
+     * 查找所有岗位，返回链表
+     * @return
+     */
     LinkedList findAll();
 }

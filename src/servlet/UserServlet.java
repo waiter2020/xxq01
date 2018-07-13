@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 @WebServlet(name = "UserServlet",urlPatterns = {"/user/change","/user/change_pwd"})
 public class UserServlet extends HttpServlet {
-    UserService userService = UserService.getUserService();
+    private UserService userService = UserService.getUserService();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();

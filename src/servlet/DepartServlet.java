@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @WebServlet(name = "DepartServlet",urlPatterns = {"/depart/list","/depart/add"})
 public class DepartServlet extends HttpServlet {
-    DepartService departService = DepartService.getDepartService();
+    private DepartService departService = DepartService.getDepartService();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

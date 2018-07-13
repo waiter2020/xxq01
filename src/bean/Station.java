@@ -5,9 +5,16 @@ import utils.annotation.Column;
 /**
  * @ Author     ：Bzy.
  * @ Date       ：Created in 下午7:40 18-7-10
+ * 岗位表
  */
 public class Station {
+    /**
+     * 岗位id
+     */
     private int id;
+    /**
+     * 岗位名
+     */
     @Column(name = "stationname")
     private String stationName;
 

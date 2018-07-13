@@ -58,8 +58,17 @@ public interface DepartDao {
      */
     PageBean listPage(PageBean pageBean);
 
+    /**
+     * 通过部门id查找部门
+     * @param id 部门id
+     * @return Depart
+     */
     Depart findById(int id);
 
+    /**
+     * 查询全部部门表
+     * @return list对象
+     */
     LinkedList<Depart> findAll();
 
 }

@@ -31,6 +31,12 @@ public class OfficeService {
         return officeDao.findByDate(pageBean,cls,name1,value1,name2,value2);
     }
 
+    /**
+     * 保存一条记录
+     * @param staff
+     * @param state
+     * @return
+     */
     public boolean save(Staff staff,int state){
         return officeDao.save(new Office(staff,new Date(),state));
     }
