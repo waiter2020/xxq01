@@ -193,6 +193,7 @@ public class DBUtils {
      * @return true或者false，对应成功或失败
      */
     public static boolean insert(Object obj) {
+        int k = 0;
         boolean flag = false;
         //获取连接
         Connection conn = JDBCPool.getConnection();
@@ -211,6 +212,7 @@ public class DBUtils {
             Column annotation = fi[i].getAnnotation(Column.class);
             Count annotation2 = fi[i].getAnnotation(Count.class);
             if (annotation2 != null) {
+                k++;
                 continue;
             }
             //判断
@@ -223,14 +225,14 @@ public class DBUtils {
         }
         sb = sb.substring(0, sb.length() - 1);
         sb += ") values(";
-        for (int i = 1; i < fi.length; i++) {
+        for (int i = 1; i < fi.length-k; i++) {
             sb += "?";
             //最后一列不用加逗号
-            if (i != fi.length - 1) {
+            if (i != fi.length - 1-k) {
                 sb += ",";
             }
         }
-        sb = sb.substring(0, sb.length() - 2);
+        //sb = sb.substring(0, sb.length() - 2);
         sb += ")";
 
         System.out.println(sb);
