@@ -197,13 +197,18 @@ public class StaffServlet extends HttpServlet {
         String departMent = request.getParameter("departMent");
         String userName = request.getParameter("userName");
         String phoneNum = request.getParameter("phoneNum");
+        String sex = request.getParameter("sex");
         String idCard = request.getParameter("idCard");
         String age = request.getParameter("age");
         String station = request.getParameter("station");
+        String wAges = request.getParameter("wAges");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+
 
         Depart byId = departService.findById(Integer.parseInt(departMent));
         Station byId1 = stationService.findById(Integer.parseInt(station));
-        Staff staff = new Staff(userName, staffName, byId, byId1, phoneNum, Integer.parseInt(age), idCard, true, 0);
+        Staff staff = new Staff(userName, staffName, byId, byId1, phoneNum, Integer.parseInt(age), idCard, true, Integer.parseInt(wAges),email,address,Integer.parseInt(sex));
         User user = new User(userName, staff, BCrypt.hashpw(userName,BCrypt.gensalt(10)), 1);
         boolean save = staffService.save(staff);
         boolean save1 = userService.save(user);
@@ -299,6 +304,7 @@ public class StaffServlet extends HttpServlet {
         String id = request.getParameter("id");
         String state = request.getParameter("state");
         Staff byId = staffService.findById(Integer.parseInt(id));
+
         if(byId!=null){
             boolean save = officeService.save(byId, Integer.parseInt(state));
             if(save){

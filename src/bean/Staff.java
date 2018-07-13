@@ -74,6 +74,21 @@ public class Staff {
 
     public Staff(){}
 
+    public Staff(String userName, String staffName, Depart departMent, Station station, String phoneNum, int age, String idCard, boolean isWork, int wAges, String email, String address, int sex) {
+        this.userName = userName;
+        this.staffName = staffName;
+        this.departMent = departMent;
+        this.station = station;
+        this.phoneNum = phoneNum;
+        this.age = age;
+        this.idCard = idCard;
+        this.isWork = isWork;
+        this.wAges = wAges;
+        this.email = email;
+        this.address = address;
+        this.sex = sex;
+    }
+
     public Staff(String userName, String staffName, Depart departMent, Station station, String phoneNum, int age, String idCard, boolean isWork, int wAges) {
         this.userName = userName;
         this.staffName = staffName;
