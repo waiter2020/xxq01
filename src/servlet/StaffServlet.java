@@ -100,7 +100,7 @@ public class StaffServlet extends HttpServlet {
      * @throws IOException
      */
     protected void dismissStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uri = request.getRequestURI();
+
         String id = request.getParameter("id");
         User loginInfo = (User) request.getSession().getAttribute("loginInfo");
 
