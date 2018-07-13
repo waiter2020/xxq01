@@ -338,54 +338,73 @@
 
                             <div class="row">
 
-                                <form role="form">
+                                <form role="form" action="${pageContext.request.contextPath}/staff/add" method="post">
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>姓名</label>
-                                            <input class="form-control">
+                                            <input class="form-control" name="staffName">
                                         </div>
 
                                         <div class="form-group">
                                             <label>年龄</label>
-                                            <input class="form-control">
+                                            <input class="form-control" name="age">
                                         </div>
 
                                         <div class="form-group">
-                                            <label>性别</label>
-                                            <input class="form-control">
+                                            <label for="disabledSelect-sex">性别</label>
+                                            <select id="disabledSelect-sex" class="form-control" name="sex">
+                                                <option value="1">男</option>
+                                                <option value="0">女</option>
+                                            </select>
                                         </div>
 
                                         <div class="form-group">
                                             <label>身份证号</label>
-                                            <input class="form-control">
+                                            <input class="form-control" name="idCard">
                                         </div>
 
                                         <div class="form-group">
                                             <label>联系方式</label>
-                                            <input class="form-control">
+                                            <input class="form-control" name="phoneNum">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>工号</label>
-                                            <input class="form-control">
+                                            <input class="form-control" name="userName">
                                         </div>
 
                                         <div class="form-group">
-                                            <label>部门</label>
-                                            <input class="form-control">
+                                            <label for="disabledSelect-depart">部门</label>
+                                            <select id="disabledSelect-depart" class="form-control" name="departMent">
+                                                <c:choose>
+                                                    <c:when test="${not empty requestScope.departs}">
+                                                        <c:forEach var="departs" items="${requestScope.departs}" varStatus="vs">
+                                                             <option value="${departs.id}">${departs.departName}</option>
+                                                        </c:forEach>
+                                                    </c:when>
+                                                </c:choose>
+                                            </select>
                                         </div>
 
                                         <div class="form-group">
-                                            <label>岗位</label>
-                                            <input class="form-control">
+                                            <label for="disabledSelect-station">岗位</label>
+                                            <select id="disabledSelect-station" class="form-control" name="station">
+                                                <c:choose>
+                                                    <c:when test="${not empty requestScope.stations}">
+                                                        <c:forEach var="stations" items="${requestScope.stations}" varStatus="vs">
+                                                            <option value="${stations.id}">${stations.stationName}</option>
+                                                        </c:forEach>
+                                                    </c:when>
+                                                </c:choose>
+                                            </select>
                                         </div>
 
                                         <div class="form-group">
                                             <label>薪酬</label>
-                                            <input class="form-control">
+                                            <input class="form-control" name="wAges">
                                         </div>
                                         <button type="submit" class="btn btn-primary" style="margin-left: 45%;margin-top: 5%">完成</button>
                                     </div>
