@@ -387,6 +387,7 @@
                                             <label>薪酬</label>
                                             <input class="form-control">
                                         </div>
+                                        <button type="submit" class="btn btn-primary" style="margin-left: 45%;margin-top: 5%">完成</button>
                                     </div>
 
                                 </form>
