@@ -208,9 +208,12 @@ public class StaffServlet extends HttpServlet {
 
         Depart byId = departService.findById(Integer.parseInt(departMent));
         Station byId1 = stationService.findById(Integer.parseInt(station));
+
         Staff staff = new Staff(userName, staffName, byId, byId1, phoneNum, Integer.parseInt(age), idCard, true, Integer.parseInt(wAges),email,address,Integer.parseInt(sex));
-        User user = new User(userName, staff, BCrypt.hashpw(userName,BCrypt.gensalt(10)), 1);
         boolean save = staffService.save(staff);
+        staff = staffService.findByUserName(userName);
+        User user = new User(userName, staff, BCrypt.hashpw(userName,BCrypt.gensalt(10)), 1);
+
         boolean save1 = userService.save(user);
         if(save&&save1){
             request.setAttribute("msg","添加成功");

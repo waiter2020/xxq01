@@ -19,6 +19,7 @@ public class Office {
     private Staff staff;
     /**
      * 日期
+     *
      */
     @DateType
     private Date date;
