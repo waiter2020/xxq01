@@ -54,6 +54,7 @@ public class Record {
     @DateType
     private Date date;
 
+    public Record(){}
     public Record(Staff byId, String mark, String stationName, String result, Date date){}
 
     public Record(Staff staff, int mark, Station srcStation, Station resStation, Depart srcDepart, Depart resDepart, Date date) {

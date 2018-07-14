@@ -7,6 +7,7 @@ import dao.impl.OfficeDaoImpl;
 import utils.PageBean;
 
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  * @ Author     ：Bzy.
@@ -45,6 +46,10 @@ public class OfficeService {
         return officeDao.findLastByStaff(staff);
     }
 
+
+    public LinkedList findListByEndDateBeforAndStartAfterAndState(Date endDate, Date startDate, int state){
+        return officeDao.findListByEndDateBeforAndStartAfterAndState(endDate,startDate,state);
+    }
 
     public static OfficeService getOfficeService(){
         return officeService;

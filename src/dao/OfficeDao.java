@@ -3,6 +3,9 @@ package dao;
 import bean.Office;
 import utils.PageBean;
 
+import java.util.Date;
+import java.util.LinkedList;
+
 public interface OfficeDao {
     /**
      * 分页查询符合日期范围的报表
@@ -29,4 +32,6 @@ public interface OfficeDao {
      * @return
      */
     Office findLastByStaff(int staff);
+
+    LinkedList findListByEndDateBeforAndStartAfterAndState(Date endDate, Date startDate,int state);
 }

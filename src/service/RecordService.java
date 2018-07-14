@@ -9,6 +9,7 @@ import dao.impl.RecordDaoImpl;
 import utils.PageBean;
 
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  * Created by  waiter on 18-7-11  下午12:50.
@@ -52,6 +53,10 @@ public class RecordService {
             return pageBean;
         }
         return recordDao.findPageByEndDateBeforAndStartAfter(pageBean,endDate,startDate);
+    }
+
+    public LinkedList findListByEndDateBeforAndStartAfterAndMark(Date endDate, Date startDate, int mark){
+        return recordDao.findListByEndDateBeforAndStartAfterAndMark(endDate,startDate,mark);
     }
 
     public static RecordService getRecordService() {
