@@ -104,7 +104,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-file"></i> Empty Page</a>
+                        <a <%
+                            active = request.getParameter("active");
+                            out.println("class=\""+ (active.equals("empty")?"active-menu":" ")+"\"");
+                        %>
+                                href="${pageContext.request.contextPath}/commons/empty.jsp">
+                            <i class="fa fa-fw fa-file"></i> Empty Page
+                        </a>
                     </li>
                 </ul>
 
