@@ -330,7 +330,7 @@
 
                                     <div class="row">
 
-                                        <form role="form">
+                                        <form role="form" action="${pageContext.request.contextPath}/staff/change" method="post">
 
                                         <div class="col-lg-6">
 
@@ -345,7 +345,7 @@
 
                                                     <div class="form-group">
                                                         <label for="disabledInput-id">工号</label>
-                                                        <input class="form-control" id="disabledInput-id" type="text" placeholder="1501020415" disabled="">
+                                                        <input class="form-control" id="disabledInput-id" type="text" placeholder="${change.userName}" disabled="">
                                                     </div>
 
                                                     <div class="form-group">
@@ -357,10 +357,8 @@
                                                         <input class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="disabledSelect-depart1">年龄</label>
-                                                        <select id="disabledSelect-depart1" class="form-control">
-                                                            <option>22</option>
-                                                        </select>
+                                                        <label>年龄</label>
+                                                        <input class="form-control">
                                                     </div>
 
                                                     <label>薪酬</label>
@@ -388,7 +386,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>@EMAL<small class="form-control-static">&nbsp;&nbsp;例:email@example.com</small></label>
-                                                    <input class="form-control" placeholder="Enter text">
+                                                    <input class="form-control">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>详细住址:</label>

@@ -364,6 +364,8 @@
                                                                 <%--class="btn btn-primary">修改--%>
                                                         <%--</button>--%>
                                                         <button type="button"
+                                                                onclick="window.location.href='${pageContext.request.contextPath}/staff/turn?id=${staff.id}'"
+                                                                href="${pageContext.request.contextPath}/staff/turn?id=${staff.id}"
                                                                 class="btn btn-primary"
                                                                 style="height: 30px">转正
                                                         </button>
@@ -374,6 +376,8 @@
                                                                 style="height: 30px">调动
                                                         </button>
                                                         <button type="button"
+                                                                onclick="window.location.href='${pageContext.request.contextPath}/staff/delete?id=${staff.id}'"
+                                                                href="${pageContext.request.contextPath}/staff/delete?id=${staff.id}"
                                                                 class="btn btn-primary"
                                                                 style="height: 30px">辞退
                                                         </button>
