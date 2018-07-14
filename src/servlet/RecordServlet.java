@@ -18,7 +18,7 @@ import java.util.LinkedList;
  *
  * @author waiter
  */
-@WebServlet(name = "RecordServlet",urlPatterns = {"/record/to_form"})
+@WebServlet(name = "RecordServlet",urlPatterns = {"/record/form"})
 public class RecordServlet extends HttpServlet {
     private DepartService departService = DepartService.getDepartService();
 
@@ -33,7 +33,7 @@ public class RecordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         String substring = uri.substring(8, uri.length());
-        if("to_form".equals(substring)){
+        if("form".equals(substring)){
             toForm(request,response);
         }
     }
