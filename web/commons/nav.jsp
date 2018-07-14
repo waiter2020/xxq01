@@ -82,10 +82,16 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-table"></i> 报表 </a>
+                        <a href="#"><i class="fa fa-table"></i> 变动报表 </a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i> from</a>
+                        <a <%
+                            active = request.getParameter("active");
+                            out.println("class=\""+ (active.equals("report")?"active-menu":" ")+"\"");
+                        %>
+                                href="${pageContext.request.contextPath}/record/report.jsp">
+                            <i class="fa fa-edit"></i> 人事月报
+                        </a>
                     </li>
 
 
