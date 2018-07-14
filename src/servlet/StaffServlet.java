@@ -158,7 +158,7 @@ public class StaffServlet extends HttpServlet {
         boolean save = staffService.save(byId);
         if(save){
             request.setAttribute("msg","修改成功");
-            request.getRequestDispatcher("/staff/list").forward(request, response);
+            getStaffList(request,response);
         }else {
             request.setAttribute("msg","修改出错，请检查参数是否有误");
             toChangeStaff(request,response);
