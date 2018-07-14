@@ -77,7 +77,7 @@
                             out.println("class=\""+ (active.equals("station-list")?"active-menu":" ")+"\"");
                         %>
                                 href="${pageContext.request.contextPath}/station/list">
-                            <i class="fa fa-qrcode"></i> 岗位管理
+                            <i class="fa fa-qrcode"></i>  岗位管理
                         </a>
                     </li>
 
