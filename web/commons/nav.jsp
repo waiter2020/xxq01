@@ -20,11 +20,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">${sessionScope.loginInfo.staff.staffName}</a>
+                <a class="navbar-brand">Dream</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
-
+                <a class="navbar-brand" href="/" style="text-align: right">${sessionScope.loginInfo.staff.staffName}</a>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
