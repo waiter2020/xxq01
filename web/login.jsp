@@ -14,7 +14,7 @@
 			<div style="float: left; margin-top: 0px; font-family: 'Amatic SC', cursive; font-size: 20px;"><h1 style="margin-top: 0;">Produced by 5352</h1></div>
 			<div class="user-login">
 				<c:if test="${requestScope.get('msg')!=null}">
-					<h4 style="text-align: center">${requestScope.get('msg')}</h4>
+					<script>confirm("${requestScope.get('msg')}")</script>
 				</c:if>
 				<form class="form-login" method="post" action="/do_login">
 					<p> Username / Email</p>
