@@ -410,8 +410,8 @@
                             </button>
                             <button type="button"
                                     style="margin-left: 1px;height: 30px"
-                                    onclick="window.location.href='${pageContext.request.contextPath}/staff/select'"
-                                    href="${pageContext.request.contextPath}/staff/select"
+                                    onclick="window.location.href='${pageContext.request.contextPath}/staff/select.jsp'"
+                                    href="${pageContext.request.contextPath}/staff/select.jsp"
                                     class="btn btn-primary">查询
                             </button>
                         </div>
