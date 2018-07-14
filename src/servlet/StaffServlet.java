@@ -112,9 +112,12 @@ public class StaffServlet extends HttpServlet {
                     } else {
                         boolean b = staffService.dismissStaff(Integer.parseInt(id));
                         if (b) {
-                            request.setAttribute("msg", "成功辞退员工");
+                            boolean save = officeService.save(byId, 2);
+                            if (save) {
+                                request.setAttribute("msg", "成功辞退员工");
 
-                            logger.info(loginInfo + "辞退了" + id + "员工");
+                                logger.info(loginInfo + "辞退了" + id + "员工");
+                            }
                         } else {
                             request.setAttribute("msg", "未知错误");
                         }
@@ -142,6 +145,7 @@ public class StaffServlet extends HttpServlet {
         String age = request.getParameter("age");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
+        request.setAttribute("id",id);
         if(id==null||"".equals(id)){
             request.getRequestDispatcher("/staff/change.jsp").forward(request,response);
             return;

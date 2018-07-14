@@ -225,10 +225,10 @@ public class DBUtils {
         }
         sb = sb.substring(0, sb.length() - 1);
         sb += ") values(";
-        for (int i = 1; i < fi.length-k; i++) {
+        for (int i = 1; i < fi.length - k; i++) {
             sb += "?";
             //最后一列不用加逗号
-            if (i != fi.length - 1-k) {
+            if (i != fi.length - 1 - k) {
                 sb += ",";
             }
         }
@@ -749,7 +749,76 @@ public class DBUtils {
 
         }
     }
+
+    public static LinkedList getListByBeforSomeAndAfterSomeAndSome( Class cls, String name, String value, String name1, String value1,String name2, String value2) {
+        ResultSet rs = null;
+        LinkedList list=null;
+        String sql = "select * from " + cls.getSimpleName() + " where " + name + " < ? " + " AND " + name1 + " >? "+" AND "+name2+" = ? " ;
+        try {
+            rs = executeQuerySQL(sql, value, value1,value2);
+            list=BeanUtils.rsToBeanList(cls, rs);
+        } catch (Exception e) {
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        } finally {
+            close(null, null, rs);
+
+        }
+        return list;
+    }
+
+    /**
+     * --------------------------------------------------------------------------------------------------
+     * 以下为非通用方法
+     */
+    /**
+     * @param pageBean
+     * @param cls
+     * @param name
+     * @param value
+     * @param name1
+     * @param value1
+     * @param map      map为三个键值对
+     * @return
+     */
+    public static PageBean getPageByBeforSomeAndAfterSomeAndSome(PageBean pageBean, Class cls, String name, String value, String name1, String value1, Map<String, String> map) {
+        Map<String, String> map1 = new TreeMap<>();
+        map1.put(value, name);
+        map1.put(value1, name1);
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            map1.put(entry.getValue(), entry.getKey());
+        }
+
+        pageBean.setTotalCount(getObjectCount(cls, map1, ">", "<", "=", "=", "="));
+        pageBean.getPageData().clear();
+        ResultSet set = null;
+        String sql = "select * from " + cls.getSimpleName() + " where " + name + " < ? " + " AND " + name1 + " >? ";
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            sql += " AND " + entry.getKey() + " = " + "'" + entry.getValue() + "'";
+        }
+        //sql = sql.substring(0, sql.length() - 4);
+        sql += " LIMIT " + (pageBean.getCurrentPage() - 1) * pageBean.getPageCount() + "," + pageBean.getPageCount();
+
+        try {
+            set = executeQuerySQL(sql, value, value1);
+            pageBean.getPageData().addAll(BeanUtils.rsToBeanList(cls, set));
+        } catch (Exception e) {
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        } finally {
+            close(null, null, set);
+
+        }
+
+        return pageBean;
+
+
+    }
 }
+
+
 
 
 

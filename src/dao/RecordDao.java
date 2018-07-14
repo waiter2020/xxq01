@@ -4,6 +4,7 @@ import bean.Record;
 import utils.PageBean;
 
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  * Created by  waiter on 18-7-11  下午12:45.
@@ -33,4 +34,6 @@ public interface RecordDao {
      * @return
      */
     PageBean findPageByEndDateBeforAndStartAfter(PageBean pageBean,Date endDate,Date startDate);
+
+    LinkedList findListByEndDateBeforAndStartAfterAndMark(Date endDate, Date startDate,int mark);
 }
