@@ -334,7 +334,7 @@
 
                         <div class="panel-body">
                             <div class="row">
-                                <form action="${pageContext.request.contextPath}/staff/select" method="post">
+                                <form action="${pageContext.request.contextPath}/staff/select" method="get">
                                     <div class="col-lg-6">
 
                                         <div class="form-group">
@@ -403,7 +403,9 @@
                                     </c:when>
                                     <c:otherwise>
                                         <tr>
+                                            <c:if test="${requestScope.page!=null}">
                                             <td colspan="3">对不起，没有你要找的数据</td>
+                                            </c:if>
                                         </tr>
                                     </c:otherwise>
                                 </c:choose>
