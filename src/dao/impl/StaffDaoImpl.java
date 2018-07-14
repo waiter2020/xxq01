@@ -57,6 +57,21 @@ public class StaffDaoImpl implements StaffDao {
         return DBUtils.getPageBySome(pageBean,Staff.class,map);
     }
 
+    @Override
+    public PageBean findPageByStaffName(PageBean pageBean, String staffName) {
+        return DBUtils.getPageBySome(pageBean,Staff.class,"staffName",staffName);
+    }
+
+    @Override
+    public PageBean findPageBywAgesAfter(PageBean pageBean, int wAges) {
+        return DBUtils.getPageByAfterSome(pageBean,Staff.class,"wages",wAges+"");
+    }
+
+    @Override
+    public PageBean findPageBywAgesBefor(PageBean pageBean, int wAges) {
+        return DBUtils.getPageByBeforSome(pageBean,Staff.class,"wages",wAges+"");
+    }
+
     public synchronized static StaffDaoImpl getStaffDao() {
         return staffDao;
     }

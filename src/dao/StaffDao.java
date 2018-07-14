@@ -55,4 +55,10 @@ public interface StaffDao {
      */
     PageBean findPageByDepartAndStation(PageBean pageBean,int depart,int station);
 
+    PageBean findPageByStaffName(PageBean pageBean,String staffName);
+
+    PageBean findPageBywAgesAfter(PageBean pageBean,int wAges);
+
+    PageBean findPageBywAgesBefor(PageBean pageBean,int wAges);
+
 }

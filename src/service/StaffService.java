@@ -81,6 +81,19 @@ public class StaffService {
         return staffDao.findPageByDepartAndStation(pageBean,depart,station);
     }
 
+    public PageBean findPageByStaffName(PageBean pageBean, String staffName) {
+        return staffDao.findPageByStaffName(pageBean,staffName);
+    }
+
+
+    public PageBean findPageBywAgesAfter(PageBean pageBean, int wAges) {
+        return staffDao.findPageBywAgesAfter(pageBean,wAges);
+    }
+
+    public PageBean findPageBywAgesBefor(PageBean pageBean, int wAges) {
+        return staffDao.findPageBywAgesBefor(pageBean,wAges);
+    }
+
     public static StaffService getStaffService() {
         return staffService;
     }
