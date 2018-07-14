@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -52,18 +55,77 @@ public class RecordServlet extends HttpServlet {
     private void lForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String start = request.getParameter("start");
         String end = request.getParameter("end");
+        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parse=null;
+        Date parse1=null;
+        try {
+            parse = sDateFormat.parse(start);
+            parse1 = sDateFormat.parse(end);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        LinkedList listByEndDateBeforAndStartAfterAndState = officeService.findListByEndDateBeforAndStartAfterAndState(parse1, parse, 2);
+        request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
+        request.getRequestDispatcher("/record/l_form.jsp");
 
     }
 
     private void rForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String start = request.getParameter("start");
+        String end = request.getParameter("end");
+        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parse=null;
+        Date parse1=null;
+        try {
+            parse = sDateFormat.parse(start);
+            parse1 = sDateFormat.parse(end);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        LinkedList listByEndDateBeforAndStartAfterAndState = officeService.findListByEndDateBeforAndStartAfterAndState(parse1, parse, 0);
+        request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
+        request.getRequestDispatcher("/record/r_form.jsp");
     }
 
     private void bForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String start = request.getParameter("start");
+        String end = request.getParameter("end");
+        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parse=null;
+        Date parse1=null;
+        try {
+            parse = sDateFormat.parse(start);
+            parse1 = sDateFormat.parse(end);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        LinkedList listByEndDateBeforAndStartAfterAndState = recordService.findListByEndDateBeforAndStartAfterAndMark(parse1, parse, 1);
+        LinkedList listByEndDateBeforAndStartAfterAndMark = recordService.findListByEndDateBeforAndStartAfterAndMark(parse1, parse, 3);
+        listByEndDateBeforAndStartAfterAndState.addAll(listByEndDateBeforAndStartAfterAndMark);
+        request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
+        request.getRequestDispatcher("/record/b_form.jsp");
     }
 
     private void gForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String start = request.getParameter("start");
+        String end = request.getParameter("end");
+        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parse=null;
+        Date parse1=null;
+        try {
+            parse = sDateFormat.parse(start);
+            parse1 = sDateFormat.parse(end);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        LinkedList listByEndDateBeforAndStartAfterAndState = recordService.findListByEndDateBeforAndStartAfterAndMark(parse1, parse, 2);
+        LinkedList listByEndDateBeforAndStartAfterAndMark = recordService.findListByEndDateBeforAndStartAfterAndMark(parse1, parse, 3);
+        listByEndDateBeforAndStartAfterAndState.addAll(listByEndDateBeforAndStartAfterAndMark);
+        request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
+        request.getRequestDispatcher("/record/g_form.jsp");
     }
 }

@@ -47,7 +47,7 @@ public class OfficeService {
     }
 
 
-    LinkedList findListByEndDateBeforAndStartAfterAndState(Date endDate, Date startDate, int state){
+    public LinkedList findListByEndDateBeforAndStartAfterAndState(Date endDate, Date startDate, int state){
         return officeDao.findListByEndDateBeforAndStartAfterAndState(endDate,startDate,state);
     }
 
