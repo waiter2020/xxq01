@@ -1,136 +1,227 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!DOCTYPE html>
-<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
-<html lang="en"
-	  xmlns="http://www.w3.org/1999/xhtml">
+<!--<html xmlns="http://www.w3.org/1999/xhtml">--> 	 
+	
+    <!-- 主界面  -->
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="">
-		<meta name="author" content="">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>员工管理系统</title>
+    <!-- echart引入部分-->
+    <script src="${pageContext.request.contextPath}/static/new/echart/echarts.js"></script>
+    <script src="${pageContext.request.contextPath}/static/new/echart/dataTool.js"></script>
+	<script src="${pageContext.request.contextPath}/static/new/echart/jquery.js"></script>
+    <!-- Bootstrap Styles-->
+    <link href="${pageContext.request.contextPath}/static/new//css/bootstrap.css" rel="stylesheet" />
+    
+    <!-- FontAwesome Styles-->
+    <link href="${pageContext.request.contextPath}/static/new/css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="${pageContext.request.contextPath}/static/new/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="${pageContext.request.contextPath}/static/new/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
 
-		<title>员工管理系统</title>
-		<!-- Bootstrap core CSS -->
-		<link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
+<body>
+    <div id="wrapper">
+    	
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.jsp">Ranlly</a>
+            </div>
 
-		<!-- Custom styles for this template -->
-		<link href="${pageContext.request.contextPath}/static/css/dashboard.css" rel="stylesheet">
-		<style type="text/css">
-			/* Chart.js */
-			
-			@-webkit-keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
-			}
-			
-			@keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
-			}
-			
-			.chartjs-render-monitor {
-				-webkit-animation: chartjs-render-animation 0.001s;
-				animation: chartjs-render-animation 0.001s;
-			}
-		</style>
-	</head>
+            <ul class="nav navbar-top-links navbar-right">
+       
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        
+        
+        
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
 
-	<body>
-	<!--引入topbar-->
-	<jsp:include page="${pageContext.request.contextPath}/commons/bar.jsp">
-		<jsp:param value="index" name="activeUri"/>
-		<jsp:param name="title" value="月度报表"/>
-	</jsp:include>
-
-	<div class="container-fluid">
-		<div class="row">
-			<!--引入sidebar-->
-
-			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-				<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-					<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-						<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-					</div>
-					<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-						<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-					</div>
-				</div>
-				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-					<h1 class="h2">设备1：</h1>
-					<div class="btn-toolbar mb-2 mb-md-0">
-						<div class="btn-group mr-2">
-							<button class="btn btn-sm btn-outline-secondary">Share</button>
-							<button class="btn btn-sm btn-outline-secondary">Export</button>
-						</div>
-						<button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-							This week
-						</button>
-					</div>
-				</div>
-
-				<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>
+                    <li>
+                        <a class="active-menu" href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
+                    </li>
+					<li>
+                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
+                    </li>
+                    <li>
+                        <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
+                    </li>
+                    
+                    <li>
+                        <a href="table.html"><i class="fa fa-table"></i> 报表 </a>
+                    </li>
+                    <li>
+                        <a href="form.html"><i class="fa fa-edit"></i> from</a>
+                    </li>
 
 
-			</main>
-		</div>
-	</div>
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 信息变更<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">员工管理</a>
+                            </li>
+                            <li>
+                                <a href="#">部门管理</a>
+                            </li>
+                            <li>
+                                <a href="form.html">岗位管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
+                    </li>
+                </ul>
 
-	<!-- Bootstrap core JavaScript
-================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.slim.min.js"></script>
-	<script type="text/javascript"  src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
-	<script type="text/javascript"  src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
+            </div>
 
-	<!-- Icons -->
-	<script type="text/javascript"  src="${pageContext.request.contextPath}/static/js/feather.min.js"></script>
-	<script>
-        feather.replace()
-	</script>
+        </nav>
+        
+        <!--
+				center
+        -->
+        <div id="page-wrapper">
+            <div id="page-inner">
 
-	<!-- Graphs -->
-	<script type="text/javascript"  src="${pageContext.request.contextPath}/static/js/Chart.min.js"></script>
-	<script>
-        var ctx = document.getElementById("myChart");
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-                datasets: [{
-                    data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: '#007bff',
-                    borderWidth: 4,
-                    pointBackgroundColor: '#007bff'
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: false
-                        }
-                    }]
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="page-header">
+                            	人力资源系统 <small>了解公司从这里开始</small>
+                        </h2>
+                        <div id="1" style="height: 750px;width: 700px; left: 100px;">
+                        	
+                        </div>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                
+				 <footer><p><!--Copyright &copy; All rights reserved。--> Serendipity-life</p></footer>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="${pageContext.request.contextPath}/static/new/js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="${pageContext.request.contextPath}/static/new/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="${pageContext.request.contextPath}/static/new/js/jquery.metisMenu.js"></script>
+    <!-- Morris Chart Js -->
+    <script src="${pageContext.request.contextPath}/static/new/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/new/js/morris/morris.js"></script>
+    <!-- Custom Js -->
+    <script src="${pageContext.request.contextPath}/static/new/js/custom-scripts.js"></script>
+    
+    <script>
+    	
+    var myChart = echarts.init(document.getElementById('1'));
+    myChart.showLoading();
+	$.get('${pageContext.request.contextPath}/static/new/echart/les-miserables.gexf', function (xml) {
+    myChart.hideLoading();
+
+    var graph = echarts.dataTool.gexf.parse(xml);
+    var categories = [{name:'人事部'},{name:'董事会'},{name:'财务部'},{name:'出纳部'},{name:'市场部'},{name:'公关'},{name:'销售部'},{name:'后勤部'},{name:'设计部'}];
+//  var categories = [];
+//  for (var i = 0; i < 9; i++) {
+//      categories[i] = {
+//          name: '类目' + i
+//      };
+//  }
+    graph.nodes.forEach(function (node) {
+        node.itemStyle = null;
+        node.value = node.symbolSize;
+        node.symbolSize /= 1.5;
+        node.label = {
+            normal: {
+                show: node.symbolSize > 10
+            }
+        };
+        node.category = node.attributes.modularity_class;
+    });
+    option = {
+        title: {
+            text: '人事系统',
+            subtext: 'Circular layout',
+            top: 'bottom',
+            left: 'left'
+        },
+        tooltip: {
+        },
+        legend: [{
+            //selectedMode: 'single',
+            data: categories.map(function (a) {
+                return a.name;
+            })
+        }],
+        animationDurationUpdate: 1500,
+        animationEasingUpdate: 'quinticInOut',
+        series : [
+            {
+                name: 'Les Miserables',
+                type: 'graph',
+                layout: 'circular',
+                circular: {
+                    rotateLabel: true
                 },
-                legend: {
-                    display: false,
+                data: graph.nodes,
+                links: graph.links,
+                categories: categories,
+                roam: true,
+                label: {
+                    normal: {
+                        position: 'right',
+                        formatter: '{b}'
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        color: 'source',
+                        curveness: 0.3
+                    }
                 }
             }
-        });
-	</script>
+        ]
+    };
+    myChart.setOption(option);
+}, 'xml');
+    </script>
 
-	</body>
+</body>
 
 </html>

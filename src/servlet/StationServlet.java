@@ -69,7 +69,7 @@ public class StationServlet extends HttpServlet {
         pageBean = staffService.findPageByDepartAndStation(pageBean, Integer.parseInt(depart), Integer.parseInt(station));
         request.setAttribute("page", pageBean);
         request.setAttribute("station","积分可接受调查阶段吧");
-        request.getRequestDispatcher("/station/staff.jsp").forward(request, response);
+        request.getRequestDispatcher("/staff/list.jsp").forward(request, response);
     }
 
 }
