@@ -51,6 +51,7 @@
                                             <th>部门号</th>
                                             <th>部门名</th>
                                             <th>部门详情</th>
+                                            <th>总人数</th>
                                         </tr>
                                     </thead>
                                 <tbody>
@@ -63,6 +64,7 @@
 		                                    out.println("<td>"+l.getId()+"</td>");
 		                                    out.println("<td>"+l.getDepartName()+"</td>");
 		                                    out.println("<td>"+l.getDescribe()+"</td>");
+                                            out.println("<td>"+l.getCount()+"</td>");
 		                                    out.println("</tr>");
 		                                }
 		                            }
