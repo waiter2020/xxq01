@@ -41,6 +41,7 @@
 
 
     <jsp:include page="${pageContext.request.contextPath}/commons/nav.jsp">
+        <jsp:param value="222" name="active"/>
     </jsp:include>
 
     <!--
