@@ -43,7 +43,7 @@
                              	了解员工详细情况
                         </div>
                         <c:if test="${requestScope.get('msg')!=null}">
-                            <h2 class="btn btn-sm btn-danger">${requestScope.get("msg")}</h2>
+                            <script>confirm("${requestScope.get('msg')}")</script>
                         </c:if>
 
                         <div class="panel-body">
@@ -59,7 +59,12 @@
                                     <th>部门</th>
                                     <th>岗位</th>
                                     <th>薪酬</th>
-                                    <th>操作</th>
+                                    <th style="text-align: center">操作</th>
+                                    <button type="button"
+                                            onclick="window.location.href='${pageContext.request.contextPath}/staff/add'"
+                                            href="${pageContext.request.contextPath}/staff/add"
+                                            class="btn btn-default">添加一个新员工
+                                    </button>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -87,21 +92,30 @@
                                                         <button type="button"
                                                                 onclick="window.location.href='${pageContext.request.contextPath}/staff/turn?id=${staff.id}'"
                                                                 href="${pageContext.request.contextPath}/staff/turn?id=${staff.id}"
-                                                                class="btn btn-primary"
-                                                                style="height: 30px">转正
+                                                                class="btn btn-default"
+                                                                >转正
                                                         </button>
                                                         <button type="button"
                                                                 onclick="window.location.href='${pageContext.request.contextPath}/staff/transfer?id=${staff.id}'"
                                                                 href="${pageContext.request.contextPath}/staff/transfer?id=${staff.id}"
-                                                                class="btn btn-primary"
-                                                                style="height: 30px">调动
+                                                                class="btn btn-default"
+                                                                >调动
                                                         </button>
                                                         <button type="button"
-                                                                onclick="window.location.href='${pageContext.request.contextPath}/staff/delete?id=${staff.id}'"
+                                                                onclick="cuitui()"
                                                                 href="${pageContext.request.contextPath}/staff/delete?id=${staff.id}"
                                                                 class="btn btn-primary"
                                                                 style="height: 30px">辞退
                                                         </button>
+                                                        <script>
+                                                                function  cuitui(){
+                                                                var r=confirm("确定辞退吗？");
+                                                                if(r==true)
+                                                                {
+                                                                    window.location.href='${pageContext.request.contextPath}/staff/delete?id=${staff.id}';
+                                                                }
+                                                            }
+                                                        </script>
                                                     </c:if>
                                                 </td>
 
@@ -123,17 +137,17 @@
                             <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.currentPage>1?requestScope.page.currentPage-1:1}">上一页 </a>&nbsp;&nbsp;
                             <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.currentPage<requestScope.page.totalPage?requestScope.page.currentPage+1:requestScope.page.totalPage}">下一页 </a>&nbsp;&nbsp;
                             <a href="${pageContext.request.contextPath }/staff/list?currentPage=${requestScope.page.totalPage}">末页</a>&nbsp;&nbsp;
-                            <button type="button"
-                                    style="margin-left: 553px;height: 30px"
-                                    onclick="window.location.href='${pageContext.request.contextPath}/staff/add'"
-                                    href="${pageContext.request.contextPath}/staff/add"
-                                    class="btn btn-primary">添加
-                            </button>
+
+                            <%--<button type="button"--%>
+                                    <%--onclick="window.location.href='${pageContext.request.contextPath}/staff/add'"--%>
+                                    <%--href="${pageContext.request.contextPath}/staff/add"--%>
+                                    <%--class="btn btn-default">添加一个新员工--%>
+                            <%--</button>--%>
                             <button type="button"
                                     style="margin-left: 1px;height: 30px"
                                     onclick="window.location.href='${pageContext.request.contextPath}/staff/select.jsp'"
                                     href="${pageContext.request.contextPath}/staff/select.jsp"
-                                    class="btn btn-primary">查询
+                                    class="btn btn-default">查找
                             </button>
                         </div>
                     </div>
