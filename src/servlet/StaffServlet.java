@@ -76,7 +76,6 @@ public class StaffServlet extends HttpServlet {
      * @throws IOException
      */
     protected void getStaffList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uri = request.getRequestURI();
         PageBean pageBean = new PageBean();
         String currentPage = request.getParameter("currentPage");
         if (currentPage != null && !currentPage.isEmpty()) {
@@ -158,7 +157,7 @@ public class StaffServlet extends HttpServlet {
         boolean save = staffService.save(byId);
         if(save){
             request.setAttribute("msg","修改成功");
-            request.getRequestDispatcher("/staff/list").forward(request, response);
+            getStaffList(request,response);
         }else {
             request.setAttribute("msg","修改出错，请检查参数是否有误");
             toChangeStaff(request,response);
@@ -324,6 +323,40 @@ public class StaffServlet extends HttpServlet {
      * @throws IOException
      */
     protected void toSelect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/staff/select.jsp");
+        String op = request.getParameter("op");
+        String condition = request.getParameter("condition");
+        if (op!=null&&condition!=null) {
+            PageBean pageBean = new PageBean();
+            String currentPage = request.getParameter("currentPage");
+            if (currentPage != null && !currentPage.isEmpty()) {
+                pageBean.setCurrentPage(Integer.parseInt(currentPage));
+            }
+            User loginInfo = (User) request.getSession().getAttribute("loginInfo");
+            Staff byUserName = staffService.findByUserName(loginInfo.getUserName());
+            logger.info("用户：" + byUserName + "查询了员工");
+
+            switch (op){
+                case "1":
+                    Staff byUserName1 = staffService.findByUserName(condition);
+                    pageBean.getPageData().add(byUserName1);
+                    break;
+                case "2":
+                    pageBean=staffService.findPageByStaffName(pageBean,condition);
+                    break;
+                case "3":
+                    pageBean=staffService.findByPageAndDepartment(pageBean,Integer.parseInt(condition));
+                    break;
+                case "4":
+                    pageBean=staffService.findPageBywAgesAfter(pageBean,Integer.parseInt(condition));
+                    break;
+                case "5":
+                    pageBean=staffService.findPageBywAgesBefor(pageBean,Integer.parseInt(condition));
+                default:
+
+            }
+
+            request.setAttribute("page", pageBean);
+        }
+        request.getRequestDispatcher("/staff/select.jsp").forward(request, response);
     }
 }
