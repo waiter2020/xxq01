@@ -50,7 +50,7 @@ public class StationServlet extends HttpServlet {
                 pageBean.setCurrentPage(Integer.parseInt(currentPage));
             }
 
-            pageBean = stationService.listPage(pageBean);
+            pageBean = stationService.getPageByDepart(pageBean,Integer.parseInt(depart));
             request.setAttribute("depart", depart);
             request.setAttribute("page", pageBean);
         }
