@@ -158,9 +158,8 @@
                                             <div class="col-lg-6">
 
                                                 <!--  以下为fixed表
-                                                基本信息不可变
-                                                @以 placeholder 显示 : 姓名 员工号 性别
-                                                @以 option 显示 : 部门 职位
+                                                    基本信息本人不可变更
+
                                                 -->
                                                 <h4>个人基本信息</h4>
 
@@ -169,35 +168,35 @@
 
                                                         <div class="form-group">
                                                             <label for="disabledInput-name">姓名</label>
-                                                            <input class="form-control" id="disabledInput-name" type="text" placeholder="刘鑫" disabled="">
+                                                            <input class="form-control" id="disabledInput-name" type="text" placeholder="${sessionScope.loginInfo.staff.staffName}" disabled="">
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="disabledInput-sex">性别</label>
-                                                            <input class="form-control" id="disabledInput-sex" type="text" placeholder="男" disabled="">
+                                                            <input class="form-control" id="disabledInput-sex" type="text" placeholder="${sessionScope.loginInfo.staff.sex==1? '女':'男'}" disabled="">
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="disabledInput-id">员工号</label>
-                                                            <input class="form-control" id="disabledInput-id" type="text" placeholder="1501020415" disabled="">
+                                                            <input class="form-control" id="disabledInput-id" type="text" placeholder="${sessionScope.loginInfo.staff.userName}" disabled="">
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="disabledSelect-depart">部门</label>
                                                             <select id="disabledSelect-depart" class="form-control">
-                                                                <option>开发部</option>
+                                                                <option>${sessionScope.loginInfo.staff.departMent.departName}</option>
                                                             </select>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="disabledSelect-position">职位</label>
                                                             <select id="disabledSelect-position" class="form-control">
-                                                                <option>董事长</option>
+                                                                <option>${sessionScope.loginInfo.staff.station.stationName}</option>
                                                             </select>
                                                         </div>
                                                         <!-- 一个假的提交按钮 -->
                                                         <div align="center">
-                                                            <button type="submit" class="btn btn-primary"  >修改</button>
+                                                            <button type="submit" class="btn btn-primary"  >保存</button>
                                                         </div>
                                                     </fieldset>
                                                 </form>
@@ -211,8 +210,9 @@
 
 
 
-                                            <!-- 以下可变信息表
-
+                                            <!--
+                                                以下可变信息表
+                                                可变内容为 电话 邮箱 住址
                                             -->
                                             <div class="col-lg-6">
                                                 <c:set var="msg" value="${requestScope.get('msg')}"/>
@@ -223,11 +223,11 @@
                                                 <form role="form" action="${pageContext.request.contextPath}/user/change" method="post">
                                                     <div class="form-group">
                                                         <label>Telephone Number</label>
-                                                        <input class="form-control " name="phoneNum">
+                                                        <input class="form-control " name="phoneNum" value="${sessionScope.loginInfo.staff.phoneNum}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>@EMAL</label>
-                                                        <input class="form-control" name="email">
+                                                        <input class="form-control" name="email" value="${sessionScope.loginInfo.staff.email}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>其形式如:</label>
@@ -236,11 +236,11 @@
 
                                                     <div class="form-group">
                                                         <label>详细住址:</label>
-                                                        <textarea class="form-control" rows="3" name="address"></textarea>
+                                                        <textarea class="form-control" rows="4      " name="address">${sessionScope.loginInfo.staff.address}</textarea>
                                                     </div>
 
                                                     <div align="center">
-                                                        <button type="submit" value ="submit" class="btn btn-default">修改</button>
+                                                        <button type="submit" value ="submit" class="btn btn-default">保存</button>
                                                         <button type="reset"  value="reset"  class="btn btn-default">重置</button>
                                                     </div>
                                                 </form>

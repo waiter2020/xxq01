@@ -38,8 +38,6 @@
 <body>
 <div id="wrapper">
 
-
-
                 <!--
                 作者：865584045@qq.com
                 时间：2018-07-11
@@ -147,58 +145,39 @@
                             <div class="row">
                                 <div class="col-lg-6">
 
-                                    <%--<c:set  var="msg" value="${requestScope.get('msg')}"/>--%>
+
                                     <c:if test="${msg!=null}">
                                        <p ><c:out value="${msg}"/></p>
                                     </c:if>
-
+                                    <form role="form" action="${pageContext.request.contextPath}/user/change_pwd" method="post">
                                         <div class="form-group">
                                             <label>原密码</label>
-                                            <input class="form-control">
+                                            <input class="form-control" type="password" id="oldPwd" required>
                                             <p class="help-block"></p>
 
 
                                         </div>
                                         <div class="form-group">
                                             <label>新密码</label>
-                                            <input class="form-control">
-                                            <p></p>
+                                            <input class="form-control" id="newPwd1" type="password" onchange="pwdMeet1()" required>
+                                            <p id="meet1"></p>
 
                                         </div>
-                                    <form role="form" action="${pageContext.request.contextPath}/user/change_pwd" method="post">
+
                                         <div class="form-group">
                                             <label>再次输入新密码</label>
-                                            <input class="form-control" name="pwd">
-                                            <p></p>
+                                            <input class="form-control" name="pwd" id="newPwd2" type="password" onchange="pwdMeet2()" required>
+                                            <p id="meet2"></p>
 
                                         </div>
                                         <div style="margin-left: 37%">
-                                        <button type="submit" value="submit" class="btn btn-default">修改</button>
+                                        <button type="submit" value="submit"  class="btn btn-default">修改</button>
                                         <button type="reset"  value="reset"  class="btn btn-default">重置</button>
                                         </div>
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
-                                <div class="col-lg-6">
 
-
-                                    <%--<form role="form">--%>
-                                        <%--<div class="form-group has-success">--%>
-                                            <%--<label class="control-label" for="inputSuccess">Input with success</label>--%>
-                                            <%--<input type="text" class="form-control" id="inputSuccess">--%>
-                                        <%--</div>--%>
-                                        <%--<div class="form-group has-warning">--%>
-                                            <%--<label class="control-label" for="inputWarning">Input with warning</label>--%>
-                                            <%--<input type="text" class="form-control" id="inputWarning">--%>
-                                        <%--</div>--%>
-                                        <%--<div class="form-group has-error">--%>
-                                            <%--<label class="control-label" for="inputError">Input with error</label>--%>
-                                            <%--<input type="text" class="form-control" id="inputError">--%>
-                                        <%--</div>--%>
-                                    <%--</form>--%>
-
-
-                                </div>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
                             <!-- /.row (nested) -->
@@ -218,6 +197,8 @@
 
 </div>
 
+
+
 <!-- /. WRAPPER  -->
 <!-- JS Scripts-->
 <!-- jQuery Js -->
@@ -233,9 +214,6 @@
 
 <script src="${pageContext.request.contextPath}/static/new/js/userAform/change_pwd.js"></script>
 
-
-</body>
-</html>
 
 </body>
 </html>
