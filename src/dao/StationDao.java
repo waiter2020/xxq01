@@ -13,7 +13,12 @@ public interface StationDao {
      */
     PageBean listPage(PageBean pageBean);
 
-
+    /**
+     * 根据部门号分页查找
+     * @param pageBean
+     * @param depart
+     * @return
+     */
     PageBean getPageByDepart(PageBean pageBean,int depart);
 
     /**

@@ -35,7 +35,7 @@ public class StationServlet extends HttpServlet {
         if ("list".equals(substring)) {
             getStationList(request, response);
         } else if ("staff".equals(substring)) {
-            toStaff(request,response);
+            toStaff(request, response);
         }
     }
 
@@ -66,8 +66,9 @@ public class StationServlet extends HttpServlet {
         if (currentPage != null && !currentPage.isEmpty()) {
             pageBean.setCurrentPage(Integer.parseInt(currentPage));
         }
-        pageBean = staffService.findPageByDepartAndStation(pageBean,Integer.parseInt(depart),Integer.parseInt(station));
-                request.setAttribute("page", pageBean);
+        pageBean = staffService.findPageByDepartAndStation(pageBean, Integer.parseInt(depart), Integer.parseInt(station));
+        request.setAttribute("page", pageBean);
+        request.setAttribute("station","积分可接受调查阶段吧");
         request.getRequestDispatcher("/station/staff.jsp").forward(request, response);
     }
 

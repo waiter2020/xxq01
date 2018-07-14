@@ -23,5 +23,10 @@ public interface OfficeDao {
      */
     boolean save(Office office);
 
+    /**
+     * 通过员工id查找最后一条记录
+     * @param staff
+     * @return
+     */
     Office findLastByStaff(int staff);
 }

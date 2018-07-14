@@ -25,6 +25,7 @@ public class DepartDaoImpl implements DepartDao{
         if(listBySome.size()==0){
             return new Depart(0,"not exist");
         }else{
+            //取第一个
             return (Depart) listBySome.remove(0);
         }
     }

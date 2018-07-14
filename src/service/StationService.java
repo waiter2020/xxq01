@@ -70,6 +70,12 @@ public class StationService {
         return stationDao.findAll();
     }
 
+    /**
+     * 通过部门id分页查找
+     * @param pageBean
+     * @param depart
+     * @return
+     */
     public PageBean getPageByDepart(PageBean pageBean,int depart){
         return stationDao.getPageByDepart(pageBean,depart);
     }

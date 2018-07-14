@@ -41,6 +41,7 @@ public class StaffDaoImpl implements StaffDao {
 
     @Override
     public boolean save(Staff staff) {
+        //判断是要插入还是更新
         if(staff.getId()>0) {
             return DBUtils.update(staff);
         }else {

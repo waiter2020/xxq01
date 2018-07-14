@@ -23,16 +23,27 @@ public class Record {
      * 变动类型
      */
     private int mark;
-
+    /**
+     * 原岗位
+     */
     @ManyToOne(bean = Station.class)
     @Column(name = "src_station")
     private Station srcStation;
+    /**
+     * 新岗位
+     */
     @ManyToOne(bean = Station.class)
     @Column(name = "res_station")
     private Station resStation;
+    /**
+     * 原部门
+     */
     @ManyToOne(bean = Depart.class)
     @Column(name = "src_depart")
     private Depart srcDepart;
+    /**
+     * 新部门
+     */
     @ManyToOne(bean = Depart.class)
     @Column(name = "res_depart")
     private Depart resDepart;

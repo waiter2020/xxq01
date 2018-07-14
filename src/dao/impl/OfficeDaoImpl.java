@@ -32,6 +32,7 @@ public class OfficeDaoImpl implements OfficeDao{
         if(listBySome==null){
             return null;
         }
+        //取最后一个
         return (Office) listBySome.getLast();
     }
 

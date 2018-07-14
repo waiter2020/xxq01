@@ -37,6 +37,7 @@ public class StationDaoImpl implements StationDao{
         if(listBySome.size()==0){
             return new Station(0,"not exist");
         }else{
+            //取第一个
             return (Station) listBySome.remove(0);
         }
     }

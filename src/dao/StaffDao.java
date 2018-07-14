@@ -46,6 +46,13 @@ public interface StaffDao {
      */
     boolean save(Staff staff);
 
+    /**
+     * 通过部门id和岗位id分页查找
+     * @param pageBean
+     * @param depart
+     * @param station
+     * @return
+     */
     PageBean findPageByDepartAndStation(PageBean pageBean,int depart,int station);
 
 }
