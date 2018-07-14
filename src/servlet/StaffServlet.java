@@ -344,7 +344,8 @@ public class StaffServlet extends HttpServlet {
                     pageBean=staffService.findPageByStaffName(pageBean,condition);
                     break;
                 case "3":
-                    pageBean=staffService.findByPageAndDepartment(pageBean,Integer.parseInt(condition));
+                    Depart byName = departService.findByName(condition);
+                    pageBean=staffService.findByPageAndDepartment(pageBean,byName.getId());
                     break;
                 case "4":
                     pageBean=staffService.findPageBywAgesAfter(pageBean,Integer.parseInt(condition));
