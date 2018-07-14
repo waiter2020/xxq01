@@ -310,7 +310,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="page-header">
-                                个人信息 <small>信息修改</small>
+                                员工信息 <small>信息修改</small>
                             </h1>
                         </div>
                     </div>
@@ -321,7 +321,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    修改员工个人信息
+                                    修改员工信息
                                 </div>
                                 <!--<div class="panel-heading">-->
                                 <!--基本信息表-->
@@ -342,7 +342,7 @@
                                             @以 option 显示 : 部门 职位
                                             -->
 
-
+                                                    <input type="hidden" name="id" value="${change.id}">
                                                     <div class="form-group">
                                                         <label for="disabledInput-id">工号</label>
                                                         <input class="form-control" id="disabledInput-id" type="text" placeholder="${change.userName}" disabled="">
@@ -350,21 +350,21 @@
 
                                                     <div class="form-group">
                                                         <label>姓名</label>
-                                                        <input class="form-control">
+                                                        <input class="form-control" name="staffName" value="${change.staffName}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>证件</label>
-                                                        <input class="form-control">
+                                                        <input class="form-control" name="idCard" value="${change.idCard}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>年龄</label>
-                                                        <input class="form-control">
+                                                        <input class="form-control" name="age" value="${change.age}">
                                                     </div>
 
                                                     <label>薪酬</label>
                                                     <div class="form-group input-group">
                                                         <span class="input-group-addon">$</span>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" name="wAges" value="${change.wAges}">
                                                         <span class="input-group-addon">.00</span>
                                                     </div>
 
@@ -382,15 +382,15 @@
 
                                                 <div class="form-group">
                                                     <label>联系方式</label>
-                                                    <input class="form-control">
+                                                    <input class="form-control" name="phoneNum" value="${change.phoneNum}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>@EMAL<small class="form-control-static">&nbsp;&nbsp;例:email@example.com</small></label>
-                                                    <input class="form-control">
+                                                    <input class="form-control" name="email" value="${change.email}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>详细住址:</label>
-                                                    <textarea class="form-control" rows="3" style="height: 130px"></textarea>
+                                                    <textarea class="form-control" rows="3" style="height: 130px" name="address">${change.address}</textarea>
                                                 </div>
 
                                                 <div style="margin-left: 160px">

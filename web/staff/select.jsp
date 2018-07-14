@@ -331,12 +331,13 @@
                         <c:if test="${requestScope.get('msg')!=null}">
                             <h2 class="btn btn-sm btn-danger">${requestScope.get("msg")}</h2>
                         </c:if>
-                        <div class="form-group input-group">
+                        <div style="width: 25%" class="form-group input-group">
                             <input type="text" class="form-control">
                             <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-                                                </button>
-                                            </span>
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
                         </div>
 
                     </div>

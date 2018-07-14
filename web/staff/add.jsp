@@ -354,8 +354,8 @@
                                         <div class="form-group">
                                             <label for="disabledSelect-sex">性别</label>
                                             <select id="disabledSelect-sex" class="form-control" name="sex">
-                                                <option value="1">男</option>
-                                                <option value="0">女</option>
+                                                <option value="0">男</option>
+                                                <option value="1">女</option>
                                             </select>
                                         </div>
 
