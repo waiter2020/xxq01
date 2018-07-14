@@ -72,19 +72,30 @@
 								</tr>
 								</thead>
 								<tbody>
-								<%
-									PageBean pageBean = (PageBean) request.getAttribute("page");
-									if(pageBean!=null){
-										LinkedList<Station> pageData = pageBean.getPageData();
-										for(Station l:pageData){
-											out.println("<tr>");
-											out.println("<td>"+l.getId()+"</td>");
-											out.println("<td>"+l.getStationName()+"</td>");
-											out.println("<td>"+l.getCount()+"</td>");
-											out.println("</tr>");
-										}
-									}
-								%>
+								<%--<%--%>
+									<%--PageBean pageBean = (PageBean) request.getAttribute("page");--%>
+									<%--if(pageBean!=null){--%>
+										<%--LinkedList<Station> pageData = pageBean.getPageData();--%>
+										<%--for(Station l:pageData){--%>
+											<%--out.println("<tr>");--%>
+											<%--out.println("<td>"+l.getId()+"</td>");--%>
+											<%--out.println("<td>"+l.getStationName()+"</td>");--%>
+											<%--out.println("<td>"+l.getCount()+"</td>");--%>
+											<%--out.println("</tr>");--%>
+										<%--}--%>
+									<%--}--%>
+                                <%--%>--%>
+                                <c:choose>
+                                    <c:when test="${not empty requestScope.page.pageData}">
+                                        <c:forEach var="station" items="${requestScope.page.pageData}" varStatus="vs">
+                                            <tr>
+                                                <td>${vs.count}</td>
+                                                <td>${station.stationName}</td>
+                                                <td >${station.count}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:when>
+                                </c:choose>
 								</tbody>
 							</table>
 							当前${requestScope.page.currentPage }/${requestScope.page.totalPage }页     &nbsp;&nbsp;
