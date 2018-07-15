@@ -28,6 +28,8 @@ public class PerformanceServlet extends HttpServlet {
         String substring = uri.substring(8, uri.length());
         if ("report".equals(substring)) {
             getReport(request, response);
+        }else if ("staff_report".equals(substring)){
+            getStaffReport(request,response);
         }
     }
 
