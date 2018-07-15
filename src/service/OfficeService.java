@@ -51,6 +51,10 @@ public class OfficeService {
         return officeDao.findListByEndDateBeforAndStartAfterAndState(endDate,startDate,state);
     }
 
+    public int countByEndDateBeforAndStartAfterAndState(Date endDate, Date startDate,int state){
+        return officeDao.countByEndDateBeforAndStartAfterAndState(endDate,startDate,state);
+    }
+
     public static OfficeService getOfficeService(){
         return officeService;
     }

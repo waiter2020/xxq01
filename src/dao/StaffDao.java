@@ -3,6 +3,8 @@ package dao;
 import bean.Staff;
 import utils.PageBean;
 
+import java.util.LinkedList;
+
 /**
  * Created by  waiter on 18-7-9  下午9:17.
  *
@@ -60,5 +62,10 @@ public interface StaffDao {
     PageBean findPageBywAgesAfter(PageBean pageBean,int wAges);
 
     PageBean findPageBywAgesBefor(PageBean pageBean,int wAges);
+
+
+    int countBySex(int sex);
+
+    LinkedList findAll();
 
 }

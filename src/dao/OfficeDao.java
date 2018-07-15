@@ -34,4 +34,6 @@ public interface OfficeDao {
     Office findLastByStaff(int staff);
 
     LinkedList findListByEndDateBeforAndStartAfterAndState(Date endDate, Date startDate,int state);
+
+    int countByEndDateBeforAndStartAfterAndState(Date endDate, Date startDate,int state);
 }

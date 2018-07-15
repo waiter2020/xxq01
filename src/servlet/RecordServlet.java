@@ -67,7 +67,7 @@ public class RecordServlet extends HttpServlet {
 
         LinkedList listByEndDateBeforAndStartAfterAndState = officeService.findListByEndDateBeforAndStartAfterAndState(parse1, parse, 2);
         request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
-        request.getRequestDispatcher("/record/l_form.jsp");
+        request.getRequestDispatcher("/record/l_form.jsp").forward(request,response);
 
     }
 
@@ -86,7 +86,7 @@ public class RecordServlet extends HttpServlet {
 
         LinkedList listByEndDateBeforAndStartAfterAndState = officeService.findListByEndDateBeforAndStartAfterAndState(parse1, parse, 0);
         request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
-        request.getRequestDispatcher("/record/r_form.jsp");
+        request.getRequestDispatcher("/record/r_form.jsp").forward(request,response);
     }
 
     private void bForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -106,7 +106,7 @@ public class RecordServlet extends HttpServlet {
         LinkedList listByEndDateBeforAndStartAfterAndMark = recordService.findListByEndDateBeforAndStartAfterAndMark(parse1, parse, 3);
         listByEndDateBeforAndStartAfterAndState.addAll(listByEndDateBeforAndStartAfterAndMark);
         request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
-        request.getRequestDispatcher("/record/b_form.jsp");
+        request.getRequestDispatcher("/record/b_form.jsp").forward(request,response);
     }
 
     private void gForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -126,6 +126,6 @@ public class RecordServlet extends HttpServlet {
         LinkedList listByEndDateBeforAndStartAfterAndMark = recordService.findListByEndDateBeforAndStartAfterAndMark(parse1, parse, 3);
         listByEndDateBeforAndStartAfterAndState.addAll(listByEndDateBeforAndStartAfterAndMark);
         request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
-        request.getRequestDispatcher("/record/g_form.jsp");
+        request.getRequestDispatcher("/record/g_form.jsp").forward(request,response);
     }
 }

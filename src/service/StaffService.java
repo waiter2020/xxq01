@@ -5,6 +5,8 @@ import dao.StaffDao;
 import dao.impl.StaffDaoImpl;
 import utils.PageBean;
 
+import java.util.LinkedList;
+
 /**
  * Created by  waiter on 18-7-9  下午9:20.
  *
@@ -92,6 +94,19 @@ public class StaffService {
 
     public PageBean findPageBywAgesBefor(PageBean pageBean, int wAges) {
         return staffDao.findPageBywAgesBefor(pageBean,wAges);
+    }
+
+    public int countBySex(int sex){
+        return staffDao.countBySex(sex);
+    }
+
+    public double avgAge(){
+        int sum=0;
+        LinkedList<Staff> all = staffDao.findAll();
+        for(Staff staff:all){
+            sum+=staff.getAge();
+        }
+        return (double)sum/all.size();
     }
 
     public static StaffService getStaffService() {

@@ -5,6 +5,7 @@ import dao.StaffDao;
 import utils.DBUtils;
 import utils.PageBean;
 
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -70,6 +71,18 @@ public class StaffDaoImpl implements StaffDao {
     @Override
     public PageBean findPageBywAgesBefor(PageBean pageBean, int wAges) {
         return DBUtils.getPageByBeforSome(pageBean,Staff.class,"wages",wAges+"");
+    }
+
+    @Override
+    public int countBySex(int sex) {
+        Map<String,String> map = new TreeMap<>();
+        map.put("sex",sex+"");
+        return DBUtils.getObjectCount(Staff.class,map);
+    }
+
+    @Override
+    public LinkedList findAll() {
+        return DBUtils.getList(Staff.class);
     }
 
     public synchronized static StaffDaoImpl getStaffDao() {

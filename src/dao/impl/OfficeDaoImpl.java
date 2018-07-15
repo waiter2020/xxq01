@@ -7,6 +7,8 @@ import utils.PageBean;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @ Author     ：Bzy.
@@ -42,6 +44,16 @@ public class OfficeDaoImpl implements OfficeDao{
         java.sql.Date startDates = new java.sql.Date(startDate.getTime());
         java.sql.Date endDates = new java.sql.Date(endDate.getTime());
         return DBUtils.getListByBeforSomeAndAfterSomeAndSome( Office.class,"date",endDates.toString(),"date",startDates.toString(),"state",state+"");
+    }
+
+    @Override
+    public int countByEndDateBeforAndStartAfterAndState(Date endDate, Date startDate, int state) {
+        java.sql.Date startDates = new java.sql.Date(startDate.getTime());
+        java.sql.Date endDates = new java.sql.Date(endDate.getTime());
+        Map<String, String> map = new TreeMap<>();
+        map.put(endDates.toString(), "date");
+        map.put(startDates.toString(), "date");
+        return DBUtils.getObjectCount( Office.class,map, ">", "<");
     }
 
 

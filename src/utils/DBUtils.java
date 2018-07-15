@@ -767,6 +767,23 @@ public class DBUtils {
         return list;
     }
 
+    public static LinkedList getListByBeforSomeAndAfterSome( Class cls, String name, String value, String name1, String value1) {
+        ResultSet rs = null;
+        LinkedList list=null;
+        String sql = "select * from " + cls.getSimpleName() + " where " + name + " < ? " + " AND " + name1 + " >? " ;
+        try {
+            rs = executeQuerySQL(sql, value, value1);
+            list=BeanUtils.rsToBeanList(cls, rs);
+        } catch (Exception e) {
+            loger.info(e.getMessage());
+            e.printStackTrace();
+        } finally {
+            close(null, null, rs);
+
+        }
+        return list;
+    }
+
     /**
      * --------------------------------------------------------------------------------------------------
      * 以下为非通用方法
