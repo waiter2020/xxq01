@@ -100,7 +100,7 @@ public class PerformanceServlet extends HttpServlet {
         request.setAttribute("woman", i1);
 
         performances.sort(Comparator.naturalOrder());
-        request.setAttribute("performances ", performances);
+        request.setAttribute("performances", performances);
 
 
         request.getRequestDispatcher("/record/report.jsp").forward(request, response);
