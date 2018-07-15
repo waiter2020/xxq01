@@ -72,7 +72,7 @@
                                     <c:when test="${not empty requestScope.page.pageData}">
                                         <c:forEach var="staff" items="${requestScope.page.pageData}" varStatus="vs">
                                             <tr>
-                                                <td><a href="${pageContext.request.contextPath}/staff/change?id=${staff.id}">${staff.userName }</a></td>
+                                                <td><a href="${pageContext.request.contextPath}/staff/staff_report?id=${staff.id}">${staff.userName }</a></td>
                                                 <td>${staff.staffName }</td>
                                                 <td>${staff.phoneNum}</td>
                                                 <td>${staff.sex==0?'男':'女'}</td>

@@ -30,7 +30,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="${pageContext.request.contextPath}/staff/change?id=${sessionScope.loginInfo.staff.id}"><i class="fa fa-user fa-fw"></i> 个人信息</a>
+                        <li><a href="${pageContext.request.contextPath}/staff/staff_report?id=${sessionScope.loginInfo.staff.id}"><i class="fa fa-user fa-fw"></i> 个人信息</a>
                         </li>
                         <li><a href="${pageContext.request.contextPath}/user/change_pwd.jsp"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
                         </li>
