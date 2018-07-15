@@ -84,7 +84,7 @@
                                                     <c:forEach var="performance" items="${requestScope.a1}" varStatus="vs">
                                                     <tr>
                                                         <td>${vs.count}</td>
-                                                        <td>${performance.departId}</td>
+                                                        <td>${performance.departName}</td>
                                                         <td>${performance.avgScore}</td>
                                                         <td>${performance.avgPresent}</td>
                                                     </tr>
@@ -101,7 +101,7 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                部门年龄性别结构
+                                部门年龄结构
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -111,22 +111,22 @@
                                             <th>#</th>
                                             <th>部门</th>
                                             <th>平均年龄</th>
-                                            <th>男女比例</th>
+                                            <th>在职人数</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <c:choose>
-                                                <c:when test="${not empty requestScope.performances }">
-                                                    <c:forEach var="performance" items="${requestScope.performances}" varStatus="vs">
-                                                        <tr>
-                                                            <td>${vs.count}</td>
-                                                            <td>${performance.staff.departMent.departName}</td>
-                                                            <td>${performance.staff.age}</td>
-                                                            <td>1:1</td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </c:when>
-                                            </c:choose>
+                                        <c:choose>
+                                            <c:when test="${not empty requestScope.a10}">
+                                                <c:forEach var="performance" items="${requestScope.a10}" varStatus="vs">
+                                                    <tr>
+                                                        <td>${vs.count}</td>
+                                                        <td>${performance.departName}</td>
+                                                        <td>${performance.avgAge}</td>
+                                                        <td>${performance.zNum}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </c:when>
+                                        </c:choose>
                                         </tbody>
                                     </table>
                                 </div>
@@ -135,90 +135,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                部门在职离职人数
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>部门</th>
-                                            <th>在职人数</th>
-                                            <th>离职人数</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                实习及正式员工人数
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>部门</th>
-                                            <th>实习人数</th>
-                                            <th>正式员工</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
         </div>
         <footer><p></p></footer>
