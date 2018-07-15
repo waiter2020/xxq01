@@ -66,23 +66,11 @@ public class PerformanceServlet extends HttpServlet {
         java.sql.Date startDates = new java.sql.Date(parse.getTime());
         java.sql.Date endDates = new java.sql.Date(parse1.getTime());
         LinkedList report1 = reportDao.getReport1(startDates.toString(), endDates.toString());
-        LinkedList report2 = reportDao.getReport2(startDates.toString(), endDates.toString());
-        LinkedList report3 = reportDao.getReport3(startDates.toString(), endDates.toString());
-        LinkedList report4 = reportDao.getReport4(startDates.toString(), endDates.toString());
-        LinkedList report5 = reportDao.getReport5(startDates.toString(), endDates.toString());
-        LinkedList report6 = reportDao.getReport6(startDates.toString(), endDates.toString());
-        LinkedList report7 = reportDao.getReport7(startDates.toString(), endDates.toString());
-        LinkedList report8 = reportDao.getReport8(startDates.toString(), endDates.toString());
-        LinkedList report9 = reportDao.getReport9(startDates.toString(), endDates.toString());
+        LinkedList report10 = reportDao.getReport10(startDates.toString(), endDates.toString());
         request.setAttribute("a1",report1);
-        request.setAttribute("a2",report2);
-        request.setAttribute("a3",report3);
-        request.setAttribute("a4",report4);
-        request.setAttribute("a5",report5);
-        request.setAttribute("a6",report6);
-        request.setAttribute("a7",report7);
-        request.setAttribute("a8",report8);
-        request.setAttribute("a9",report9);
+        request.setAttribute("a10",report10);
+
+
 
 
         request.getRequestDispatcher("/record/report.jsp").forward(request, response);

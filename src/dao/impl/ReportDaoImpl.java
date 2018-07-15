@@ -305,6 +305,32 @@ public class ReportDaoImpl {
         return list;
     }
 
+    public  LinkedList getReport10(String start, String end){
+        LinkedList<Report> list=new LinkedList<>();
+        String sql="SELECT COUNT(*),Staff.department,AVG(Staff.age)\n" +
+                "from Staff,Office\n" +
+                "where `date`>\""+start+"\" AND `date` < \""+end+"\" AND Office.staff=Staff.id and state<>2\n" +
+                "group by Staff.department;\n";
+        ResultSet set = DBUtils.executeQuerySQL(sql);
+        try {
+            while (set.next()){
+                int aDouble = set.getInt(1);
+                int anInt = set.getInt(2);
+                Report report = new Report();
+                Depart objectById = (Depart) DBUtils.getObjectById(Depart.class, anInt);
+                report.setDepartName(objectById.getDepartName());
+                report.setDepartId(anInt);
+                report.setWoman(aDouble);
+
+                list.add(report);
+
+            }
+        } catch (SQLException e) {
+
+        }
+        return list;
+    }
+
     public synchronized static ReportDaoImpl getReportDao() {
         return reportDao;
     }
