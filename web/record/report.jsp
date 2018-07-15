@@ -57,7 +57,7 @@
                 <div class="col-lg-6">
                     <%--<form role="form">--%>
                     <div class="form-group">
-                        <button type="submit" style="margin-top: 27px;margin-bottom: 20px">查询</button>
+                        <button type="submit" class="btn btn-default" style="margin-top: 25px;margin-bottom: 20px">查询</button>
                     </div>
                 </div>
 
