@@ -55,7 +55,7 @@ public class RecordService {
         return recordDao.findPageByEndDateBeforAndStartAfter(pageBean,endDate,startDate);
     }
 
-    LinkedList findListByEndDateBeforAndStartAfterAndMark(Date endDate, Date startDate, int mark){
+    public LinkedList findListByEndDateBeforAndStartAfterAndMark(Date endDate, Date startDate, int mark){
         return recordDao.findListByEndDateBeforAndStartAfterAndMark(endDate,startDate,mark);
     }
 

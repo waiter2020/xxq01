@@ -81,12 +81,6 @@
         node.category = node.attributes.modularity_class;
     });
     option = {
-        title: {
-            text: '人事系统',
-            subtext: 'Circular layout',
-            top: 'bottom',
-            left: 'left'
-        },
         tooltip: {
         },
         legend: [{

@@ -145,7 +145,6 @@ public class StaffServlet extends HttpServlet {
         String age = request.getParameter("age");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
-        request.setAttribute("id",id);
         if(id==null||"".equals(id)){
             request.getRequestDispatcher("/staff/change.jsp").forward(request,response);
             return;
