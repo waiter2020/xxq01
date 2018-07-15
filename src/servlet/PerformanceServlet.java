@@ -1,6 +1,8 @@
 package servlet;
 
+import bean.Depart;
 import bean.Performance;
+import service.DepartService;
 import service.OfficeService;
 import service.PerformanceService;
 import service.StaffService;
@@ -20,7 +22,7 @@ public class PerformanceServlet extends HttpServlet {
     private PerformanceService performanceService = PerformanceService.getPerformanceService();
     private OfficeService officeService = OfficeService.getOfficeService();
     private StaffService staffService = StaffService.getStaffService();
-
+    private DepartService departService = DepartService.getDepartService();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,8 +30,6 @@ public class PerformanceServlet extends HttpServlet {
         String substring = uri.substring(8, uri.length());
         if ("report".equals(substring)) {
             getReport(request, response);
-        }else if ("staff_report".equals(substring)){
-            getStaffReport(request,response);
         }
     }
 
@@ -40,7 +40,7 @@ public class PerformanceServlet extends HttpServlet {
 
     protected void getReport(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String start = request.getParameter("date");
-
+        request.setAttribute("date",start);
         Date parse = new Date();
         Date parse1 = null;
 
@@ -60,12 +60,26 @@ public class PerformanceServlet extends HttpServlet {
 
 
         List<Performance> performances = performanceService.getPerformanceBetweenStartDateAndEndDate(parse, parse1);
+        LinkedList<Depart> all = departService.findAll();
+        Map<String,Double> map = new TreeMap<>();
+
+        for(Depart depart:all){
+            double sum=0;
+            for (Performance p:performances){
+                if(depart.getId()==p.getStaff().getDepartment().getId()){
+                    sum+=p.getScore();
+                }
+            }
+            map.put(depart.getDepartName(),sum/depart.getCount());
+        }
+
+        request.setAttribute("avgScore",map);
 
         int z = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 1);
         int x = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 0);
         int l = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 2);
         //在职
-        request.setAttribute("z", z + x);
+        request.setAttribute("zx", z + x);
         //离职
         request.setAttribute("l", l);
         //实习
@@ -89,34 +103,5 @@ public class PerformanceServlet extends HttpServlet {
 
     }
 
-    protected void getStaffReport(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
-        Date parse = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(parse);
-        int m = calendar.get(Calendar.MONTH);
-        if(m<=5){
-            calendar.set(Calendar.MONTH,m-5);
-        }else {
-            calendar.set(Calendar.MONTH,m-5);
-        }
-        Date time = calendar.getTime();
-        m = calendar.get(Calendar.MONTH);
-        if (m==0){
-            calendar.set(Calendar.YEAR-1,11,Calendar.DATE);
-        }else {
-            calendar.set(Calendar.MONTH,m-1);
-        }
-        Date time1 = calendar.getTime();
-        LinkedList<Performance> byStaffAndAfterDate1 = performanceService.findByStaffAndAfterDate(Integer.parseInt(id), time1);
-        LinkedList<Performance> byStaffAndAfterDate = performanceService.findByStaffAndAfterDate(Integer.parseInt(id), time);
-        calendar.setTime(parse);
-
-        request.setAttribute("six",byStaffAndAfterDate);
-        request.setAttribute("one",byStaffAndAfterDate1);
-        request.getRequestDispatcher("").forward(request,response);
-
-
-    }
 
 }

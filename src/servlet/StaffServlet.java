@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.logging.Logger;
 
@@ -20,7 +22,8 @@ import java.util.logging.Logger;
  * @author waiter
  */
 @WebServlet(name = "StaffServlet", urlPatterns = {"/staff/list", "/staff/delete","/staff/change",
-                                                "/staff/add","/staff/transfer","/staff/turn","/staff/select"})
+                                                "/staff/add","/staff/transfer","/staff/turn",
+                                                "/staff/select","/staff/staff_report"})
 public class StaffServlet extends HttpServlet {
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private StaffService staffService = StaffService.getStaffService();
@@ -29,6 +32,7 @@ public class StaffServlet extends HttpServlet {
     private StationService stationService = StationService.getStationService();
     private RecordService recordService = RecordService.getRecordService();
     private OfficeService officeService = OfficeService.getOfficeService();
+    private PerformanceService performanceService = PerformanceService.getPerformanceService();
 
 
     @Override
@@ -64,6 +68,8 @@ public class StaffServlet extends HttpServlet {
             turnStaff(request,response);
         }else if ("select".equals(substring)){
             toSelect(request,response);
+        }else if ("staff_report".equals(substring)){
+            getStaffReport(request,response);
         }
     }
 
@@ -363,4 +369,39 @@ public class StaffServlet extends HttpServlet {
         }
         request.getRequestDispatcher("/staff/select.jsp").forward(request, response);
     }
+
+
+
+    protected void getStaffReport(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        Date parse = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(parse);
+        int m = calendar.get(Calendar.MONTH);
+        if(m<=6){
+            calendar.set(Calendar.YEAR-1,m-6+12,1);
+        }else {
+            calendar.set(Calendar.MONTH,m-6);
+        }
+        Date time = calendar.getTime();
+        calendar.setTime(parse);
+        m = calendar.get(Calendar.MONTH);
+        if (m==0){
+            calendar.set(Calendar.YEAR-1,11,Calendar.DATE);
+        }else {
+            calendar.set(Calendar.MONTH,m-1);
+        }
+
+        Date time1 = calendar.getTime();
+        LinkedList<Performance> byStaffAndAfterDate1 = performanceService.findByStaffAndAfterDate(Integer.parseInt(id), time1);
+        LinkedList<Performance> byStaffAndAfterDate = performanceService.findByStaffAndAfterDate(Integer.parseInt(id), time);
+        calendar.setTime(parse);
+
+        request.setAttribute("six",byStaffAndAfterDate);
+        request.setAttribute("one",byStaffAndAfterDate1);
+        request.getRequestDispatcher("/staff/staff_report.jsp").forward(request,response);
+
+
+    }
+
 }

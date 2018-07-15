@@ -45,7 +45,10 @@
                         </div>
                         <div class="panel-body">
                             <div class="col-lg-6">
-                                <small>姓名:</small><h2>黄会凌</h2><br>
+                            <c:choose>
+                            <c:when test="${not empty requestScope.one}">
+                                <c:forEach var="performance" items="${requestScope.one}" varStatus="vs">
+                                <small>姓名:</small><h2>${performance.staff.userName}</h2><br>
                                 <small>部门及岗位:</small><h3>技术部经理</h3><br>
                                 <small>证件号:</small><h3>1487319983249</h3><br>
                                 <button class="btn btn-default">修改</button>
@@ -54,7 +57,10 @@
                                 <small>联系方式:</small><h3>138762783478</h3><br>
                                 <small>Email:</small><h3>3489287@qq.com</h3><br>
                                 <small>住址:</small><h3>东风路234</h3><br>
-                            </div>
+                        </div>
+                                </c:forEach>
+                            </c:when>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
