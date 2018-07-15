@@ -44,15 +44,20 @@
                     <%--<form role="form">--%>
                     <div class="form-group">
                         <label for="disabledSelect-month">月份</label>
-                        <select id="disabledSelect-month" name="" class="form-control">
-                            <option>123</option>
+                        <select id="disabledSelect-month" name="month" class="form-control">
+                            <option value="2">二月</option>
+                            <option value="3">三月</option>
+                            <option value="4">四月</option>
+                            <option value="5">五月</option>
+                            <option value="6">六月</option>
+                            <option value="7">七月</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <%--<form role="form">--%>
                     <div class="form-group">
-                        <button type="submit" style="margin-top: 27px;margin-bottom: 20px">查询</button>
+                        <button type="submit" class="btn btn-default" style="margin-top: 25px;margin-bottom: 20px">查询</button>
                     </div>
                 </div>
 
@@ -60,7 +65,7 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                111
+                                部门绩效及考勤
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -68,30 +73,24 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>部门</th>
+                                            <th>平均绩效</th>
+                                            <th>平均考勤</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+                                <%--<c:choose>--%>
+                                    <%--<c:when test="${not empty requestScope.page.pageData}">--%>
+                                        <%--<c:forEach var="month" items="${requestScope.page.pageData}" varStatus="vs">--%>
+                                        <%--<tr>--%>
+                                            <%--<td>${vs.count}</td>--%>
+                                            <%--<td>Mark</td>--%>
+                                            <%--<td>Otto</td>--%>
+                                            <%--<td>@mdo</td>--%>
+                                        <%--</tr>--%>
+                                        <%--</c:forEach>--%>
+                                    <%--</c:when>--%>
+                                <%--</c:choose>--%>
                                         </tbody>
                                     </table>
                                 </div>
@@ -101,7 +100,7 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                222
+                                部门年龄性别结构
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -109,9 +108,9 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>部门</th>
+                                            <th>平均年龄</th>
+                                            <th>男女比例</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -145,7 +144,7 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                333
+                                部门在职离职人数
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -153,9 +152,9 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>部门</th>
+                                            <th>在职人数</th>
+                                            <th>离职人数</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -186,7 +185,7 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                444
+                                实习及正式员工人数
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -194,9 +193,9 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>部门</th>
+                                            <th>实习人数</th>
+                                            <th>正式员工</th>
                                         </tr>
                                         </thead>
                                         <tbody>
