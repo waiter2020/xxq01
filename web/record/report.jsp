@@ -45,12 +45,12 @@
                     <div class="form-group">
                         <label for="disabledSelect-month">月份</label>
                         <select id="disabledSelect-month" name="date" class="form-control">
-                            <option value="2">二月</option>
-                            <option value="3">三月</option>
-                            <option value="4">四月</option>
-                            <option value="5">五月</option>
-                            <option value="6">六月</option>
-                            <option value="7">七月</option>
+                            <option value="1" <c:if test="${requestScope.date==1}"> selected="selected"</c:if>>一月</option>
+                            <option value="2" <c:if test="${requestScope.date==2}"> selected="selected"</c:if>>二月</option>
+                            <option value="3" <c:if test="${requestScope.date==3}"> selected="selected"</c:if>>三月</option>
+                            <option value="4" <c:if test="${requestScope.date==4}"> selected="selected"</c:if>>四月</option>
+                            <option value="5" <c:if test="${requestScope.date==5}"> selected="selected"</c:if>>五月</option>
+                            <option value="6" <c:if test="${requestScope.date==6}"> selected="selected"</c:if>>六月</option>
                         </select>
                     </div>
                 </div>
@@ -85,12 +85,13 @@
                                                     <tr>
                                                         <td>${vs.count}</td>
                                                         <td>${performance.staff.departMent.departName}</td>
-                                                        <td>1</td>
-                                                        <td>2</td>
+                                                        <td>${performance.score}</td>
+                                                        <td>${performance.present}</td>
                                                     </tr>
                                                     </c:forEach>
                                                 </c:when>
                                             </c:choose>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -114,24 +115,18 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+                                            <c:choose>
+                                                <c:when test="${not empty requestScope.performances }">
+                                                    <c:forEach var="performance" items="${requestScope.performances}" varStatus="vs">
+                                                        <tr>
+                                                            <td>${vs.count}</td>
+                                                            <td>${performance.staff.departMent.departName}</td>
+                                                            <td>${performance.staff.age}</td>
+                                                            <td>1:1</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </c:when>
+                                            </c:choose>
                                         </tbody>
                                     </table>
                                 </div>
