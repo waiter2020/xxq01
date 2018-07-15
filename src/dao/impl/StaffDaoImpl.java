@@ -74,9 +74,10 @@ public class StaffDaoImpl implements StaffDao {
     }
 
     @Override
-    public int countBySex(int sex) {
+    public int countBySexAndDepart(int sex,int depart) {
         Map<String,String> map = new TreeMap<>();
         map.put("sex",sex+"");
+        map.put("department",depart+"");
         return DBUtils.getObjectCount(Staff.class,map);
     }
 

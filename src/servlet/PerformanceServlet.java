@@ -63,9 +63,15 @@ public class PerformanceServlet extends HttpServlet {
         LinkedList<Depart> all = departService.findAll();
         Map<String,Double> map = new TreeMap<>();
         Map<String,Double> map1=new TreeMap<>();
+        Map<String,Integer> man=new TreeMap<>();
+        Map<String,Integer> woman=new TreeMap<>();
         for(Depart depart:all){
             double sum=0;
             double ss=0;
+            int i = staffService.countBySex(1, depart.getId());
+            int i1 = staffService.countBySex(0, depart.getId());
+            man.put(depart.getDepartName(),i);
+            woman.put(depart.getDepartName(),i1);
             for (Performance p:performances){
                 if(depart.getId()==p.getStaff().getDepartment().getId()){
                     sum+=p.getScore();
@@ -75,7 +81,8 @@ public class PerformanceServlet extends HttpServlet {
             map.put(depart.getDepartName(),sum/depart.getCount());
             map1.put(depart.getDepartName(),ss/depart.getCount());
         }
-
+        request.setAttribute("man",man);
+        request.setAttribute("woman",woman);
         request.setAttribute("avgp",map1);
         request.setAttribute("avgScore",map);
 
@@ -94,10 +101,6 @@ public class PerformanceServlet extends HttpServlet {
         double avgAge = staffService.avgAge();
         request.setAttribute("avgAge", avgAge);
 
-        int i = staffService.countBySex(0);
-        request.setAttribute("man", i);
-        int i1 = staffService.countBySex(1);
-        request.setAttribute("woman", i1);
 
         performances.sort(Comparator.naturalOrder());
         request.setAttribute("performances", performances);
