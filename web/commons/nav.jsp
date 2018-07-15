@@ -82,7 +82,7 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-table"></i> 变动报表 </a>
+                        <a href="#"><i class="fa fa-table"></i> 绩效查询 </a>
                     </li>
                     <li>
                         <a <%
@@ -96,18 +96,46 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> 信息变更<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap"></i> 报表查询<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">员工管理</a>
+                                <a <%
+                                    active = request.getParameter("active");
+                                    out.println("class=\""+ (active.equals("r-form")?"active-menu":" ")+"\"");
+                                %>
+                                        href="${pageContext.request.contextPath}/record/r_form.jsp">新聘员工表</a>
                             </li>
                             <li>
-                                <a href="#">部门管理</a>
+                                <a <%
+                                    active = request.getParameter("active");
+                                    out.println("class=\""+ (active.equals("l-form")?"active-menu":" ")+"\"");
+                                %>
+                                        href="${pageContext.request.contextPath}/record/l_form.jsp">离职员工表</a>
                             </li>
                             <li>
-                                <a href="#">岗位管理</a>
+                                <a <%
+                                    active = request.getParameter("active");
+                                    out.println("class=\""+ (active.equals("b-form")?"active-menu":" ")+"\"");
+                                %>
+                                        href="${pageContext.request.contextPath}/record/b_form.jsp">部门调动表</a>
+                            </li>
+                            <li>
+                                <a <%
+                                    active = request.getParameter("active");
+                                    out.println("class=\""+ (active.equals("g-form")?"active-menu":" ")+"\"");
+                                %>
+                                        href="${pageContext.request.contextPath}/record/g_form.jsp">岗位调动表</a>
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a <%
+                            active = request.getParameter("active");
+                            out.println("class=\""+ (active.equals("depart-add")?"active-menu":" ")+"\"");
+                        %>
+                                href="${pageContext.request.contextPath}/depart/add.jsp">
+                            <i class="fa fa-fw fa-file"></i> 部门添加
+                        </a>
                     </li>
                     <li>
                         <a <%
