@@ -74,15 +74,15 @@ public class PerformanceServlet extends HttpServlet {
         LinkedList report8 = reportDao.getReport8(startDates.toString(), endDates.toString());
         LinkedList report9 = reportDao.getReport9(startDates.toString(), endDates.toString());
 
-        request.setAttribute("1",report1);
-        request.setAttribute("2",report2);
-        request.setAttribute("3",report3);
-        request.setAttribute("4",report4);
-        request.setAttribute("5",report5);
-        request.setAttribute("6",report6);
-        request.setAttribute("7",report7);
-        request.setAttribute("8",report8);
-        request.setAttribute("9",report9);
+        request.setAttribute("a1",report1);
+        request.setAttribute("a2",report2);
+        request.setAttribute("a3",report3);
+        request.setAttribute("a4",report4);
+        request.setAttribute("a5",report5);
+        request.setAttribute("a6",report6);
+        request.setAttribute("a7",report7);
+        request.setAttribute("a8",report8);
+        request.setAttribute("a9",report9);
 
 
         request.getRequestDispatcher("/record/report.jsp").forward(request, response);

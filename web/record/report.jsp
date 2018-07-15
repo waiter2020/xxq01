@@ -80,13 +80,13 @@
                                         </thead>
                                         <tbody>
                                             <c:choose>
-                                                <c:when test="${not empty requestScope.performances }">
-                                                    <c:forEach var="performance" items="${requestScope.performances}" varStatus="vs">
+                                                <c:when test="${not empty requestScope.a1}">
+                                                    <c:forEach var="performance" items="${requestScope.a1}" varStatus="vs">
                                                     <tr>
                                                         <td>${vs.count}</td>
-                                                        <td>${performance.staff.departMent.departName}</td>
-                                                        <td>${performance.score}</td>
-                                                        <td>${performance.present}</td>
+                                                        <td>${performance.departId}</td>
+                                                        <td>${performance.avgScore}</td>
+                                                        <td>${performance.avgPresent}</td>
                                                     </tr>
                                                     </c:forEach>
                                                 </c:when>
