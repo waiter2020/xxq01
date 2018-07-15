@@ -28,7 +28,7 @@ public class ReportDaoImpl {
      */
     public  LinkedList getReport1(String start, String end){
         LinkedList<Report> list= new LinkedList<>();
-        String sql="SELECT avg(score) as avgScore,Staff.department as departId,sum(present) as avgPresent\n" +
+        String sql="SELECT avg(score) as avgScore,Staff.department as departId,avg(present) as avgPresent\n" +
                 "from Performance,Staff\n" +
                 "where mouth > \""+start+"\" AND mouth < \""+end+"\" AND Performance.staff=Staff.id\n" +
                 "GROUP BY Staff.department;\n";
