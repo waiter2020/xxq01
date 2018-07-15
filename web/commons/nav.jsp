@@ -20,7 +20,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">Dream</a>
+                <a class="navbar-brand" href="/">HRMS</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
