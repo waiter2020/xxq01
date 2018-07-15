@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>个人信息</title>
@@ -66,26 +67,27 @@
                                                     <input type="hidden" name="id" value="${change.id}">
                                                     <div class="form-group">
                                                         <label for="disabledInput-id">工号</label>
-                                                        <input class="form-control" id="disabledInput-id" type="text" placeholder="${change.userName}" disabled="">
+                                                        <input class="form-control" id="disabledInput-id" type="text" placeholder="${change.userName}" readonly>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label>姓名</label>
-                                                        <input class="form-control" name="staffName" value="${change.staffName}">
+                                                        <input class="form-control" name="staffName" value="${change.staffName}" readonly>
+
                                                     </div>
                                                     <div class="form-group">
                                                         <label>证件</label>
-                                                        <input class="form-control" name="idCard" value="${change.idCard}">
+                                                        <input class="form-control" name="idCard" value="${change.idCard}" readonly>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>年龄</label>
-                                                        <input class="form-control" name="age" value="${change.age}">
+                                                        <input class="form-control" name="age" value="${change.age}" readonly>
                                                     </div>
 
                                                     <label>薪酬</label>
                                                     <div class="form-group input-group">
                                                         <span class="input-group-addon">$</span>
-                                                        <input type="text" class="form-control" name="wAges" value="${change.wAges}">
+                                                        <input type="text" class="form-control" name="wAges" value="${change.wAges}" <c:if test="${change.id==sessionScope.loginInfo.staff.id}">readonly</c:if>>
                                                         <span class="input-group-addon">.00</span>
                                                     </div>
 
@@ -119,10 +121,6 @@
                                                     <button type="reset"  value="reset"  class="btn btn-primary" style="margin-left: 20px">重置</button>
 
                                                 </div>
-
-
-
-
                                         </div>
                                         </form>
 
