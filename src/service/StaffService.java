@@ -96,8 +96,8 @@ public class StaffService {
         return staffDao.findPageBywAgesBefor(pageBean,wAges);
     }
 
-    public int countBySex(int sex){
-        return staffDao.countBySex(sex);
+    public int countBySex(int sex,int depart){
+        return staffDao.countBySexAndDepart(sex,depart);
     }
 
     public double avgAge(){

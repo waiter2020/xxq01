@@ -64,7 +64,7 @@ public interface StaffDao {
     PageBean findPageBywAgesBefor(PageBean pageBean,int wAges);
 
 
-    int countBySex(int sex);
+    int countBySexAndDepart(int sex,int depart);
 
     LinkedList findAll();
 
