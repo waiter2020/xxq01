@@ -5,6 +5,7 @@ import dao.PerformanceDao;
 import dao.impl.PerformanceDaoImpl;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PerformanceService {
@@ -18,6 +19,14 @@ public class PerformanceService {
 
     public List<Performance> getPerformanceBetweenStartDateAndEndDate(Date startDate, Date endDate) {
         return performanceDao.getPerformanceBetweenStartDateAndEndDate(startDate,endDate);
+    }
+
+    public LinkedList<Performance> findByStaff(int staff){
+        return performanceDao.findByStaff(staff);
+    }
+
+    public LinkedList<Performance> findByStaffAndAfterDate(int staff, Date date){
+        return performanceDao.findByStaffAndAfterDate(staff,date);
     }
 
     public static PerformanceService getPerformanceService() {

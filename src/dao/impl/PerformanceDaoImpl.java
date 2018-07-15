@@ -5,6 +5,7 @@ import dao.PerformanceDao;
 import utils.DBUtils;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PerformanceDaoImpl implements PerformanceDao {
@@ -23,6 +24,17 @@ public class PerformanceDaoImpl implements PerformanceDao {
         java.sql.Date endDates = new java.sql.Date(endDate.getTime());
 
         return DBUtils.getListByBeforSomeAndAfterSome(Performance.class,"mouth",endDates.toString(),"mouth",startDates.toString());
+    }
+
+    @Override
+    public LinkedList<Performance> findByStaff(int staff) {
+        return DBUtils.getListBySome(Performance.class,"staff",staff+"");
+    }
+
+    @Override
+    public LinkedList<Performance> findByStaffAndAfterDate(int staff, Date date) {
+        java.sql.Date startDates = new java.sql.Date(date.getTime());
+        return DBUtils.getListByAfterSomeAndSome(Performance.class,"mouth",startDates.toString(),"staff",staff+"");
     }
 
     public static PerformanceDaoImpl getChangeDaoImpl() {

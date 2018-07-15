@@ -45,39 +45,76 @@ public class PerformanceServlet extends HttpServlet {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(parse);
         int year = calendar.get(Calendar.YEAR);
-        calendar.set(year,Integer.parseInt(start)-2,28);
+        if(Integer.parseInt(start) - 2<0){
+            calendar.set(year-1, Integer.parseInt(start) - 2+12, 28);
+        }else {
+            calendar.set(year, Integer.parseInt(start) - 2, 28);
+        }
+
         parse.setTime(calendar.getTimeInMillis());
-        calendar.set(year,Integer.parseInt(start)-1,28);
-        parse1=new Date(calendar.getTimeInMillis());
+
+        calendar.set(year, Integer.parseInt(start) - 1, 28);
+        parse1 = new Date(calendar.getTimeInMillis());
 
 
         List<Performance> performances = performanceService.getPerformanceBetweenStartDateAndEndDate(parse, parse1);
 
         int z = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 1);
-        int x=officeService.countByEndDateBeforAndStartAfterAndState(parse1,parse,0);
-        int l = officeService.countByEndDateBeforAndStartAfterAndState(parse1,parse,2);
+        int x = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 0);
+        int l = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 2);
         //在职
-        request.setAttribute("z",z+x);
+        request.setAttribute("z", z + x);
         //离职
-        request.setAttribute("l",l);
+        request.setAttribute("l", l);
         //实习
-        request.setAttribute("x",x);
+        request.setAttribute("x", x);
         //正式
-        request.setAttribute("z",z);
+        request.setAttribute("z", z);
 
         double avgAge = staffService.avgAge();
-        request.setAttribute("avgAge",avgAge);
+        request.setAttribute("avgAge", avgAge);
 
         int i = staffService.countBySex(0);
-        request.setAttribute("man",i);
+        request.setAttribute("man", i);
         int i1 = staffService.countBySex(1);
-        request.setAttribute("woman",i1);
+        request.setAttribute("woman", i1);
 
         performances.sort(Comparator.naturalOrder());
         request.setAttribute("performances ", performances);
 
 
-        request.getRequestDispatcher("/record/report.jsp").forward(request,response);
+        request.getRequestDispatcher("/record/report.jsp").forward(request, response);
 
     }
+
+    protected void getStaffReport(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        Date parse = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(parse);
+        int m = calendar.get(Calendar.MONTH);
+        if(m<=5){
+            calendar.set(Calendar.MONTH,m-5);
+        }else {
+            calendar.set(Calendar.MONTH,m-5);
+        }
+        Date time = calendar.getTime();
+        m = calendar.get(Calendar.MONTH);
+        if (m==0){
+            calendar.set(Calendar.YEAR-1,11,Calendar.DATE);
+        }else {
+            calendar.set(Calendar.MONTH,m-1);
+        }
+        Date time1 = calendar.getTime();
+        LinkedList<Performance> byStaffAndAfterDate1 = performanceService.findByStaffAndAfterDate(Integer.parseInt(id), time1);
+        LinkedList<Performance> byStaffAndAfterDate = performanceService.findByStaffAndAfterDate(Integer.parseInt(id), time);
+        calendar.setTime(parse);
+
+        request.setAttribute("six",byStaffAndAfterDate);
+        request.setAttribute("one",byStaffAndAfterDate1);
+        request.getRequestDispatcher("").forward(request,response);
+
+
+    }
+
 }
