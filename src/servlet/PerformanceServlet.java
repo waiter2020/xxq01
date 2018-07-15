@@ -60,7 +60,8 @@ public class PerformanceServlet extends HttpServlet {
         calendar.set(year, Integer.parseInt(start) - 1, 28);
         parse1 = new Date(calendar.getTimeInMillis());
 
-
+        LinkedList<Depart> all = departService.findAll();
+        request.setAttribute("depart",all);
         List<Performance> performances = performanceService.getPerformanceBetweenStartDateAndEndDate(parse, parse1);
         java.sql.Date startDates = new java.sql.Date(parse.getTime());
         java.sql.Date endDates = new java.sql.Date(parse1.getTime());
@@ -73,7 +74,6 @@ public class PerformanceServlet extends HttpServlet {
         LinkedList report7 = reportDao.getReport7(startDates.toString(), endDates.toString());
         LinkedList report8 = reportDao.getReport8(startDates.toString(), endDates.toString());
         LinkedList report9 = reportDao.getReport9(startDates.toString(), endDates.toString());
-
         request.setAttribute("a1",report1);
         request.setAttribute("a2",report2);
         request.setAttribute("a3",report3);

@@ -159,7 +159,7 @@ public class ReportDaoImpl {
                 int anInt = set.getInt(2);
                 Report report = new Report();
                 report.setDepartId(anInt);
-                report.setzNum(aDouble);
+                report.setyNum(aDouble);
 
                 list.add(report);
 
