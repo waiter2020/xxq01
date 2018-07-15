@@ -1,6 +1,8 @@
 package servlet;
 
+import bean.Depart;
 import bean.Performance;
+import service.DepartService;
 import service.OfficeService;
 import service.PerformanceService;
 import service.StaffService;
@@ -20,7 +22,7 @@ public class PerformanceServlet extends HttpServlet {
     private PerformanceService performanceService = PerformanceService.getPerformanceService();
     private OfficeService officeService = OfficeService.getOfficeService();
     private StaffService staffService = StaffService.getStaffService();
-
+    private DepartService departService = DepartService.getDepartService();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +40,7 @@ public class PerformanceServlet extends HttpServlet {
 
     protected void getReport(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String start = request.getParameter("date");
-
+        request.setAttribute("date",start);
         Date parse = new Date();
         Date parse1 = null;
 
@@ -58,12 +60,26 @@ public class PerformanceServlet extends HttpServlet {
 
 
         List<Performance> performances = performanceService.getPerformanceBetweenStartDateAndEndDate(parse, parse1);
+        LinkedList<Depart> all = departService.findAll();
+        Map<String,Double> map = new TreeMap<>();
+
+        for(Depart depart:all){
+            double sum=0;
+            for (Performance p:performances){
+                if(depart.getId()==p.getStaff().getDepartment().getId()){
+                    sum+=p.getScore();
+                }
+            }
+            map.put(depart.getDepartName(),sum/depart.getCount());
+        }
+
+        request.setAttribute("avgScore",map);
 
         int z = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 1);
         int x = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 0);
         int l = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 2);
         //在职
-        request.setAttribute("z", z + x);
+        request.setAttribute("zx", z + x);
         //离职
         request.setAttribute("l", l);
         //实习

@@ -378,12 +378,13 @@ public class StaffServlet extends HttpServlet {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(parse);
         int m = calendar.get(Calendar.MONTH);
-        if(m<=5){
-            calendar.set(Calendar.MONTH,m-5);
+        if(m<=6){
+            calendar.set(Calendar.YEAR-1,m-6+12,1);
         }else {
-            calendar.set(Calendar.MONTH,m-5);
+            calendar.set(Calendar.MONTH,m-6);
         }
         Date time = calendar.getTime();
+        calendar.setTime(parse);
         m = calendar.get(Calendar.MONTH);
         if (m==0){
             calendar.set(Calendar.YEAR-1,11,Calendar.DATE);
