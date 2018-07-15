@@ -1,5 +1,7 @@
 package bean;
 
+import java.math.BigDecimal;
+
 /**
  * @ Author     ：Bzy.
  * @ Date       ：Created in 下午5:19 18-7-15
@@ -12,7 +14,7 @@ public class Report {
     private int lNum;//部门离职人数
     private int sNum;//部门实习人数
     private int yNum;//部门正式员工数
-    private int avgAge;//部门平均年龄
+    private double avgAge;//部门平均年龄
     private int man;//部门男人个数
     private int woman;//部门女人个数
 
@@ -87,11 +89,11 @@ public class Report {
         this.yNum = yNum;
     }
 
-    public int getAvgAge() {
+    public double getAvgAge() {
         return avgAge;
     }
 
-    public void setAvgAge(int avgAge) {
+    public void setAvgAge(double avgAge) {
         this.avgAge = avgAge;
     }
 

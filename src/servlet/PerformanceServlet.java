@@ -2,6 +2,7 @@ package servlet;
 
 import bean.Depart;
 import bean.Performance;
+import dao.impl.ReportDaoImpl;
 import service.DepartService;
 import service.OfficeService;
 import service.PerformanceService;
@@ -23,6 +24,7 @@ public class PerformanceServlet extends HttpServlet {
     private OfficeService officeService = OfficeService.getOfficeService();
     private StaffService staffService = StaffService.getStaffService();
     private DepartService departService = DepartService.getDepartService();
+    private ReportDaoImpl reportDao = ReportDaoImpl.getReportDao();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,50 +62,27 @@ public class PerformanceServlet extends HttpServlet {
 
 
         List<Performance> performances = performanceService.getPerformanceBetweenStartDateAndEndDate(parse, parse1);
-        LinkedList<Depart> all = departService.findAll();
-        Map<String,Double> map = new TreeMap<>();
-        Map<String,Double> map1=new TreeMap<>();
-        Map<String,Integer> man=new TreeMap<>();
-        Map<String,Integer> woman=new TreeMap<>();
-        for(Depart depart:all){
-            double sum=0;
-            double ss=0;
-            int i = staffService.countBySex(1, depart.getId());
-            int i1 = staffService.countBySex(0, depart.getId());
-            man.put(depart.getDepartName(),i);
-            woman.put(depart.getDepartName(),i1);
-            for (Performance p:performances){
-                if(depart.getId()==p.getStaff().getDepartment().getId()){
-                    sum+=p.getScore();
-                    ss+=p.getPresent();
-                }
-            }
-            map.put(depart.getDepartName(),sum/depart.getCount());
-            map1.put(depart.getDepartName(),ss/depart.getCount());
-        }
-        request.setAttribute("man",man);
-        request.setAttribute("woman",woman);
-        request.setAttribute("avgp",map1);
-        request.setAttribute("avgScore",map);
+        java.sql.Date startDates = new java.sql.Date(parse.getTime());
+        java.sql.Date endDates = new java.sql.Date(parse1.getTime());
+        LinkedList report1 = reportDao.getReport1(startDates.toString(), endDates.toString());
+        LinkedList report2 = reportDao.getReport2(startDates.toString(), endDates.toString());
+        LinkedList report3 = reportDao.getReport3(startDates.toString(), endDates.toString());
+        LinkedList report4 = reportDao.getReport4(startDates.toString(), endDates.toString());
+        LinkedList report5 = reportDao.getReport5(startDates.toString(), endDates.toString());
+        LinkedList report6 = reportDao.getReport6(startDates.toString(), endDates.toString());
+        LinkedList report7 = reportDao.getReport7(startDates.toString(), endDates.toString());
+        LinkedList report8 = reportDao.getReport8(startDates.toString(), endDates.toString());
+        LinkedList report9 = reportDao.getReport9(startDates.toString(), endDates.toString());
 
-        int z = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 1);
-        int x = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 0);
-        int l = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 2);
-        //在职
-        request.setAttribute("zx", z + x);
-        //离职
-        request.setAttribute("l", l);
-        //实习
-        request.setAttribute("x", x);
-        //正式
-        request.setAttribute("z", z);
-
-        double avgAge = staffService.avgAge();
-        request.setAttribute("avgAge", avgAge);
-
-
-        performances.sort(Comparator.naturalOrder());
-        request.setAttribute("performances", performances);
+        request.setAttribute("1",report1);
+        request.setAttribute("2",report2);
+        request.setAttribute("3",report3);
+        request.setAttribute("4",report4);
+        request.setAttribute("5",report5);
+        request.setAttribute("6",report6);
+        request.setAttribute("7",report7);
+        request.setAttribute("8",report8);
+        request.setAttribute("9",report9);
 
 
         request.getRequestDispatcher("/record/report.jsp").forward(request, response);
