@@ -29,7 +29,7 @@
     <jsp:include page="${pageContext.request.contextPath}/commons/nav.jsp">
         <jsp:param value="report" name="active"/>
     </jsp:include>
-
+<form action="${pageContext.request.contextPath}/record/report" method="post">
     <div id="page-wrapper" >
         <div id="page-inner">
             <%--头--%>
@@ -44,7 +44,7 @@
                     <%--<form role="form">--%>
                     <div class="form-group">
                         <label for="disabledSelect-month">月份</label>
-                        <select id="disabledSelect-month" name="month" class="form-control">
+                        <select id="disabledSelect-month" name="date" class="form-control">
                             <option value="2">二月</option>
                             <option value="3">三月</option>
                             <option value="4">四月</option>
@@ -79,18 +79,18 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                <%--<c:choose>--%>
-                                    <%--<c:when test="${not empty requestScope.page.pageData}">--%>
-                                        <%--<c:forEach var="month" items="${requestScope.page.pageData}" varStatus="vs">--%>
-                                        <%--<tr>--%>
-                                            <%--<td>${vs.count}</td>--%>
-                                            <%--<td>Mark</td>--%>
-                                            <%--<td>Otto</td>--%>
-                                            <%--<td>@mdo</td>--%>
-                                        <%--</tr>--%>
-                                        <%--</c:forEach>--%>
-                                    <%--</c:when>--%>
-                                <%--</c:choose>--%>
+                                            <c:choose>
+                                                <c:when test="${not empty requestScope.performances }">
+                                                    <c:forEach var="performance" items="${requestScope.performances}" varStatus="vs">
+                                                    <tr>
+                                                        <td>${vs.count}</td>
+                                                        <td>${performance.staff.departMent.departName}</td>
+                                                        <td>1</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                    </c:forEach>
+                                                </c:when>
+                                            </c:choose>
                                         </tbody>
                                     </table>
                                 </div>
@@ -228,7 +228,7 @@
         </div>
         <footer><p></p></footer>
     </div>
-
+</form>
 </div>
 
 <%--引入js文件--%>
