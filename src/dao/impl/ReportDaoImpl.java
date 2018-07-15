@@ -316,11 +316,13 @@ public class ReportDaoImpl {
             while (set.next()){
                 int aDouble = set.getInt(1);
                 int anInt = set.getInt(2);
+                double aDouble1 = set.getDouble(3);
                 Report report = new Report();
                 Depart objectById = (Depart) DBUtils.getObjectById(Depart.class, anInt);
                 report.setDepartName(objectById.getDepartName());
                 report.setDepartId(anInt);
-                report.setWoman(aDouble);
+                report.setAvgAge(aDouble1);
+                report.setzNum(aDouble);
 
                 list.add(report);
 
