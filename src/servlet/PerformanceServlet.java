@@ -15,7 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@WebServlet(name = "PerformanceServlet",urlPatterns = {"/record/report"})
+@WebServlet(name = "PerformanceServlet",urlPatterns = {"/record/report","/record/staff_report"})
 public class PerformanceServlet extends HttpServlet {
     private PerformanceService performanceService = PerformanceService.getPerformanceService();
     private OfficeService officeService = OfficeService.getOfficeService();
