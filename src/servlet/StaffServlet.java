@@ -382,14 +382,15 @@ public class StaffServlet extends HttpServlet {
             calendar.set(Calendar.YEAR-1,m-6+12,1);
         }else {
             calendar.set(Calendar.MONTH,m-6);
+            calendar.set(Calendar.DATE,1);
         }
         Date time = calendar.getTime();
         calendar.setTime(parse);
-        m = calendar.get(Calendar.MONTH);
         if (m==0){
-            calendar.set(Calendar.YEAR-1,11,Calendar.DATE);
+            calendar.set(Calendar.YEAR-1,11,1);
         }else {
             calendar.set(Calendar.MONTH,m-1);
+            calendar.set(Calendar.DATE,1);
         }
 
         Date time1 = calendar.getTime();

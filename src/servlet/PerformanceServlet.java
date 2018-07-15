@@ -62,17 +62,21 @@ public class PerformanceServlet extends HttpServlet {
         List<Performance> performances = performanceService.getPerformanceBetweenStartDateAndEndDate(parse, parse1);
         LinkedList<Depart> all = departService.findAll();
         Map<String,Double> map = new TreeMap<>();
-
+        Map<String,Double> map1=new TreeMap<>();
         for(Depart depart:all){
             double sum=0;
+            double ss=0;
             for (Performance p:performances){
                 if(depart.getId()==p.getStaff().getDepartment().getId()){
                     sum+=p.getScore();
+                    ss+=p.getPresent();
                 }
             }
             map.put(depart.getDepartName(),sum/depart.getCount());
+            map1.put(depart.getDepartName(),ss/depart.getCount());
         }
 
+        request.setAttribute("avgp",map1);
         request.setAttribute("avgScore",map);
 
         int z = officeService.countByEndDateBeforAndStartAfterAndState(parse1, parse, 1);
