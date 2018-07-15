@@ -47,8 +47,6 @@ public class StaffServlet extends HttpServlet {
             transferStaff(request,response);
         }else if("turn".equals(substring)){
             turnStaff(request,response);
-        }else if ("staff_report".equals(substring)){
-            getStaffReport(request,response);
         }
     }
 
@@ -70,6 +68,8 @@ public class StaffServlet extends HttpServlet {
             turnStaff(request,response);
         }else if ("select".equals(substring)){
             toSelect(request,response);
+        }else if ("staff_report".equals(substring)){
+            getStaffReport(request,response);
         }
     }
 
@@ -398,7 +398,7 @@ public class StaffServlet extends HttpServlet {
 
         request.setAttribute("six",byStaffAndAfterDate);
         request.setAttribute("one",byStaffAndAfterDate1);
-        request.getRequestDispatcher("").forward(request,response);
+        request.getRequestDispatcher("/staff/staff_report.jsp").forward(request,response);
 
 
     }
