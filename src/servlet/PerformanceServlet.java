@@ -28,8 +28,6 @@ public class PerformanceServlet extends HttpServlet {
         String substring = uri.substring(8, uri.length());
         if ("report".equals(substring)) {
             getReport(request, response);
-        }else if ("staff_report".equals(substring)){
-            getStaffReport(request,response);
         }
     }
 
@@ -89,34 +87,5 @@ public class PerformanceServlet extends HttpServlet {
 
     }
 
-    protected void getStaffReport(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
-        Date parse = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(parse);
-        int m = calendar.get(Calendar.MONTH);
-        if(m<=5){
-            calendar.set(Calendar.MONTH,m-5);
-        }else {
-            calendar.set(Calendar.MONTH,m-5);
-        }
-        Date time = calendar.getTime();
-        m = calendar.get(Calendar.MONTH);
-        if (m==0){
-            calendar.set(Calendar.YEAR-1,11,Calendar.DATE);
-        }else {
-            calendar.set(Calendar.MONTH,m-1);
-        }
-        Date time1 = calendar.getTime();
-        LinkedList<Performance> byStaffAndAfterDate1 = performanceService.findByStaffAndAfterDate(Integer.parseInt(id), time1);
-        LinkedList<Performance> byStaffAndAfterDate = performanceService.findByStaffAndAfterDate(Integer.parseInt(id), time);
-        calendar.setTime(parse);
-
-        request.setAttribute("six",byStaffAndAfterDate);
-        request.setAttribute("one",byStaffAndAfterDate1);
-        request.getRequestDispatcher("").forward(request,response);
-
-
-    }
 
 }
