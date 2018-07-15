@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -48,15 +49,15 @@
                             <c:choose>
                             <c:when test="${not empty requestScope.one}">
                                 <c:forEach var="performance" items="${requestScope.one}" varStatus="vs">
-                                <small>姓名:</small><h2>${performance.staff.userName}</h2><br>
-                                <small>部门及岗位:</small><h3>技术部经理</h3><br>
-                                <small>证件号:</small><h3>1487319983249</h3><br>
-                                <button class="btn btn-default">修改</button>
+                                <small>姓名:</small><h2>${performance.staff.staffName}</h2><br>
+                                <small>部门及岗位:</small><h3>${performance.staff.departMent.departName}${performance.staff.station.stationName}</h3><br>
+                                <small>证件号:</small><h3>${performance.staff.idCard}</h3><br>
+                                <button class="btn btn-default" onclick="location='${pageContext.request.contextPath}/staff/change?id=${performance.staff.id}'">修改</button>
                             </div>
                             <div class="col-lg-6">
-                                <small>联系方式:</small><h3>138762783478</h3><br>
-                                <small>Email:</small><h3>3489287@qq.com</h3><br>
-                                <small>住址:</small><h3>东风路234</h3><br>
+                                <small>联系方式:</small><h3>${performance.staff.phoneNum}</h3><br>
+                                <small>Email:</small><h3>${performance.staff.email}</h3><br>
+                                <small>住址:</small><h3>${performance.staff.address}</h3><br>
                         </div>
                                 </c:forEach>
                             </c:when>
@@ -98,6 +99,15 @@
     </div>
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
+
+        <script>
+            function getTime(nS) {
+                var date=new Date(nS);
+                var year=date.getFullYear();
+                var month=date.getMonth();
+                return year+"-"+month;
+            }
+        </script>
     <script>
         var myChart1 = echarts.init(document.getElementById('1'));
         option = {
@@ -112,7 +122,7 @@
             },
             series: [
                 {
-                    name:'访问来源',
+                    name:'考勤情况',
                     type:'pie',
                     radius: ['50%', '70%'],
                     avoidLabelOverlap: false,
@@ -133,11 +143,24 @@
                         normal: {
                             show: true
                         }
-
                     },
                     data:[
-                        {value:29, name:'出勤'},
-                        {value:3, name:'缺勤'}
+                        {value:<c:choose>
+                            <c:when test="${not empty requestScope.one}">
+                            <c:forEach var="performance" items="${requestScope.one}" varStatus="vs">
+                            ${performance.present}
+                            </c:forEach>
+                            </c:when>
+                            </c:choose>
+                            , name:'出勤'},
+                        {value:<c:choose>
+                            <c:when test="${not empty requestScope.one}">
+                            <c:forEach var="performance" items="${requestScope.one}" varStatus="vs">
+                            31-${performance.present}
+                            </c:forEach>
+                            </c:when>
+                            </c:choose>
+                            , name:'缺勤'}
                     ]
                 }
             ]
@@ -151,13 +174,30 @@
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                data:[
+                    <c:choose>
+                    <c:when test="${not empty requestScope.six}">
+                    <c:forEach var="performances" items="${requestScope.six}">
+                    '<fmt:formatDate value="${performances.month}" pattern="yyyy-MM"/>',
+                    </c:forEach>
+                    </c:when>
+                    </c:choose>
+                ]
+                // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
             },
             yAxis: {
                 type: 'value'
             },
             series: [{
-                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                data:[
+                <c:choose>
+                <c:when test="${not empty requestScope.six}">
+                <c:forEach var="performances" items="${requestScope.six}" varStatus="vs">
+                '${performances.score}',
+                </c:forEach>
+                </c:when>
+                </c:choose>]
+                ,
                 type: 'line',
                 areaStyle: {}
             }]
