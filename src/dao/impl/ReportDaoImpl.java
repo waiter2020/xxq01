@@ -1,5 +1,6 @@
 package dao.impl;
 
+import bean.Depart;
 import bean.Report;
 import utils.BeanUtils;
 import utils.DBUtils;
@@ -38,7 +39,10 @@ public class ReportDaoImpl {
                 int anInt = set.getInt(2);
                 double aDouble1 = set.getDouble(3);
                 Report report = new Report();
+                Depart objectById = (Depart) DBUtils.getObjectById(Depart.class, anInt);
+                report.setDepartName(objectById.getDepartName());
                 report.setDepartId(anInt);
+
                 report.setAvgScore(aDouble);
                 report.setAvgPresent(aDouble1);
                 list.add(report);
@@ -68,6 +72,8 @@ public class ReportDaoImpl {
                 int aDouble = set.getInt(1);
                 int anInt = set.getInt(2);
                 Report report = new Report();
+                Depart objectById = (Depart) DBUtils.getObjectById(Depart.class, anInt);
+                report.setDepartName(objectById.getDepartName());
                 report.setDepartId(anInt);
                 report.setzNum(aDouble);
 
@@ -98,6 +104,8 @@ public class ReportDaoImpl {
                 int aDouble = set.getInt(1);
                 int anInt = set.getInt(2);
                 Report report = new Report();
+                Depart objectById = (Depart) DBUtils.getObjectById(Depart.class, anInt);
+                report.setDepartName(objectById.getDepartName());
                 report.setDepartId(anInt);
                 report.setlNum(aDouble);
 
@@ -128,6 +136,8 @@ public class ReportDaoImpl {
                 int aDouble = set.getInt(1);
                 int anInt = set.getInt(2);
                 Report report = new Report();
+                Depart objectById = (Depart) DBUtils.getObjectById(Depart.class, anInt);
+                report.setDepartName(objectById.getDepartName());
                 report.setDepartId(anInt);
                 report.setsNum(aDouble);
 
@@ -158,6 +168,8 @@ public class ReportDaoImpl {
                 int aDouble = set.getInt(1);
                 int anInt = set.getInt(2);
                 Report report = new Report();
+                Depart objectById = (Depart) DBUtils.getObjectById(Depart.class, anInt);
+                report.setDepartName(objectById.getDepartName());
                 report.setDepartId(anInt);
                 report.setyNum(aDouble);
 
@@ -188,6 +200,8 @@ public class ReportDaoImpl {
                 int aDouble = set.getInt(1);
                 int anInt = set.getInt(2);
                 Report report = new Report();
+                Depart objectById = (Depart) DBUtils.getObjectById(Depart.class, anInt);
+                report.setDepartName(objectById.getDepartName());
                 report.setDepartId(anInt);
                 report.setlNum(aDouble);
 
@@ -218,6 +232,8 @@ public class ReportDaoImpl {
                 double aDouble = set.getDouble(1);
                 int anInt = set.getInt(2);
                 Report report = new Report();
+                Depart objectById = (Depart) DBUtils.getObjectById(Depart.class, anInt);
+                report.setDepartName(objectById.getDepartName());
                 report.setDepartId(anInt);
                 report.setAvgAge(aDouble);
 
@@ -248,6 +264,8 @@ public class ReportDaoImpl {
                 int aDouble = set.getInt(1);
                 int anInt = set.getInt(2);
                 Report report = new Report();
+                Depart objectById = (Depart) DBUtils.getObjectById(Depart.class, anInt);
+                report.setDepartName(objectById.getDepartName());
                 report.setDepartId(anInt);
                 report.setMan(aDouble);
 
@@ -273,6 +291,8 @@ public class ReportDaoImpl {
                 int aDouble = set.getInt(1);
                 int anInt = set.getInt(2);
                 Report report = new Report();
+                Depart objectById = (Depart) DBUtils.getObjectById(Depart.class, anInt);
+                report.setDepartName(objectById.getDepartName());
                 report.setDepartId(anInt);
                 report.setWoman(aDouble);
 

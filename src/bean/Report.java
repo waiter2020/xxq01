@@ -17,6 +17,15 @@ public class Report {
     private double avgAge;//部门平均年龄
     private int man;//部门男人个数
     private int woman;//部门女人个数
+    private String departName;
+
+    public String getDepartName() {
+        return departName;
+    }
+
+    public void setDepartName(String departName) {
+        this.departName = departName;
+    }
 
     public Report(){}
 
