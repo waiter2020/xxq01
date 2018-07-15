@@ -41,6 +41,14 @@ public class RecordDaoImpl implements RecordDao {
         return DBUtils.getPageByBeforSomeAndAfterSome(pageBean, Record.class,"date",endDates.toString(),"date",startDates.toString());
     }
 
+    @Override
+    public LinkedList findListByEndDateBeforAndStartAfterAndMark(Date endDate, Date startDate,int mark) {
+        java.sql.Date startDates = new java.sql.Date(startDate.getTime());
+        java.sql.Date endDates = new java.sql.Date(endDate.getTime());
+        return DBUtils.getListByBeforSomeAndAfterSomeAndSome( Record.class,"date",endDates.toString(),"date",startDates.toString(),"mark",mark+"");
+    }
+
+
     public static RecordDaoImpl getChangeDaoImpl() {
         return ChangeDaoImpl;
     }

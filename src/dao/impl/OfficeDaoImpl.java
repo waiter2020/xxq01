@@ -5,6 +5,7 @@ import dao.OfficeDao;
 import utils.DBUtils;
 import utils.PageBean;
 
+import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -34,6 +35,13 @@ public class OfficeDaoImpl implements OfficeDao{
         }
         //取最后一个
         return (Office) listBySome.getLast();
+    }
+
+    @Override
+    public LinkedList findListByEndDateBeforAndStartAfterAndState(Date endDate, Date startDate,int state) {
+        java.sql.Date startDates = new java.sql.Date(startDate.getTime());
+        java.sql.Date endDates = new java.sql.Date(endDate.getTime());
+        return DBUtils.getListByBeforSomeAndAfterSomeAndSome( Office.class,"date",endDates.toString(),"date",startDates.toString(),"state",state+"");
     }
 
 

@@ -20,11 +20,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">${sessionScope.loginInfo.staff.staffName}</a>
+                <a class="navbar-brand">Dream</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
-
+                <a class="navbar-brand" href="/" style="text-align: right">${sessionScope.loginInfo.staff.staffName}</a>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -82,10 +82,16 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-table"></i> 报表 </a>
+                        <a href="#"><i class="fa fa-table"></i> 变动报表 </a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i> from</a>
+                        <a <%
+                            active = request.getParameter("active");
+                            out.println("class=\""+ (active.equals("report")?"active-menu":" ")+"\"");
+                        %>
+                                href="${pageContext.request.contextPath}/record/report.jsp">
+                            <i class="fa fa-edit"></i> 人事月报
+                        </a>
                     </li>
 
 
