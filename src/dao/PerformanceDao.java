@@ -1,6 +1,7 @@
 package dao;
 
 import bean.Performance;
+import utils.PageBean;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -15,4 +16,6 @@ public interface PerformanceDao {
     LinkedList<Performance> findByStaff(int staff);
 
     LinkedList<Performance> findByStaffAndAfterDate(int staff,Date date);
+
+    PageBean getPageByDateAfter(PageBean pageBean,Date date);
 }

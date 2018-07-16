@@ -3,6 +3,7 @@ package dao.impl;
 import bean.Performance;
 import dao.PerformanceDao;
 import utils.DBUtils;
+import utils.PageBean;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -35,6 +36,12 @@ public class PerformanceDaoImpl implements PerformanceDao {
     public LinkedList<Performance> findByStaffAndAfterDate(int staff, Date date) {
         java.sql.Date startDates = new java.sql.Date(date.getTime());
         return DBUtils.getListByAfterSomeAndSome(Performance.class,"mouth",startDates.toString(),"staff",staff+"");
+    }
+
+    @Override
+    public PageBean getPageByDateAfter(PageBean pageBean, Date date) {
+        java.sql.Date dates = new java.sql.Date(date.getTime());
+        return DBUtils.getPageByAfterSome(pageBean,Performance.class,"month",dates.toString());
     }
 
     public static PerformanceDaoImpl getChangeDaoImpl() {

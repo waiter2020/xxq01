@@ -16,7 +16,7 @@ public class PageBean {
     /**
      * 每页行数
      */
-	private int pageCount = 4;
+	private int pageCount = 10;
     /**
      * 总行数
      */

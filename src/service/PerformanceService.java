@@ -3,6 +3,7 @@ package service;
 import bean.Performance;
 import dao.PerformanceDao;
 import dao.impl.PerformanceDaoImpl;
+import utils.PageBean;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -27,6 +28,10 @@ public class PerformanceService {
 
     public LinkedList<Performance> findByStaffAndAfterDate(int staff, Date date){
         return performanceDao.findByStaffAndAfterDate(staff,date);
+    }
+
+    public PageBean getPageByDateAfter(PageBean pageBean, Date date) {
+        return performanceDao.getPageByDateAfter(pageBean,date);
     }
 
     public static PerformanceService getPerformanceService() {
