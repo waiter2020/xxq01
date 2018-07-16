@@ -90,7 +90,11 @@ public class StaffServlet extends HttpServlet {
         User loginInfo = (User) request.getSession().getAttribute("loginInfo");
         Staff byUserName = staffService.findByUserName(loginInfo.getUserName());
         logger.info("用户：" + byUserName + "查询了员工列表");
-        pageBean = staffService.findByPageAndDepartmentAndIsWork(pageBean, byUserName.getDepartment().getId(), true);
+        if(loginInfo.getGrade()==0){
+            pageBean = staffService.getPage(pageBean);
+        }else {
+            pageBean = staffService.findByPageAndDepartmentAndIsWork(pageBean, byUserName.getDepartment().getId(), true);
+        }
 
         request.setAttribute("page", pageBean);
         request.getRequestDispatcher("/staff/list.jsp").forward(request, response);
@@ -363,7 +367,7 @@ public class StaffServlet extends HttpServlet {
                 case "5":
                     pageBean=staffService.findPageBywAgesBefor(pageBean,Integer.parseInt(condition));
                 default:
-
+                    break;
             }
 
             request.setAttribute("page", pageBean);

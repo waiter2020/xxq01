@@ -17,6 +17,7 @@ import java.util.logging.Logger;
  * Created by  waiter on 18-7-6  14.
  *
  * @author waiter
+ * JDBC底层封装方法大全
  */
 public class DBUtils {
     private static final Logger loger = Logger.getLogger(JDBCPool.class.getName());

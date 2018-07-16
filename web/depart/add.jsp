@@ -59,7 +59,7 @@
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                <footer><p><!--Copyright &copy; All rights reserved。--> Serendipity-life</p></footer>
+                <footer><p></p></footer>
             </div>
             <!-- /. PAGE INNER  -->
         </div>

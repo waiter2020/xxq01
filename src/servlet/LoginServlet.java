@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
     protected void doLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         Object loginInfo = request.getAttribute("loginInfo");
         logger.info("用户："+loginInfo+"已退出");
-        request.setAttribute("loginInfo",null);
+        request.getSession().setAttribute("loginInfo",null);
         request.setAttribute("msg","退出成功");
         request.getRequestDispatcher("/login.jsp").forward(request,response);
     }

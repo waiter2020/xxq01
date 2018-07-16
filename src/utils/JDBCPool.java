@@ -28,7 +28,7 @@ public class JDBCPool {
     private static long active=Long.parseLong(props.getProperty("activeTime"))+System.currentTimeMillis();
     static{
         String initialSize = props.getProperty("initialSize");
-        int i=new Integer(initialSize);
+        int i=Integer.parseInt(initialSize);
         loger.info("初始化连接数"+i);
         while (i>0){
             try {
@@ -77,7 +77,7 @@ public class JDBCPool {
      */
     private static void addConnection(){
         String minIdle = props.getProperty("minIdle");
-        int i = new Integer(minIdle);
+        int i = Integer.parseInt(minIdle);
         while (i>=0){
             try {
                 connections.add(JDBCUtils.getConnection());
@@ -122,7 +122,7 @@ public class JDBCPool {
      */
     public static void close(Connection connection){
         String maxSize = props.getProperty("maxSize");
-        int i = new Integer(maxSize);
+        int i = Integer.parseInt(maxSize);
         if(connections.size()>=i){
             try {
                 connection.close();

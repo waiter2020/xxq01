@@ -16,16 +16,16 @@ function sereAlert(msg) {
 }
     //2
 function pwdMeet1() {
-    var op = document.getElementById("oldPwd").value;
-    var np1 = document.getElementById("newPdw1").value;
-    if(op==np1){
-        document.getElementById("meet1").innerHTML="新密码与旧密码不能相同";
+    // var op = document.getElementById("oldPwd").value;
+    // var np1 = document.getElementById("newPdw1").value;
+    if(document.getElementById("oldPwd").value==document.getElementById("newPdw1").value){
+        document.getElementById("meet1").innerText="新密码与旧密码不能相同";
     }
 }
 function pwdMeet2() {
-    var np1 = document.getElementById("newPdw1").value;
-    var np2 = document.getElementById("newPdw2").value;
-    if (np1!=np2){
-        document.getElementById("meet2").innerHTML="两次新密码输入必须一致";
+    // var np1 = document.getElementById("newPdw1").value;
+    // var np2 = document.getElementById("newPdw2").value;
+    if (document.getElementById("newPdw1").value!=document.getElementById("newPdw2").value){
+        document.getElementById("meet2").innerText="两次新密码输入必须一致";
     }
 }

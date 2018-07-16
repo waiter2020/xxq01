@@ -64,19 +64,19 @@ public class Record {
         this.resStation = resStation;
         this.srcDepart = srcDepart;
         this.resDepart = resDepart;
-        this.date = date;
+        this.date = new Date(date.getTime());
     }
 
     public Record(int mark, Date date) {
         this.mark = mark;
 
-        this.date = date;
+        this.date = new Date(date.getTime());
     }
 
     public Record(Staff staff, int mark, Date date) {
         this.staff=staff;
         this.mark = mark;
-        this.date = date;
+        this.date = new Date(date.getTime());
     }
 
     public Station getSrcStation() {
@@ -138,11 +138,11 @@ public class Record {
 
 
     public Date getDate() {
-        return date;
+        return new Date(date.getTime());
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = new Date(date.getTime());
     }
 
     @Override

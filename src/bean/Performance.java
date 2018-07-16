@@ -33,11 +33,11 @@ public class Performance implements Comparable<Performance> {
     }
 
     public Date getMonth() {
-        return month;
+        return new Date(month.getTime());
     }
 
     public void setMonth(Date month) {
-        this.month = month;
+        this.month = new Date(month.getTime());
     }
 
     public float getScore() {
@@ -76,7 +76,7 @@ public class Performance implements Comparable<Performance> {
     }
 
     public Performance(Date month, float score, int present, Staff staff) {
-        this.month = month;
+        this.month = new Date(month.getTime());
         this.score = score;
         this.present = present;
         this.staff = staff;
