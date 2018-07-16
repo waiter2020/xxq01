@@ -55,6 +55,8 @@ public class RecordServlet extends HttpServlet {
     private void lForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String start = request.getParameter("start");
         String end = request.getParameter("end");
+        request.setAttribute("start",start);
+        request.setAttribute("end",end);
         SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         Date parse=null;
         Date parse1=null;
@@ -74,6 +76,8 @@ public class RecordServlet extends HttpServlet {
     private void rForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String start = request.getParameter("start");
         String end = request.getParameter("end");
+        request.setAttribute("start",start);
+        request.setAttribute("end",end);
         SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         Date parse=null;
         Date parse1=null;
@@ -92,6 +96,8 @@ public class RecordServlet extends HttpServlet {
     private void bForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String start = request.getParameter("start");
         String end = request.getParameter("end");
+        request.setAttribute("start",start);
+        request.setAttribute("end",end);
         SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         Date parse=null;
         Date parse1=null;
@@ -112,6 +118,8 @@ public class RecordServlet extends HttpServlet {
     private void gForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String start = request.getParameter("start");
         String end = request.getParameter("end");
+        request.setAttribute("start",start);
+        request.setAttribute("end",end);
         SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         Date parse=null;
         Date parse1=null;
