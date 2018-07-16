@@ -41,7 +41,7 @@ public class PerformanceDaoImpl implements PerformanceDao {
     @Override
     public PageBean getPageByDateAfter(PageBean pageBean, Date date) {
         java.sql.Date dates = new java.sql.Date(date.getTime());
-        return DBUtils.getPageByAfterSome(pageBean,Performance.class,"month",dates.toString());
+        return DBUtils.getPageByAfterSome(pageBean,Performance.class,"mouth",dates.toString());
     }
 
     public static PerformanceDaoImpl getChangeDaoImpl() {

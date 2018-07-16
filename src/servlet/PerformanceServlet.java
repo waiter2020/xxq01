@@ -108,7 +108,7 @@ public class PerformanceServlet extends HttpServlet {
         pageBean.setPageData(pageData);
 
         request.setAttribute("page",pageBean);
-        request.getRequestDispatcher("").forward(request,response);
+        request.getRequestDispatcher("/record/list.jsp").forward(request,response);
 
     }
 }
