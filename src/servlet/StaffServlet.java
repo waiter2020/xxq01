@@ -367,7 +367,7 @@ public class StaffServlet extends HttpServlet {
                 case "5":
                     pageBean=staffService.findPageBywAgesBefor(pageBean,Integer.parseInt(condition));
                 default:
-
+                    break;
             }
 
             request.setAttribute("page", pageBean);

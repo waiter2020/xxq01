@@ -47,8 +47,6 @@ public class RecordServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uri = request.getRequestURI();
-        String substring = uri.substring(8, uri.length());
 
     }
 
