@@ -80,6 +80,10 @@ public class StationService {
         return stationDao.getPageByDepart(pageBean,depart);
     }
 
+    public Station findByNameAndDepart(String stationName,int depart){
+        return stationDao.findByNameAndDepart(stationName,depart);
+    }
+
     public static StationService getStationService(){
         return stationService;
     }

@@ -219,8 +219,8 @@ public class StaffServlet extends HttpServlet {
 
 
         Depart byId = departService.findById(Integer.parseInt(departMent));
-        Station byId1 = stationService.findById(Integer.parseInt(station));
-
+        //Station byId1 = stationService.findById(Integer.parseInt(station));
+        Station byId1 = stationService.findByNameAndDepart(station, Integer.parseInt(departMent));
         Staff staff = new Staff(userName, staffName, byId, byId1, phoneNum, Integer.parseInt(age), idCard, true, Integer.parseInt(wAges),email,address,Integer.parseInt(sex));
         boolean save = staffService.save(staff);
         staff = staffService.findByUserName(userName);
