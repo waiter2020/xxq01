@@ -3,6 +3,8 @@ package bean;
 import utils.annotation.Column;
 import utils.annotation.OneToOne;
 
+import java.io.Serializable;
+
 /**
  * Created by  waiter on 18-7-6.
  *
@@ -10,7 +12,8 @@ import utils.annotation.OneToOne;
  * 用户表
  */
 
-public class User {
+public class User implements Serializable {
+
     /**
      * 用户id
      */

@@ -76,21 +76,20 @@
                                     <form role="form" action="${pageContext.request.contextPath}/user/change_pwd" method="post">
                                         <div class="form-group">
                                             <label>原密码</label>
-                                            <input class="form-control" type="password" id="oldPwd" required>
-                                            <p class="help-block"></p>
-
+                                            <input class="form-control" type="password" id="oldPwd" onclick="pwd1()" required>
+                                            <p class="help-block" id="meet"></p>
 
                                         </div>
                                         <div class="form-group">
                                             <label>新密码</label>
-                                            <input class="form-control" id="newPwd1" type="password" onchange="pwdMeet1()" required>
+                                            <input class="form-control" id="newPwd1" type="password" onkeyup="pwdMeet1()" required>
                                             <p id="meet1"></p>
 
                                         </div>
 
                                         <div class="form-group">
                                             <label>再次输入新密码</label>
-                                            <input class="form-control" name="pwd" id="newPwd2" type="password" onchange="pwdMeet2()" required>
+                                            <input class="form-control" name="pwd" id="newPwd2" type="password" onkeyup="pwdMeet2()" onclick="pwd2()" required>
                                             <p id="meet2"></p>
 
                                         </div>
