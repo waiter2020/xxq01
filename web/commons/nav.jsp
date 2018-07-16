@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: bzy
@@ -61,6 +62,7 @@
                         %>
                                 href="${pageContext.request.contextPath}/"><i class="fa fa-dashboard"></i> 主页</a>
                     </li>
+                    <c:if test="${sessionScope.loginInfo.grade==0||sessionScope.loginInfo.staff.id==sessionScope.loginInfo.staff.departMent.staffid}">
                     <li>
                         <a <%
                             active = request.getParameter("active");
@@ -88,7 +90,7 @@
                             <i class="fa fa-qrcode"></i>  岗位管理
                         </a>
                     </li>
-
+                    </c:if>
                     <li>
                         <a <%
                             active = request.getParameter("active");
@@ -98,6 +100,9 @@
                             <i class="fa fa-table"></i> 绩效查询
                         </a>
                     </li>
+
+<c:if test="${sessionScope.loginInfo.grade==0||sessionScope.loginInfo.staff.id==sessionScope.loginInfo.staff.departMent.staffid}">
+
                     <li>
                         <a <%
                             active = request.getParameter("active");
@@ -151,6 +156,7 @@
                             <i class="fa fa-fw fa-file"></i> 部门添加
                         </a>
                     </li>
+</c:if>
                 </ul>
 
             </div>
