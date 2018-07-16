@@ -13,6 +13,13 @@ public interface StationDao {
      */
     PageBean listPage(PageBean pageBean);
 
+    /**
+     * 根据部门号分页查找
+     * @param pageBean
+     * @param depart
+     * @return
+     */
+    PageBean getPageByDepart(PageBean pageBean,int depart);
 
     /**
      * 插入岗位信息
@@ -35,7 +42,19 @@ public interface StationDao {
      */
     boolean deleteByName(String stationName);
 
+    /**
+     * 通过id查找一个岗位
+     * @param id
+     * @return
+     */
     Station findById(int id);
 
+    /**
+     * 查找所有岗位，返回链表
+     * @return
+     */
     LinkedList findAll();
+
+
+
 }

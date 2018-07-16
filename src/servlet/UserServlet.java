@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 @WebServlet(name = "UserServlet",urlPatterns = {"/user/change","/user/change_pwd"})
 public class UserServlet extends HttpServlet {
-    UserService userService = UserService.getUserService();
+    private UserService userService = UserService.getUserService();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
@@ -74,17 +74,19 @@ public class UserServlet extends HttpServlet {
         String pwd = request.getParameter("pwd");
         User loginInfo = (User) request.getSession().getAttribute("loginInfo");
         if ("".equals(pwd)||pwd==null){
-            request.setAttribute("msg","密码修改失败，请检查输入");
+            request.setAttribute("msg","修改失败,新密码不能为空");
         }else {
             loginInfo.setPassWd(BCrypt.hashpw(pwd,BCrypt.gensalt(10)));
             boolean save = userService.save(loginInfo);
             if(save){
-                request.setAttribute("msg","密码修改成功");
+                request.setAttribute("msg","修改成功");
             }else {
-                request.setAttribute("msg","密码修改失败，请检查输入");
+                request.setAttribute("msg","修改失败，请检查输入");
             }
         }
         request.getRequestDispatcher("/user/change_pwd.jsp").forward(request,response);
 
     }
+
+
 }

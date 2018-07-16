@@ -7,6 +7,7 @@ import dao.impl.OfficeDaoImpl;
 import utils.PageBean;
 
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  * @ Author     ：Bzy.
@@ -31,8 +32,27 @@ public class OfficeService {
         return officeDao.findByDate(pageBean,cls,name1,value1,name2,value2);
     }
 
+    /**
+     * 保存一条记录
+     * @param staff
+     * @param state
+     * @return
+     */
     public boolean save(Staff staff,int state){
         return officeDao.save(new Office(staff,new Date(),state));
+    }
+
+    public Office findLastByStaff(int staff){
+        return officeDao.findLastByStaff(staff);
+    }
+
+
+    public LinkedList findListByEndDateBeforAndStartAfterAndState(Date endDate, Date startDate, int state){
+        return officeDao.findListByEndDateBeforAndStartAfterAndState(endDate,startDate,state);
+    }
+
+    public int countByEndDateBeforAndStartAfterAndState(Date endDate, Date startDate,int state){
+        return officeDao.countByEndDateBeforAndStartAfterAndState(endDate,startDate,state);
     }
 
     public static OfficeService getOfficeService(){

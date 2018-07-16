@@ -1,6 +1,5 @@
 package bean;
 
-import utils.annotation.Column;
 import utils.annotation.DateType;
 import utils.annotation.ManyToOne;
 
@@ -9,13 +8,24 @@ import java.util.Date;
 /**
  * @ Author     ：Bzy.
  * @ Date       ：Created in 下午4:20 18-7-11
+ * 工作记录表
  */
 public class Office {
     private int id;
+    /**
+     * 员工
+     */
     @ManyToOne(bean = Staff.class)
     private Staff staff;
+    /**
+     * 日期
+     *
+     */
     @DateType
     private Date date;
+    /**
+     * 工作状态
+     */
     private int state;
 
     public Office(){}

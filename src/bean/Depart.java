@@ -10,10 +10,23 @@ import utils.annotation.Count;
  * 部门实体类
  */
 public class Depart {
+    /**
+     * 部门id
+     */
     private int id;
+    /**
+     * 部门名
+     */
     @Column(name = "departname")
     private String departName;
+    /**
+     * 部门描述
+     */
+    @Column(name = "describ")
     private String describe;
+    /**
+     * 部门总人数
+     */
     @Count(name = "department",bean = Staff.class)
     private int count;
 

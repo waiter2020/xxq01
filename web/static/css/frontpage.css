@@ -1,0 +1,70 @@
+.container{
+	padding:  0;
+}
+.user-login{
+	padding-top: 4em;
+	width: 30%;
+	margin: 0 auto;
+	border-radius: 0.8em;
+}
+.user-login h1{
+	font-size: 1.2em;
+	color: #fff;
+	background: #08AEA9;
+	text-align: center;
+	padding: 1.4em 0em;
+	border-top-left-radius: 0.6em;
+	border-top-right-radius: 0.6em;
+}
+.user-login p{
+	font-family: 'Ubuntu', sans-serif;
+	color: white;
+	font-size: 19px;
+	padding-bottom: 15px;
+	text-align: center;
+}
+.form-login{
+	padding: 2% 2.5em;
+}
+.form-login li{
+	list-style: none;
+	width: 90%;
+	margin: 0 auto;
+	border: 2px solid #D6D0D0;
+	border-radius: 0.3em;
+}
+.form-login li.base{
+	margin-bottom: 10px;
+}
+.user-login input[type="text"],.user-login input[type="password"]{
+	width: 82%;
+	padding: 0.7em 0.7em;
+	color:black;
+	font-size: 15px;
+	outline: none;
+	background-color:rgba(255,255,255,0);
+	border:none;
+}
+.submit-login{
+	margin-top:2.3em;
+}
+.user-login input[type="submit"]{
+	margin-top: 2em;
+	margin-left: 1em;
+	font-size:18px;
+	font-weight: 400;
+	color:#fff;
+	display: inline-block;
+	padding: 0.9em 0.9em;
+	width: 90%;
+	cursor: pointer;
+	border: solid #08AEA9 1px;
+	outline: none;
+	background: #08AEA9;
+	border-radius: 0.3em;
+	font-family: 'Ubuntu', sans-serif;
+}
+.user-login input[type="submit"]:hover{
+	background-color:rgba(255,255,255,0.1);
+	color: #08AEA9;
+}

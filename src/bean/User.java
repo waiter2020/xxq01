@@ -7,15 +7,31 @@ import utils.annotation.OneToOne;
  * Created by  waiter on 18-7-6.
  *
  * @author waiter
+ * 用户表
  */
 
 public class User {
+    /**
+     * 用户id
+     */
     private int id;
+    /**
+     * 用户名
+     */
     private String userName;
+    /**
+     * 对应员工
+     */
     @OneToOne(bean = Staff.class)
     private Staff staff;
+    /**
+     * 密码
+     */
     @Column(name = "passWd")
     private String pwd;
+    /**
+     * 权限
+     */
     private int grade;
 
     public User(String userName, Staff staff, String pwd, int grade) {

@@ -16,23 +16,6 @@ public class DepartService {
     private static final DepartService departService=new DepartService();
     private DepartService(){}
 
-//    /**
-//     * 列出全部部门信息
-//     * @return 部门信息列表
-//     */
-//    public LinkedList departList(){
-//        return departDao.departList();
-//    }
-
-//
-//    /**
-//     * 通过员工id查询部门名称
-//     * @param staffid
-//     * @return 部门实体类，包含所查找元组
-//     */
-//    public Depart findById(int staffid){
-//        return departDao.findById(staffid);
-//    }
 
     /**
      * 通过部门名称查询部门信息
@@ -61,14 +44,6 @@ public class DepartService {
         return departDao.deleteByName(departname);
     }
 
-//    /**
-//     * 更新部门信息
-//     * @param departname,dp
-//     * @return 是否更新成功
-//     */
-//    public boolean updateByName(String departname,Depart dp){
-//        return departDao.updateByName(departname,dp);
-//    }
 
     /**
      * 分页展示部门信息
@@ -79,17 +54,32 @@ public class DepartService {
         return departDao.listPage(pageBean);
     }
 
+    /**
+     * 添加一个部门
+     * @param depart
+     * @return
+     */
     public boolean addDepart(Depart depart){
         return departDao.departInsert(depart);
     }
 
+    /**
+     * 通过id查找部门
+     * @param id
+     * @return
+     */
     public Depart findById(int id){
         return departDao.findById(id);
     }
 
+    /**
+     * 查询所有部门
+     * @return
+     */
     public LinkedList<Depart> findAll(){
         return departDao.findAll();
     }
+
 
     public static DepartService getDepartService(){
         return departService;

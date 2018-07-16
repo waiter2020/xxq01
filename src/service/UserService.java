@@ -15,12 +15,21 @@ public class UserService {
     private UserService(){}
 
 
-
+    /**
+     * 通过用户名查找用户
+     * @param userName
+     * @return
+     */
     public User findByUserName(String userName){
 
         return userDao.findByUserName(userName);
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public boolean save(User user){
         return userDao.save(user);
     }

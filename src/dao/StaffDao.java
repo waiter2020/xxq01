@@ -3,6 +3,8 @@ package dao;
 import bean.Staff;
 import utils.PageBean;
 
+import java.util.LinkedList;
+
 /**
  * Created by  waiter on 18-7-9  下午9:17.
  *
@@ -45,4 +47,25 @@ public interface StaffDao {
      * @return
      */
     boolean save(Staff staff);
+
+    /**
+     * 通过部门id和岗位id分页查找
+     * @param pageBean
+     * @param depart
+     * @param station
+     * @return
+     */
+    PageBean findPageByDepartAndStation(PageBean pageBean,int depart,int station);
+
+    PageBean findPageByStaffName(PageBean pageBean,String staffName);
+
+    PageBean findPageBywAgesAfter(PageBean pageBean,int wAges);
+
+    PageBean findPageBywAgesBefor(PageBean pageBean,int wAges);
+
+
+    int countBySexAndDepart(int sex,int depart);
+
+    LinkedList findAll();
+
 }

@@ -25,6 +25,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean save(User user) {
         boolean b;
+        //判断是插入还是更新
         if(user.getId()>0){
             b=DBUtils.update(user);
         }else {

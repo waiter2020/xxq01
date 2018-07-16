@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.logging.Logger;
 
@@ -20,7 +22,8 @@ import java.util.logging.Logger;
  * @author waiter
  */
 @WebServlet(name = "StaffServlet", urlPatterns = {"/staff/list", "/staff/delete","/staff/change",
-                                                "/staff/add","/staff/transfer","/staff/turn","/staff/select"})
+                                                "/staff/add","/staff/transfer","/staff/turn",
+                                                "/staff/select","/staff/staff_report"})
 public class StaffServlet extends HttpServlet {
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private StaffService staffService = StaffService.getStaffService();
@@ -29,6 +32,7 @@ public class StaffServlet extends HttpServlet {
     private StationService stationService = StationService.getStationService();
     private RecordService recordService = RecordService.getRecordService();
     private OfficeService officeService = OfficeService.getOfficeService();
+    private PerformanceService performanceService = PerformanceService.getPerformanceService();
 
 
     @Override
@@ -64,6 +68,8 @@ public class StaffServlet extends HttpServlet {
             turnStaff(request,response);
         }else if ("select".equals(substring)){
             toSelect(request,response);
+        }else if ("staff_report".equals(substring)){
+            getStaffReport(request,response);
         }
     }
 
@@ -76,7 +82,6 @@ public class StaffServlet extends HttpServlet {
      * @throws IOException
      */
     protected void getStaffList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uri = request.getRequestURI();
         PageBean pageBean = new PageBean();
         String currentPage = request.getParameter("currentPage");
         if (currentPage != null && !currentPage.isEmpty()) {
@@ -113,9 +118,12 @@ public class StaffServlet extends HttpServlet {
                     } else {
                         boolean b = staffService.dismissStaff(Integer.parseInt(id));
                         if (b) {
-                            request.setAttribute("msg", "成功辞退员工");
+                            boolean save = officeService.save(byId, 2);
+                            if (save) {
+                                request.setAttribute("msg", "成功辞退员工");
 
-                            logger.info(loginInfo + "辞退了" + id + "员工");
+                                logger.info(loginInfo + "辞退了" + id + "员工");
+                            }
                         } else {
                             request.setAttribute("msg", "未知错误");
                         }
@@ -123,7 +131,7 @@ public class StaffServlet extends HttpServlet {
                 }
             }
         }
-        request.getRequestDispatcher("/staff/list").forward(request, response);
+        getStaffList(request,response);
     }
 
 
@@ -137,9 +145,12 @@ public class StaffServlet extends HttpServlet {
     protected void changeStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         String staffName = request.getParameter("staffName");
+        String idCard = request.getParameter("idCard");
         String phoneNum = request.getParameter("phoneNum");
         String wAges = request.getParameter("wAges");
         String age = request.getParameter("age");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
         if(id==null||"".equals(id)){
             request.getRequestDispatcher("/staff/change.jsp").forward(request,response);
             return;
@@ -149,13 +160,16 @@ public class StaffServlet extends HttpServlet {
         byId.setPhoneNum(phoneNum);
         byId.setwAges(Integer.parseInt(wAges));
         byId.setAge(Integer.parseInt(age));
+        byId.setEmail(email);
+        byId.setAddress(address);
+        byId.setIdCard(idCard);
         boolean save = staffService.save(byId);
         if(save){
             request.setAttribute("msg","修改成功");
-            request.getRequestDispatcher("/staff/list").forward(request, response);
+            getStaffList(request,response);
         }else {
             request.setAttribute("msg","修改出错，请检查参数是否有误");
-            request.getRequestDispatcher("/staff/change.jsp").forward(request, response);
+            toChangeStaff(request,response);
         }
     }
 
@@ -171,6 +185,10 @@ public class StaffServlet extends HttpServlet {
         String id = request.getParameter("id");
         Staff byId = staffService.findById(Integer.parseInt(id));
         request.setAttribute("change",byId);
+        LinkedList<Station> all = stationService.findAll();
+        request.setAttribute("stations",all);
+        LinkedList<Depart> all1 = departService.findAll();
+        request.setAttribute("departs",all1);
         request.getRequestDispatcher("/staff/change.jsp").forward(request,response);
     }
 
@@ -187,22 +205,31 @@ public class StaffServlet extends HttpServlet {
         String departMent = request.getParameter("departMent");
         String userName = request.getParameter("userName");
         String phoneNum = request.getParameter("phoneNum");
+        String sex = request.getParameter("sex");
         String idCard = request.getParameter("idCard");
         String age = request.getParameter("age");
         String station = request.getParameter("station");
+        String wAges = request.getParameter("wAges");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+
 
         Depart byId = departService.findById(Integer.parseInt(departMent));
         Station byId1 = stationService.findById(Integer.parseInt(station));
-        Staff staff = new Staff(userName, staffName, byId, byId1, phoneNum, Integer.parseInt(age), idCard, true, 0);
-        User user = new User(userName, staff, BCrypt.hashpw(userName,BCrypt.gensalt(10)), 1);
+
+        Staff staff = new Staff(userName, staffName, byId, byId1, phoneNum, Integer.parseInt(age), idCard, true, Integer.parseInt(wAges),email,address,Integer.parseInt(sex));
         boolean save = staffService.save(staff);
+        staff = staffService.findByUserName(userName);
+        User user = new User(userName, staff, BCrypt.hashpw(userName,BCrypt.gensalt(10)), 1);
+
         boolean save1 = userService.save(user);
         if(save&&save1){
             request.setAttribute("msg","添加成功");
-            request.getRequestDispatcher("/staff/list").forward(request, response);
+            officeService.save(staff,0);
+            getStaffList(request,response);
         }else {
             request.setAttribute("msg","添加出错，请检查参数是否有误");
-            request.getRequestDispatcher("/staff/add.jsp").forward(request, response);
+            toAddStaff(request,response);
         }
 
     }
@@ -232,34 +259,27 @@ public class StaffServlet extends HttpServlet {
      */
     protected void transferStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String mark = request.getParameter("mark");
-        String result = request.getParameter("result");
+        //员工id
         String id = request.getParameter("id");
-        //得给我传一个部门或岗位的id
-        String result_id = request.getParameter("result_id");
+        //各id
+        //String srcStation = request.getParameter("srcStation");
+        String resStation = request.getParameter("resStation");
+        //String srcDepart = request.getParameter("srcDepart");
+        String resDepart = request.getParameter("resDepart");
         Staff byId = staffService.findById(Integer.parseInt(id));
-        if("1".equals(mark)){
-            boolean save = recordService.save(byId, Integer.parseInt(mark), byId.getStation().getStationName(), result);
-            if(save){
-                Station byId1 = stationService.findById(Integer.parseInt(result_id));
-                byId.setStation(byId1);
-                boolean save1 = staffService.save(byId);
-                if(save1){
-                    request.setAttribute("msg","变动成功");
-                }
-            }
-        }else {
-            boolean save = recordService.save(byId, Integer.parseInt(mark), byId.getDepartment().getDepartName(), result);
-            if(save){
-                Depart byId1 = departService.findById(Integer.parseInt(result_id));
-                byId.setDepartment(byId1);
-                boolean save1 = staffService.save(byId);
-                if(save1){
-                    request.setAttribute("msg","变动成功");
-                }
-            }
+
+        Station resStations = stationService.findById(Integer.parseInt(resStation));
+        Depart depart1 = departService.findById(Integer.parseInt(resDepart));
+
+        boolean save = recordService.save(byId, Integer.parseInt(mark), byId.getStation(), resStations, byId.getDepartMent(), depart1);
+        byId.setDepartment(depart1);
+        byId.setStation(resStations);
+        boolean save1 = staffService.save(byId);
+        if(save&&save1){
+            request.setAttribute("msg","变动成功");
         }
 
-        request.getRequestDispatcher("/staff/list").forward(request,response);
+        getStaffList(request,response);
     }
 
     /**
@@ -271,6 +291,9 @@ public class StaffServlet extends HttpServlet {
      * @throws IOException
      */
     protected void toTransferStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        Staff byId = staffService.findById(Integer.parseInt(id));
+        request.setAttribute("staff",byId);
         LinkedList<Station> all = stationService.findAll();
         request.setAttribute("stations",all);
         LinkedList<Depart> all1 = departService.findAll();
@@ -287,15 +310,19 @@ public class StaffServlet extends HttpServlet {
      */
     protected void turnStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-        String state = request.getParameter("state");
         Staff byId = staffService.findById(Integer.parseInt(id));
         if(byId!=null){
-            boolean save = officeService.save(byId, Integer.parseInt(state));
+        Office lastByStaff = officeService.findLastByStaff(byId.getId());
+        if(lastByStaff!=null&&lastByStaff.getState()!=1){
+            boolean save = officeService.save(byId, 1);
             if(save){
                 request.setAttribute("msg","变更成功");
             }
+        }else {
+            request.setAttribute("msg","变更失败");
         }
-        request.getRequestDispatcher("/staff/list").forward(request,response);
+        }
+        getStaffList(request,response);
     }
 
     /**
@@ -306,6 +333,77 @@ public class StaffServlet extends HttpServlet {
      * @throws IOException
      */
     protected void toSelect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/staff/select.jsp");
+        String op = request.getParameter("op");
+        String condition = request.getParameter("condition");
+        if (op!=null&&condition!=null) {
+            PageBean pageBean = new PageBean();
+            String currentPage = request.getParameter("currentPage");
+            if (currentPage != null && !currentPage.isEmpty()) {
+                pageBean.setCurrentPage(Integer.parseInt(currentPage));
+            }
+            User loginInfo = (User) request.getSession().getAttribute("loginInfo");
+            Staff byUserName = staffService.findByUserName(loginInfo.getUserName());
+            logger.info("用户：" + byUserName + "查询了员工");
+
+            switch (op){
+                case "1":
+                    Staff byUserName1 = staffService.findByUserName(condition);
+                    pageBean.getPageData().add(byUserName1);
+                    break;
+                case "2":
+                    pageBean=staffService.findPageByStaffName(pageBean,condition);
+                    break;
+                case "3":
+                    Depart byName = departService.findByName(condition);
+                    pageBean=staffService.findByPageAndDepartment(pageBean,byName.getId());
+                    break;
+                case "4":
+                    pageBean=staffService.findPageBywAgesAfter(pageBean,Integer.parseInt(condition));
+                    break;
+                case "5":
+                    pageBean=staffService.findPageBywAgesBefor(pageBean,Integer.parseInt(condition));
+                default:
+
+            }
+
+            request.setAttribute("page", pageBean);
+        }
+        request.getRequestDispatcher("/staff/select.jsp").forward(request, response);
     }
+
+
+
+    protected void getStaffReport(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        Date parse = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(parse);
+        int m = calendar.get(Calendar.MONTH);
+        if(m<=6){
+            calendar.set(Calendar.YEAR-1,m-6+12,1);
+        }else {
+            calendar.set(Calendar.MONTH,m-6);
+            calendar.set(Calendar.DATE,1);
+        }
+        Date time = calendar.getTime();
+        calendar.setTime(parse);
+        if (m==0){
+            calendar.set(Calendar.YEAR-1,11,1);
+        }else {
+            calendar.set(Calendar.MONTH,m-1);
+            calendar.set(Calendar.DATE,1);
+        }
+
+        Date time1 = calendar.getTime();
+        LinkedList<Performance> byStaffAndAfterDate1 = performanceService.findByStaffAndAfterDate(Integer.parseInt(id), time1);
+        LinkedList<Performance> byStaffAndAfterDate = performanceService.findByStaffAndAfterDate(Integer.parseInt(id), time);
+        calendar.setTime(parse);
+
+        request.setAttribute("six",byStaffAndAfterDate);
+        request.setAttribute("one",byStaffAndAfterDate1);
+        request.getRequestDispatcher("/staff/staff_report.jsp").forward(request,response);
+
+
+    }
+
 }

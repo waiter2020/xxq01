@@ -20,6 +20,11 @@ public class StationDaoImpl implements StationDao{
         return DBUtils.getPage(pageBean,Station.class);
     }
 
+    @Override
+    public PageBean getPageByDepart(PageBean pageBean,int depart) {
+        return DBUtils.getPageBySome(pageBean,Station.class,"depart",depart+"");
+    }
+
 
     @Override
     public boolean stationInsert(Station station){
@@ -32,6 +37,7 @@ public class StationDaoImpl implements StationDao{
         if(listBySome.size()==0){
             return new Station(0,"not exist");
         }else{
+            //取第一个
             return (Station) listBySome.remove(0);
         }
     }
