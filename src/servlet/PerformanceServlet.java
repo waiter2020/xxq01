@@ -69,7 +69,6 @@ public class PerformanceServlet extends HttpServlet {
 
         LinkedList<Depart> all = departService.findAll();
         request.setAttribute("depart", all);
-        List<Performance> performances = performanceService.getPerformanceBetweenStartDateAndEndDate(parse, parse1);
         java.sql.Date startDates = new java.sql.Date(parse.getTime());
         java.sql.Date endDates = new java.sql.Date(parse1.getTime());
         LinkedList report1 = reportDao.getReport1(startDates.toString(), endDates.toString());

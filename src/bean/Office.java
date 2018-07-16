@@ -32,14 +32,14 @@ public class Office {
 
     public Office(int id,Staff staff, Date date, int state) {
         this.id = id;
-        this.date = date;
+        this.date = new Date(date.getTime());
         this.state = state;
         this.staff=staff;
     }
 
     public Office(Staff staff, Date date, int state) {
         this.staff = staff;
-        this.date = date;
+        this.date = new Date(date.getTime());
         this.state = state;
     }
 
@@ -53,11 +53,11 @@ public class Office {
 
 
     public Date getDate() {
-        return date;
+        return new Date(date.getTime());
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = new Date(date.getTime());
     }
 
     public int getState() {
