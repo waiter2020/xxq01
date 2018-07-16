@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
  * Created by  waiter on 18-7-12  上午9:06.
  *
  * @author waiter
+ * 多对一关系
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

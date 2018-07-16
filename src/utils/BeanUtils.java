@@ -15,6 +15,7 @@ import java.util.TreeMap;
  * Created by  waiter on 18-7-9  上午8:29.
  *
  * @author waiter
+ * bean自动注入
  */
 public class BeanUtils {
 
