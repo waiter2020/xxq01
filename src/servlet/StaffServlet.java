@@ -225,6 +225,7 @@ public class StaffServlet extends HttpServlet {
         boolean save1 = userService.save(user);
         if(save&&save1){
             request.setAttribute("msg","添加成功");
+            officeService.save(staff,0);
             getStaffList(request,response);
         }else {
             request.setAttribute("msg","添加出错，请检查参数是否有误");
