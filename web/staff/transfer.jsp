@@ -15,7 +15,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dream</title>
+    <title>员工调动</title>
     <%--引入css文件--%>
 
     <link href="${pageContext.request.contextPath}/static/new/css/bootstrap.css" rel="stylesheet" />

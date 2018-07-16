@@ -7,7 +7,7 @@
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dream</title>
+    <title>绩效列表</title>
 	<!-- Bootstrap Styles-->
     <link href="${pageContext.request.contextPath}/static/new/css/bootstrap.css" rel="stylesheet" />
      <!-- FontAwesome Styles-->

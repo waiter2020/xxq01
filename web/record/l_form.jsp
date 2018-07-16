@@ -31,7 +31,7 @@
 <body>
 <div id="wrapper">
     <jsp:include page="${pageContext.request.contextPath}/commons/nav.jsp">
-        <jsp:param value="g-form" name="active"/>
+        <jsp:param value="l-form" name="active"/>
     </jsp:include>
 
 

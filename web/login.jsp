@@ -7,7 +7,7 @@
 		<meta charset="utf-8" />
 		<link href='http://fonts.font.im/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.font.im/css?family=Amatic+SC:700' rel='stylesheet' type='text/css'>
-		<title></title>
+		<title>登录</title>
 	</head>
 	<body style="background-image: url(${pageContext.request.contextPath}/static/images/s1.jpg); background-size: cover;">
 		<div class="container">
