@@ -82,7 +82,13 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-table"></i> 绩效查询 </a>
+                        <a <%
+                            active = request.getParameter("active");
+                            out.println("class=\""+ (active.equals("record-list")?"active-menu":" ")+"\"");
+                        %>
+                        href="${pageContext.request.contextPath}/record/list">
+                            <i class="fa fa-table"></i> 绩效查询
+                        </a>
                     </li>
                     <li>
                         <a <%
@@ -135,15 +141,6 @@
                         %>
                                 href="${pageContext.request.contextPath}/depart/add.jsp">
                             <i class="fa fa-fw fa-file"></i> 部门添加
-                        </a>
-                    </li>
-                    <li>
-                        <a <%
-                            active = request.getParameter("active");
-                            out.println("class=\""+ (active.equals("empty")?"active-menu":" ")+"\"");
-                        %>
-                                href="${pageContext.request.contextPath}/commons/empty.jsp">
-                            <i class="fa fa-fw fa-file"></i> Empty Page
                         </a>
                     </li>
                 </ul>

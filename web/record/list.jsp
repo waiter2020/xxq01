@@ -25,7 +25,7 @@
     <div id="wrapper">
 
         <jsp:include page="${pageContext.request.contextPath}/commons/nav.jsp">
-            <jsp:param value="depart-list" name="active"/>
+            <jsp:param value="record-list" name="active"/>
         </jsp:include>
         <div id="page-wrapper" >
             <div id="page-inner">
