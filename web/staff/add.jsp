@@ -181,7 +181,7 @@
         for (var i = 0; i < city[m].length; i++) {
 
             //创建一个option 把数据存储在option
-            var op = new Option(city[m][i],i);
+            var op = new Option(city[m][i],i+4*(m-1)+1);
 
             //把带有数据的option 添加到第二个select
             two.add(op);
