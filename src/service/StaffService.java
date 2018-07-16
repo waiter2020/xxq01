@@ -96,6 +96,10 @@ public class StaffService {
         return staffDao.findPageBywAgesBefor(pageBean,wAges);
     }
 
+    public PageBean getPage(PageBean pageBean){
+        return staffDao.getPage(pageBean);
+    }
+
     public int countBySex(int sex,int depart){
         return staffDao.countBySexAndDepart(sex,depart);
     }

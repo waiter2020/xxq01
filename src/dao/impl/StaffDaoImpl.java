@@ -74,6 +74,11 @@ public class StaffDaoImpl implements StaffDao {
     }
 
     @Override
+    public PageBean getPage(PageBean pageBean) {
+        return DBUtils.getPage(pageBean,Staff.class);
+    }
+
+    @Override
     public int countBySexAndDepart(int sex,int depart) {
         Map<String,String> map = new TreeMap<>();
         map.put("sex",sex+"");
