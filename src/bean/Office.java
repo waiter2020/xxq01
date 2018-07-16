@@ -43,6 +43,14 @@ public class Office {
         this.state = state;
     }
 
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
     public int getId() {
         return id;
     }
