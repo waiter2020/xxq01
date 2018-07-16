@@ -17,9 +17,20 @@
 					<script>confirm("${requestScope.get('msg')}")</script>
 				</c:if>
 				<form class="form-login" method="post" action="/do_login">
-					<p> Username / Email</p>
-					<li class="base">
-						<input type="text" name="username" autocomplete="off"/>
+					<p> Username</p>
+					<script>
+                        function t1(value){
+                            var a1=document.getElementById('a1');
+                            if(/^[a-z0-9_-]{3,16}$/.test(value)==true){
+                                a1.style.borderColor='white';
+                            }
+                            else{
+                                a1.style.borderColor='red';
+                            }
+                        }
+					</script>
+					<li class="base" id='a1'>
+						<input type="text" name="username" autocomplete="off" oninput="t1(this.value)"/>
 					</li>
 					<p> Password </p>
 					<li class="base">						
