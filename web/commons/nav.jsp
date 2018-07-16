@@ -34,7 +34,15 @@
                         </li>
                         <li><a href="${pageContext.request.contextPath}/user/change_pwd.jsp"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
                         </li>
-                        <li><a href="${pageContext.request.contextPath}/do_login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a onclick="logout()" href="javascript:void(0)"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <script>
+                                function logout() {
+                                    var r=confirm("确定退出吗？");
+                                    if(r==true){
+                                        window.location.href="${pageContext.request.contextPath}/do_logout";
+                                    }
+                                }
+                            </script>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
