@@ -38,9 +38,9 @@ public class RecordServlet extends HttpServlet {
             rForm(request, response);
         }else if ("l_form".equals(substring)) {
             lForm(request, response);
-        }else if ("r_form".equals(substring)) {
+        }else if ("b_form".equals(substring)) {
             bForm(request, response);
-        }else if ("l_form".equals(substring)) {
+        }else if ("g_form".equals(substring)) {
             gForm(request, response);
         }
     }
