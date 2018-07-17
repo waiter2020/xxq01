@@ -27,7 +27,11 @@ public class StaffDaoImpl implements StaffDao {
 
     @Override
     public Staff findByUserName(String userName) {
-        return (Staff) DBUtils.getListBySome(Staff.class, "userName", userName).remove(0);
+        LinkedList listBySome = DBUtils.getListBySome(Staff.class, "userName", userName);
+        if(listBySome==null||listBySome.size()==0){
+            return null;
+        }
+        return (Staff) listBySome.remove(0);
     }
 
     @Override
