@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dream</title>
+    <title>个人信息</title>
     <script src="${pageContext.request.contextPath}/static/new/echart/echarts.js"></script>
     <script src="${pageContext.request.contextPath}/static/new/echart/dataTool.js"></script>
     <script src="${pageContext.request.contextPath}/static/new/echart/jquery.js"></script>

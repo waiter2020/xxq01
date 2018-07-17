@@ -7,7 +7,7 @@
 		<meta charset="utf-8" />
 		<link href='http://fonts.font.im/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.font.im/css?family=Amatic+SC:700' rel='stylesheet' type='text/css'>
-		<title></title>
+		<title>登录</title>
 	</head>
 	<body style="background-image: url(${pageContext.request.contextPath}/static/images/s1.jpg); background-size: cover;">
 		<div class="container">
@@ -17,9 +17,20 @@
 					<script>confirm("${requestScope.get('msg')}")</script>
 				</c:if>
 				<form class="form-login" method="post" action="/do_login">
-					<p> Username / Email</p>
-					<li class="base">
-						<input type="text" name="username" autocomplete="off"/>
+					<p> Username</p>
+					<script>
+                        function t1(value){
+                            var a1=document.getElementById('a1');
+                            if(/^[a-z0-9_-]{3,16}$/.test(value)==true){
+                                a1.style.borderColor='white';
+                            }
+                            else{
+                                a1.style.borderColor='red';
+                            }
+                        }
+					</script>
+					<li class="base" id='a1'>
+						<input type="text" name="username" autocomplete="off" oninput="t1(this.value)"/>
 					</li>
 					<p> Password </p>
 					<li class="base">						

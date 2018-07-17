@@ -59,14 +59,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>开始时间：</label>
-                                        <input  class="form-control" name="start" type="text" size="10">
+                                        <input  class="form-control" <c:if test="${requestScope.start!=null}">value="${requestScope.start}" </c:if> name="start" type="text" size="10">
 
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>结束时间：</label>
-                                        <input  type="text" name="end" class="form-control" size="10">
+    <input  type="text" <c:if test="${requestScope.end!=null}">value="${requestScope.end}"</c:if> name="end" class="form-control" size="10">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-default" >生成</button>

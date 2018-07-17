@@ -3,6 +3,7 @@ package bean;
 
 import utils.annotation.Column;
 import utils.annotation.Count;
+import utils.annotation.OneToOne;
 
 /**
  * @ Author     ：Bzy.
@@ -24,6 +25,8 @@ public class Depart {
      */
     @Column(name = "describ")
     private String describe;
+
+    private int staffid;
     /**
      * 部门总人数
      */
@@ -44,6 +47,14 @@ public class Depart {
     public Depart(int id, String departName) {
         this.id = id;
         this.departName = departName;
+    }
+
+    public int getStaffid() {
+        return staffid;
+    }
+
+    public void setStaffid(int staffid) {
+        this.staffid = staffid;
     }
 
     public int getCount() {

@@ -62,7 +62,7 @@
     myChart.hideLoading();
 
     var graph = echarts.dataTool.gexf.parse(xml);
-    var categories = [{name:'人事部'},{name:'董事会'},{name:'财务部'},{name:'出纳部'},{name:'市场部'},{name:'公关'},{name:'销售部'},{name:'后勤部'},{name:'设计部'}];
+    var categories = [{name:'人事部'},{name:'董事会'},{name:'财务部'},{name:'出纳部'},{name:'市场部'},{name:'公关部'},{name:'销售部'},{name:'后勤部'},{name:'设计部'}];
 //  var categories = [];
 //  for (var i = 0; i < 9; i++) {
 //      categories[i] = {

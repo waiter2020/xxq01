@@ -6,6 +6,8 @@ import utils.DBUtils;
 import utils.PageBean;
 
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @ Author     ：Bzy.
@@ -61,6 +63,18 @@ public class StationDaoImpl implements StationDao{
     @Override
     public LinkedList<Station> findAll() {
         return DBUtils.getList(Station.class);
+    }
+
+    @Override
+    public Station findByNameAndDepart(String stationName, int depart) {
+        Map<String,String> map= new TreeMap<>();
+        map.put("stationname",stationName);
+        map.put("depart",depart+"");
+        LinkedList listBySome = DBUtils.getListBySome(Station.class, map);
+        if (listBySome==null){
+            return null;
+        }
+        return (Station) listBySome.remove(0);
     }
 
 

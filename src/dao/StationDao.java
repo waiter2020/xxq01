@@ -55,6 +55,6 @@ public interface StationDao {
      */
     LinkedList findAll();
 
-
+    Station findByNameAndDepart(String stationName,int depart);
 
 }

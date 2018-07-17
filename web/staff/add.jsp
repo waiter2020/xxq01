@@ -15,7 +15,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dream</title>
+    <title>员工添加</title>
     <%--引入css文件--%>
 
     <link href="${pageContext.request.contextPath}/static/new/css/bootstrap.css" rel="stylesheet" />
@@ -99,7 +99,7 @@
 
                                         <div class="form-group">
                                             <label for="disabledSelect-depart">部门</label>
-                                            <select id="disabledSelect-depart" class="form-control" name="departMent">
+                                            <select id="disabledSelect-depart" class="form-control" name="departMent" onchange="func(this.value)">
                                                 <c:choose>
                                                     <c:when test="${not empty requestScope.departs}">
                                                         <c:forEach var="departs" items="${requestScope.departs}" varStatus="vs">
@@ -113,14 +113,15 @@
                                         <div class="form-group">
                                             <label for="disabledSelect-station">岗位</label>
                                             <select id="disabledSelect-station" class="form-control" name="station">
-                                                <c:choose>
-                                                    <c:when test="${not empty requestScope.stations}">
-                                                        <c:forEach var="stations" items="${requestScope.stations}" varStatus="vs">
-                                                            <option value="${stations.id}">${stations.stationName}</option>
-                                                        </c:forEach>
-                                                    </c:when>
-                                                </c:choose>
+                                                <%--<c:choose>--%>
+                                                    <%--<c:when test="${not empty requestScope.stations}">--%>
+                                                        <%--<c:forEach var="stations" items="${requestScope.stations}" varStatus="vs">--%>
+                                                            <%--<option value="${stations.id}">${stations.stationName}</option>--%>
+                                                        <%--</c:forEach>--%>
+                                                    <%--</c:when>--%>
+                                                <%--</c:choose>--%>
                                             </select>
+
                                         </div>
 
                                         <div class="form-group">
@@ -152,7 +153,41 @@
 <script src="${pageContext.request.contextPath}/static/new/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/new/js/jquery.metisMenu.js"></script>
 <script src="${pageContext.request.contextPath}/static/new/js/custom-scripts.js"></script>
+<%--<c:out value="//申明"></c:out>--%>
+<%--<c:choose>--%>
+    <%--<c:when test="${not empty requestScope.departs}">--%>
+        <%--<c:forEach var="departs" items="${requestScope.departs}" varStatus="vs">--%>
+            <%--<option value="${departs.id}">${departs.departName}</option>--%>
+        <%--</c:forEach>--%>
+    <%--</c:when>--%>
+<%--</c:choose>--%>
 
+<script>
+    var two = document.getElementById('disabledSelect-station');
+    city = [];
+    //定义二级数据
+    city[1] = ['经理','副经理','主管','职工'];
+    city[2] = ['经理','副经理','主管','职工'];
+    city[3] = ['经理','副经理','主管','职工'];
+    city[4] = ['经理','副经理','主管','职工'];
+    city[5] = ['经理','副经理','主管','职工'];
+    city[6] = ['经理','副经理','主管','职工'];
+    city[7] = ['经理','副经理','主管','职工'];
+    city[8] = ['经理','副经理','主管','职工'];
+    function func(m){
+        two.length = 1;
+
+        //遍历生产option选项
+        for (var i = 0; i < city[m].length; i++) {
+
+            //创建一个option 把数据存储在option
+            var op = new Option(city[m][i],i+4*(m-1)+1);
+
+            //把带有数据的option 添加到第二个select
+            two.add(op);
+        };
+    }
+</script>
 
 </body>
 </html>

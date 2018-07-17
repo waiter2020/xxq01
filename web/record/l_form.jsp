@@ -31,7 +31,7 @@
 <body>
 <div id="wrapper">
     <jsp:include page="${pageContext.request.contextPath}/commons/nav.jsp">
-        <jsp:param value="g-form" name="active"/>
+        <jsp:param value="l-form" name="active"/>
     </jsp:include>
 
 
@@ -59,14 +59,14 @@
 
                                         <div class="form_date">
                                             <label class="control-label">开始时间:</label>
-                                            <input type="text" size="10" class="form-control"  name="start">
+                                            <input type="text" size="10" class="form-control" <c:if test="${requestScope.start!=null}">value="${requestScope.start}" </c:if> name="start">
                                         </div>
 
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>结束时间：</label>
-                                        <input  type="text"  class="form-control" size="10" name="end" >
+                                        <input  type="text" <c:if test="${requestScope.end!=null}">value="${requestScope.end}" </c:if> class="form-control" size="10" name="end" >
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-default" >生成</button>
