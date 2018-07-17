@@ -49,10 +49,10 @@ public class BeanUtils {
                 ManyToOne annotation3 = f.getAnnotation(ManyToOne.class);
                 Count annotation4 = f.getAnnotation(Count.class);
 
-                if(annotation4!=null){
+                if (annotation4 != null) {
                     int anInt = set.getInt(declaredFields[0].getName());
-                    Map<String,String> map = new TreeMap<>();
-                    map.put(annotation4.name(),anInt+"");
+                    Map<String, String> map = new TreeMap<>();
+                    map.put(annotation4.name(), anInt + "");
                     int objectCount = DBUtils.getObjectCount(annotation4.bean(), map);
                     f.set(obj, objectCount);
                     continue;
@@ -78,7 +78,7 @@ public class BeanUtils {
                         }
                     }
 
-                }else if (annotation != null) {
+                } else if (annotation != null) {
                     java.sql.Date date = set.getDate(name);
                     if (date == null) {
                         continue;

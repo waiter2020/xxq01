@@ -28,4 +28,7 @@ function pwdMeet2() {
     if (document.getElementById("newPdw1").value!=document.getElementById("newPdw2").value){
         document.getElementById("meet2").innerText="两次新密码输入必须一致";
     }
+    else{
+        document.getElementById("meet2").innerText="";
+    }
 }

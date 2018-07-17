@@ -54,8 +54,11 @@ public class Record {
     @DateType
     private Date date;
 
-    public Record(){}
-    public Record(Staff byId, String mark, String stationName, String result, Date date){}
+    public Record() {
+    }
+
+    public Record(Staff byId, String mark, String stationName, String result, Date date) {
+    }
 
     public Record(Staff staff, int mark, Station srcStation, Station resStation, Depart srcDepart, Depart resDepart, Date date) {
         this.staff = staff;
@@ -74,7 +77,7 @@ public class Record {
     }
 
     public Record(Staff staff, int mark, Date date) {
-        this.staff=staff;
+        this.staff = staff;
         this.mark = mark;
         this.date = new Date(date.getTime());
     }
@@ -134,7 +137,6 @@ public class Record {
     public void setMark(int mark) {
         this.mark = mark;
     }
-
 
 
     public Date getDate() {

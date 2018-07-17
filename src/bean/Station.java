@@ -21,10 +21,11 @@ public class Station {
     private String stationName;
     @ManyToOne(bean = Depart.class)
     private Depart depart;
-    @Count(bean = Staff.class,name = "station")
+    @Count(bean = Staff.class, name = "station")
     private int count;
 
-    public Station(){}
+    public Station() {
+    }
 
     public Station(int id, String stationName) {
         this.id = id;

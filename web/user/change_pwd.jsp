@@ -76,25 +76,25 @@
                                     <form role="form" action="${pageContext.request.contextPath}/user/change_pwd" method="post">
                                         <div class="form-group">
                                             <label>原密码</label>
-                                            <input class="form-control" type="password" id="oldPwd" onclick="pwd1()" required>
+                                            <input class="form-control" type="password" id="oldPwd"  required>
                                             <p class="help-block" id="meet"></p>
 
                                         </div>
                                         <div class="form-group">
                                             <label>新密码</label>
-                                            <input class="form-control" id="newPwd1" type="password" onkeyup="pwdMeet1()" required>
+                                            <input class="form-control" id="newPwd1" type="password" onchange="pwdMeet1()" required>
                                             <p id="meet1"></p>
 
                                         </div>
 
                                         <div class="form-group">
                                             <label>再次输入新密码</label>
-                                            <input class="form-control" name="pwd" id="newPwd2" type="password" onkeyup="pwdMeet2()" onclick="pwd2()" required>
+                                            <input class="form-control" name="pwd" id="newPwd2" type="password"  required>
                                             <p id="meet2"></p>
 
                                         </div>
                                         <div style="margin-left: 37%">
-                                        <button type="submit" value="submit"  class="btn btn-default">修改</button>
+                                        <button type="submit" value="submit" onclick="pwdMeet2()" class="btn btn-default">修改</button>
                                         <button type="reset"  value="reset"  class="btn btn-default">重置</button>
                                         </div>
                                     </form>
@@ -121,6 +121,19 @@
 </div>
 
 
+
+<script>
+    function pwdMeet2() {
+        var np1 = document.getElementById("newPdw1").value;
+        var np2 = document.getElementById("newPdw2").value;
+        if(np1==np2){
+            document.getElementById("meet2").innerText="";
+        }
+        else {
+            document.getElementById("meet2").innerText="两次新密码输入必须一致";
+        }
+    }
+</script>
 
 <!-- /. WRAPPER  -->
 <!-- JS Scripts-->

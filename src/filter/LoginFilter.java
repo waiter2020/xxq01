@@ -13,14 +13,15 @@ import java.util.logging.Logger;
  *
  * @author waiter
  */
-@WebFilter(filterName = "LoginFilter",urlPatterns = "/*")
+@WebFilter(filterName = "LoginFilter", urlPatterns = "/*")
 public class LoginFilter implements Filter {
     private ServletContext servletContext;
-    private Logger logger=Logger.getLogger(this.getClass().getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-    servletContext=filterConfig.getServletContext();
-    logger.info("LoginFilter start");
+        servletContext = filterConfig.getServletContext();
+        logger.info("LoginFilter start");
     }
 
     @Override
@@ -35,9 +36,9 @@ public class LoginFilter implements Filter {
         String requestPath = uri.substring(uri.lastIndexOf("/") + 1, uri.length());
         logger.info(requestPath);
         // 判断： 先放行一些资源：/login.jsp、/login
-        if(uri.contains("static")){
+        if (uri.contains("static")) {
             filterChain.doFilter(request, response);
-        }else if ("do_login".equals(requestPath) || "login.jsp".equals(requestPath)||"register.jsp".equals(requestPath)||"register".equals(requestPath)) {
+        } else if ("do_login".equals(requestPath) || "login.jsp".equals(requestPath) || "register.jsp".equals(requestPath) || "register".equals(requestPath)) {
             // 放行
             filterChain.doFilter(request, response);
         } else {
@@ -69,6 +70,6 @@ public class LoginFilter implements Filter {
 
     @Override
     public void destroy() {
-    logger.info("LoginFilter stop");
+        logger.info("LoginFilter stop");
     }
 }

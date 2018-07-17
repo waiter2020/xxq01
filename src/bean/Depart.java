@@ -30,10 +30,11 @@ public class Depart {
     /**
      * 部门总人数
      */
-    @Count(name = "department",bean = Staff.class)
+    @Count(name = "department", bean = Staff.class)
     private int count;
 
-    public Depart(){}
+    public Depart() {
+    }
 
     public Depart(String departName, String describe) {
         this.departName = departName;

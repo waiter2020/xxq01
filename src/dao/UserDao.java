@@ -10,6 +10,7 @@ import bean.User;
 public interface UserDao {
     /**
      * 通过用户名查找一个用户
+     *
      * @param userName
      * @return
      */
@@ -17,6 +18,7 @@ public interface UserDao {
 
     /**
      * 保存一个用户
+     *
      * @param user
      * @return
      */

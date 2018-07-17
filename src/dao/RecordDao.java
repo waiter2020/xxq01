@@ -14,6 +14,7 @@ import java.util.LinkedList;
 public interface RecordDao {
     /**
      * 通过用户名查找变更
+     *
      * @param userName
      * @return
      */
@@ -21,6 +22,7 @@ public interface RecordDao {
 
     /**
      * 保存变动信息
+     *
      * @param record
      * @return
      */
@@ -28,12 +30,13 @@ public interface RecordDao {
 
     /**
      * 通过起始时间和结束时间获取一个分页列表
+     *
      * @param pageBean
      * @param endDate
      * @param startDate
      * @return
      */
-    PageBean findPageByEndDateBeforAndStartAfter(PageBean pageBean,Date endDate,Date startDate);
+    PageBean findPageByEndDateBeforAndStartAfter(PageBean pageBean, Date endDate, Date startDate);
 
-    LinkedList findListByEndDateBeforAndStartAfterAndMark(Date endDate, Date startDate,int mark);
+    LinkedList findListByEndDateBeforAndStartAfterAndMark(Date endDate, Date startDate, int mark);
 }

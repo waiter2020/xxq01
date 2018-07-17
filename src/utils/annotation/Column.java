@@ -9,12 +9,12 @@ import java.lang.annotation.Target;
  * Created by  waiter on 18-7-9  下午4:14.
  *
  * @author waiter
- *
+ * <p>
  * 标注在实体类属性上
  * name为该属性对应字段
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Column {
-    String name() ;
+    String name();
 }
