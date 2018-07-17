@@ -72,7 +72,8 @@ public class Staff {
      */
     private int sex;
 
-    public Staff(){}
+    public Staff() {
+    }
 
     public Staff(String userName, String staffName, Depart departMent, Station station, String phoneNum, int age, String idCard, boolean isWork, int wAges, String email, String address, int sex) {
         this.userName = userName;

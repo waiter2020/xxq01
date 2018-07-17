@@ -9,7 +9,7 @@ import java.io.IOException;
  *
  * @author waiter
  */
-@WebFilter(filterName = "EncodingfFilter",urlPatterns = "/*")
+@WebFilter(filterName = "EncodingfFilter", urlPatterns = "/*")
 public class EncodingfFilter implements Filter {
     @Override
     public void destroy() {

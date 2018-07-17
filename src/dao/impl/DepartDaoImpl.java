@@ -13,36 +13,37 @@ import java.util.LinkedList;
  * @ Date       ：Created in 下午7:50 18-7-9
  * 部门Dao层接口实现类
  */
-public class DepartDaoImpl implements DepartDao{
+public class DepartDaoImpl implements DepartDao {
     private static final DepartDaoImpl departDaoImpl = new DepartDaoImpl();
 
-    private DepartDaoImpl(){}
+    private DepartDaoImpl() {
+    }
 
 
     @Override
-    public Depart findByName(String departName){
-        LinkedList listBySome = DBUtils.getListBySome(Depart.class, "departname", departName+"");
-        if(listBySome.size()==0){
-            return new Depart(0,"not exist");
-        }else{
+    public Depart findByName(String departName) {
+        LinkedList listBySome = DBUtils.getListBySome(Depart.class, "departname", departName + "");
+        if (listBySome.size() == 0) {
+            return new Depart(0, "not exist");
+        } else {
             //取第一个
             return (Depart) listBySome.remove(0);
         }
     }
 
     @Override
-    public boolean departInsert(Depart depart){
+    public boolean departInsert(Depart depart) {
         return DBUtils.insert(depart);
     }
 
     @Override
-    public boolean deleteByName(String departName){
+    public boolean deleteByName(String departName) {
 
-        Depart depart=findByName(departName);
-        if(depart.getDepartName()==null){
+        Depart depart = findByName(departName);
+        if (depart.getDepartName() == null) {
             return false;
-        }else{
-            return DBUtils.delete(Depart.class,depart.getId());
+        } else {
+            return DBUtils.delete(Depart.class, depart.getId());
         }
 
     }
@@ -50,12 +51,12 @@ public class DepartDaoImpl implements DepartDao{
 
     @Override
     public PageBean listPage(PageBean pageBean) {
-        return DBUtils.getPage(pageBean,Depart.class);
+        return DBUtils.getPage(pageBean, Depart.class);
     }
 
     @Override
     public Depart findById(int id) {
-        return (Depart) DBUtils.getObjectById(Depart.class,id);
+        return (Depart) DBUtils.getObjectById(Depart.class, id);
     }
 
     @Override

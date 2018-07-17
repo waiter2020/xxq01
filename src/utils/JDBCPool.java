@@ -16,7 +16,7 @@ public class JDBCPool {
     /**
      * 连接池
      */
-    private static final LinkedList<Connection> connections=new LinkedList<>();
+    private static final LinkedList<Connection> connections = new LinkedList<>();
     private static final Logger loger = Logger.getLogger(JDBCPool.class.getName());
     /**
      * 获取配置信息
@@ -25,12 +25,13 @@ public class JDBCPool {
     /**
      * 连接超时时间
      */
-    private static long active=Long.parseLong(props.getProperty("activeTime"))+System.currentTimeMillis();
-    static{
+    private static long active = Long.parseLong(props.getProperty("activeTime")) + System.currentTimeMillis();
+
+    static {
         String initialSize = props.getProperty("initialSize");
-        int i=Integer.parseInt(initialSize);
-        loger.info("初始化连接数"+i);
-        while (i>0){
+        int i = Integer.parseInt(initialSize);
+        loger.info("初始化连接数" + i);
+        while (i > 0) {
             try {
                 /**
                  * 初始化连接
@@ -38,7 +39,7 @@ public class JDBCPool {
                 connections.add(JDBCUtils.getConnection());
                 i--;
             } catch (SQLException e) {
-                loger.log(Level.ALL,"数据库连接异常，请检查配置文件");
+                loger.log(Level.ALL, "数据库连接异常，请检查配置文件");
                 e.printStackTrace();
                 break;
             }
@@ -48,26 +49,29 @@ public class JDBCPool {
     /**
      * 私有构造，禁止实例化
      */
-    private JDBCPool(){}
+    private JDBCPool() {
+    }
 
     /**
      * 获取当前连接数
+     *
      * @return
      */
-    public static int getTotalConnection(){
+    public static int getTotalConnection() {
         return connections.size();
     }
 
     /**
      * 获取一个连接
+     *
      * @return
      */
-    public static synchronized Connection getConnection(){
-        if(System.currentTimeMillis()>active){
+    public static synchronized Connection getConnection() {
+        if (System.currentTimeMillis() > active) {
             reload();
         }
-        if(connections.size()==0){
-        addConnection();
+        if (connections.size() == 0) {
+            addConnection();
         }
         return connections.remove(0);
     }
@@ -75,15 +79,15 @@ public class JDBCPool {
     /**
      * 当连接池没有连接时新建连接
      */
-    private static void addConnection(){
+    private static void addConnection() {
         String minIdle = props.getProperty("minIdle");
         int i = Integer.parseInt(minIdle);
-        while (i>=0){
+        while (i >= 0) {
             try {
                 connections.add(JDBCUtils.getConnection());
                 i--;
             } catch (SQLException e) {
-                loger.log(Level.ALL,"未知错误，添加连接出错");
+                loger.log(Level.ALL, "未知错误，添加连接出错");
                 e.printStackTrace();
                 break;
             }
@@ -93,7 +97,7 @@ public class JDBCPool {
     /**
      * 刷新数据库连接，防止连接超时被错误获取
      */
-    private static void reload(){
+    private static void reload() {
         for (Connection connection : connections) {
             try {
                 connection.close();
@@ -103,34 +107,35 @@ public class JDBCPool {
             }
         }
         int i = Integer.parseInt(props.getProperty("initialSize"));
-        while (i>0){
+        while (i > 0) {
             try {
                 connections.add(JDBCUtils.getConnection());
                 i--;
             } catch (SQLException e) {
-                loger.log(Level.ALL,"刷新数据连接池异常");
+                loger.log(Level.ALL, "刷新数据连接池异常");
                 e.printStackTrace();
                 break;
             }
         }
-        active=Long.parseLong(props.getProperty("activeTime"))+System.currentTimeMillis();
+        active = Long.parseLong(props.getProperty("activeTime")) + System.currentTimeMillis();
     }
 
     /**
      * 回收连接
+     *
      * @param connection
      */
-    public static void close(Connection connection){
+    public static void close(Connection connection) {
         String maxSize = props.getProperty("maxSize");
         int i = Integer.parseInt(maxSize);
-        if(connections.size()>=i){
+        if (connections.size() >= i) {
             try {
                 connection.close();
             } catch (SQLException e) {
-                loger.log(Level.ALL,"连接关闭异常");
+                loger.log(Level.ALL, "连接关闭异常");
                 e.printStackTrace();
             }
-        }else {
+        } else {
             connections.add(connection);
         }
     }

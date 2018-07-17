@@ -50,7 +50,7 @@ public class StationServlet extends HttpServlet {
                 pageBean.setCurrentPage(Integer.parseInt(currentPage));
             }
 
-            pageBean = stationService.getPageByDepart(pageBean,Integer.parseInt(depart));
+            pageBean = stationService.getPageByDepart(pageBean, Integer.parseInt(depart));
             request.setAttribute("depart", depart);
             request.setAttribute("page", pageBean);
         }
@@ -68,8 +68,8 @@ public class StationServlet extends HttpServlet {
         }
         pageBean = staffService.findPageByDepartAndStation(pageBean, Integer.parseInt(depart), Integer.parseInt(station));
         request.setAttribute("page", pageBean);
-        request.setAttribute("station",station);
-        request.setAttribute("depart",depart);
+        request.setAttribute("station", station);
+        request.setAttribute("depart", depart);
         request.getRequestDispatcher("/staff/list.jsp").forward(request, response);
     }
 

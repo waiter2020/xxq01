@@ -12,24 +12,25 @@ import java.util.LinkedList;
  * @author waiter
  */
 public class UserDaoImpl implements UserDao {
-    private static final UserDaoImpl userDaoImpl=new UserDaoImpl();
+    private static final UserDaoImpl userDaoImpl = new UserDaoImpl();
 
-    private UserDaoImpl(){}
+    private UserDaoImpl() {
+    }
 
     @Override
     public User findByUserName(String userName) {
         LinkedList userName1 = DBUtils.getListBySome(User.class, "userName", userName);
-        return userName1.size()>0?(User) userName1.remove(0):null;
+        return userName1.size() > 0 ? (User) userName1.remove(0) : null;
     }
 
     @Override
     public boolean save(User user) {
         boolean b;
         //判断是插入还是更新
-        if(user.getId()>0){
-            b=DBUtils.update(user);
-        }else {
-            b=DBUtils.insert(user);
+        if (user.getId() > 0) {
+            b = DBUtils.update(user);
+        } else {
+            b = DBUtils.insert(user);
         }
         return b;
     }

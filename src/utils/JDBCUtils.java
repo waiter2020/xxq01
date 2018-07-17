@@ -23,7 +23,7 @@ public class JDBCUtils {
             props = new Properties();
             props.load(in);
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -38,7 +38,8 @@ public class JDBCUtils {
     /**
      * 私有构造
      */
-    private JDBCUtils(){}
+    private JDBCUtils() {
+    }
 
     /**
      * 获取连接!
@@ -53,6 +54,7 @@ public class JDBCUtils {
 
     /**
      * 获取配置
+     *
      * @return
      */
     public static Properties getProps() {

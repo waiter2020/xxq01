@@ -11,30 +11,32 @@ import dao.impl.UserDaoImpl;
  */
 public class UserService {
     private final UserDao userDao = UserDaoImpl.getUserDaoImpl();
-    private static final UserService userService=new UserService();
-    private UserService(){}
+    private static final UserService userService = new UserService();
+
+    private UserService() {
+    }
 
 
     /**
      * 通过用户名查找用户
+     *
      * @param userName
      * @return
      */
-    public User findByUserName(String userName){
+    public User findByUserName(String userName) {
 
         return userDao.findByUserName(userName);
     }
 
     /**
-     *
      * @param user
      * @return
      */
-    public boolean save(User user){
+    public boolean save(User user) {
         return userDao.save(user);
     }
 
-    public static UserService getUserService(){
+    public static UserService getUserService() {
         return userService;
     }
 }

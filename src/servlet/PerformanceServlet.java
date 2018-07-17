@@ -19,7 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@WebServlet(name = "PerformanceServlet",urlPatterns = {"/record/report","/record/staff_report","/record/list"})
+@WebServlet(name = "PerformanceServlet", urlPatterns = {"/record/report", "/record/staff_report", "/record/list"})
 public class PerformanceServlet extends HttpServlet {
     private PerformanceService performanceService = PerformanceService.getPerformanceService();
     private OfficeService officeService = OfficeService.getOfficeService();
@@ -42,8 +42,8 @@ public class PerformanceServlet extends HttpServlet {
         String substring = uri.substring(8, uri.length());
         if ("report".equals(substring)) {
             getReport(request, response);
-        }else if ("list".equals(substring)){
-            getPage(request,response);
+        } else if ("list".equals(substring)) {
+            getPage(request, response);
         }
     }
 
@@ -86,11 +86,11 @@ public class PerformanceServlet extends HttpServlet {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(parse);
         int m = calendar.get(Calendar.MONTH);
-        if (m==0){
-            calendar.set(Calendar.YEAR-1,11,1);
-        }else {
-            calendar.set(Calendar.MONTH,m-1);
-            calendar.set(Calendar.DATE,1);
+        if (m == 0) {
+            calendar.set(Calendar.YEAR - 1, 11, 1);
+        } else {
+            calendar.set(Calendar.MONTH, m - 1);
+            calendar.set(Calendar.DATE, 1);
         }
         Date time = calendar.getTime();
         PageBean pageBean = new PageBean();
@@ -101,13 +101,12 @@ public class PerformanceServlet extends HttpServlet {
         pageBean = performanceService.getPageByDateAfter(pageBean, time);
 
 
-
         LinkedList<Performance> pageData = pageBean.getPageData();
         pageData.sort(Comparator.naturalOrder());
         pageBean.setPageData(pageData);
 
-        request.setAttribute("page",pageBean);
-        request.getRequestDispatcher("/record/list.jsp").forward(request,response);
+        request.setAttribute("page", pageBean);
+        request.getRequestDispatcher("/record/list.jsp").forward(request, response);
 
     }
 }

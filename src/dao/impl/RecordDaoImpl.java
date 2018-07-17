@@ -21,7 +21,7 @@ public class RecordDaoImpl implements RecordDao {
     @Override
     public Record findByUserName(String userName) {
         LinkedList userName1 = DBUtils.getListBySome(Record.class, "userName", userName);
-        if(userName1==null||userName1.size()==0){
+        if (userName1 == null || userName1.size() == 0) {
             return null;
         }
         return (Record) userName1.remove(0);
@@ -29,7 +29,7 @@ public class RecordDaoImpl implements RecordDao {
 
     @Override
     public boolean save(Record record) {
-        boolean b=DBUtils.insert(record);
+        boolean b = DBUtils.insert(record);
         return b;
     }
 
@@ -38,14 +38,14 @@ public class RecordDaoImpl implements RecordDao {
         //类型转换
         java.sql.Date startDates = new java.sql.Date(startDate.getTime());
         java.sql.Date endDates = new java.sql.Date(endDate.getTime());
-        return DBUtils.getPageByBeforSomeAndAfterSome(pageBean, Record.class,"date",endDates.toString(),"date",startDates.toString());
+        return DBUtils.getPageByBeforSomeAndAfterSome(pageBean, Record.class, "date", endDates.toString(), "date", startDates.toString());
     }
 
     @Override
-    public LinkedList findListByEndDateBeforAndStartAfterAndMark(Date endDate, Date startDate,int mark) {
+    public LinkedList findListByEndDateBeforAndStartAfterAndMark(Date endDate, Date startDate, int mark) {
         java.sql.Date startDates = new java.sql.Date(startDate.getTime());
         java.sql.Date endDates = new java.sql.Date(endDate.getTime());
-        return DBUtils.getListByBeforSomeAndAfterSomeAndSome( Record.class,"date",endDates.toString(),"date",startDates.toString(),"mark",mark+"");
+        return DBUtils.getListByBeforSomeAndAfterSomeAndSome(Record.class, "date", endDates.toString(), "date", startDates.toString(), "mark", mark + "");
     }
 
 

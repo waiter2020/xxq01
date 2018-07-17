@@ -7,16 +7,46 @@ import java.math.BigDecimal;
  * @ Date       ：Created in 下午5:19 18-7-15
  */
 public class Report {
-    private int departId;//部门id
-    private double avgScore;//部门平均绩效
-    private double avgPresent;//部门平均考勤
-    private int zNum;//部门在职人数
-    private int lNum;//部门离职人数
-    private int sNum;//部门实习人数
-    private int yNum;//部门正式员工数
-    private double avgAge;//部门平均年龄
-    private int man;//部门男人个数
-    private int woman;//部门女人个数
+    /**
+     * 部门id
+     */
+    private int departId;
+    /**
+     * 部门平均绩效
+     */
+    private double avgScore;
+    /**
+     * 部门平均考勤
+     */
+    private double avgPresent;
+    /**
+     * 部门在职人数
+     */
+    private int zNum;
+    /**
+     * 部门离职人数
+     */
+    private int lNum;
+    /**
+     * 部门实习人数
+     */
+    private int sNum;
+    /**
+     * 部门正式员工数
+     */
+    private int yNum;
+    /**
+     * 部门平均年龄
+     */
+    private double avgAge;
+    /**
+     * 部门男人个数
+     */
+    private int man;
+    /**
+     * 部门女人个数
+     */
+    private int woman;
     private String departName;
 
     public String getDepartName() {
@@ -27,7 +57,8 @@ public class Report {
         this.departName = departName;
     }
 
-    public Report(){}
+    public Report() {
+    }
 
     public Report(int departId, double avgScore, double avgPresent, int zNum, int lNum, int sNum, int yNum, int avgAge, int man, int woman) {
         this.departId = departId;

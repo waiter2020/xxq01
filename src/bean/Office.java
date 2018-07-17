@@ -19,7 +19,6 @@ public class Office {
     private Staff staff;
     /**
      * 日期
-     *
      */
     @DateType
     private Date date;
@@ -28,13 +27,14 @@ public class Office {
      */
     private int state;
 
-    public Office(){}
+    public Office() {
+    }
 
-    public Office(int id,Staff staff, Date date, int state) {
+    public Office(int id, Staff staff, Date date, int state) {
         this.id = id;
         this.date = new Date(date.getTime());
         this.state = state;
-        this.staff=staff;
+        this.staff = staff;
     }
 
     public Office(Staff staff, Date date, int state) {

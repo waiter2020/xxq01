@@ -23,7 +23,7 @@ import java.util.LinkedList;
  *
  * @author waiter
  */
-@WebServlet(name = "RecordServlet",urlPatterns = {"/record/r_form","/record/l_form","/record/b_form","/record/g_form"})
+@WebServlet(name = "RecordServlet", urlPatterns = {"/record/r_form", "/record/l_form", "/record/b_form", "/record/g_form"})
 public class RecordServlet extends HttpServlet {
     private DepartService departService = DepartService.getDepartService();
     private OfficeService officeService = OfficeService.getOfficeService();
@@ -36,11 +36,11 @@ public class RecordServlet extends HttpServlet {
         String substring = uri.substring(8, uri.length());
         if ("r_form".equals(substring)) {
             rForm(request, response);
-        }else if ("l_form".equals(substring)) {
+        } else if ("l_form".equals(substring)) {
             lForm(request, response);
-        }else if ("b_form".equals(substring)) {
+        } else if ("b_form".equals(substring)) {
             bForm(request, response);
-        }else if ("g_form".equals(substring)) {
+        } else if ("g_form".equals(substring)) {
             gForm(request, response);
         }
     }
@@ -53,11 +53,11 @@ public class RecordServlet extends HttpServlet {
     private void lForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String start = request.getParameter("start");
         String end = request.getParameter("end");
-        request.setAttribute("start",start);
-        request.setAttribute("end",end);
-        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        Date parse=null;
-        Date parse1=null;
+        request.setAttribute("start", start);
+        request.setAttribute("end", end);
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parse = null;
+        Date parse1 = null;
         try {
             parse = sDateFormat.parse(start);
             parse1 = sDateFormat.parse(end);
@@ -66,19 +66,19 @@ public class RecordServlet extends HttpServlet {
         }
 
         LinkedList listByEndDateBeforAndStartAfterAndState = officeService.findListByEndDateBeforAndStartAfterAndState(parse1, parse, 2);
-        request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
-        request.getRequestDispatcher("/record/l_form.jsp").forward(request,response);
+        request.setAttribute("list", listByEndDateBeforAndStartAfterAndState);
+        request.getRequestDispatcher("/record/l_form.jsp").forward(request, response);
 
     }
 
     private void rForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String start = request.getParameter("start");
         String end = request.getParameter("end");
-        request.setAttribute("start",start);
-        request.setAttribute("end",end);
-        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        Date parse=null;
-        Date parse1=null;
+        request.setAttribute("start", start);
+        request.setAttribute("end", end);
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parse = null;
+        Date parse1 = null;
         try {
             parse = sDateFormat.parse(start);
             parse1 = sDateFormat.parse(end);
@@ -87,18 +87,18 @@ public class RecordServlet extends HttpServlet {
         }
 
         LinkedList listByEndDateBeforAndStartAfterAndState = officeService.findListByEndDateBeforAndStartAfterAndState(parse1, parse, 0);
-        request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
-        request.getRequestDispatcher("/record/r_form.jsp").forward(request,response);
+        request.setAttribute("list", listByEndDateBeforAndStartAfterAndState);
+        request.getRequestDispatcher("/record/r_form.jsp").forward(request, response);
     }
 
     private void bForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String start = request.getParameter("start");
         String end = request.getParameter("end");
-        request.setAttribute("start",start);
-        request.setAttribute("end",end);
-        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        Date parse=null;
-        Date parse1=null;
+        request.setAttribute("start", start);
+        request.setAttribute("end", end);
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parse = null;
+        Date parse1 = null;
         try {
             parse = sDateFormat.parse(start);
             parse1 = sDateFormat.parse(end);
@@ -109,18 +109,18 @@ public class RecordServlet extends HttpServlet {
         LinkedList listByEndDateBeforAndStartAfterAndState = recordService.findListByEndDateBeforAndStartAfterAndMark(parse1, parse, 1);
         LinkedList listByEndDateBeforAndStartAfterAndMark = recordService.findListByEndDateBeforAndStartAfterAndMark(parse1, parse, 3);
         listByEndDateBeforAndStartAfterAndState.addAll(listByEndDateBeforAndStartAfterAndMark);
-        request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
-        request.getRequestDispatcher("/record/b_form.jsp").forward(request,response);
+        request.setAttribute("list", listByEndDateBeforAndStartAfterAndState);
+        request.getRequestDispatcher("/record/b_form.jsp").forward(request, response);
     }
 
     private void gForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String start = request.getParameter("start");
         String end = request.getParameter("end");
-        request.setAttribute("start",start);
-        request.setAttribute("end",end);
-        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        Date parse=null;
-        Date parse1=null;
+        request.setAttribute("start", start);
+        request.setAttribute("end", end);
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parse = null;
+        Date parse1 = null;
         try {
             parse = sDateFormat.parse(start);
             parse1 = sDateFormat.parse(end);
@@ -131,7 +131,7 @@ public class RecordServlet extends HttpServlet {
         LinkedList listByEndDateBeforAndStartAfterAndState = recordService.findListByEndDateBeforAndStartAfterAndMark(parse1, parse, 2);
         LinkedList listByEndDateBeforAndStartAfterAndMark = recordService.findListByEndDateBeforAndStartAfterAndMark(parse1, parse, 3);
         listByEndDateBeforAndStartAfterAndState.addAll(listByEndDateBeforAndStartAfterAndMark);
-        request.setAttribute("list",listByEndDateBeforAndStartAfterAndState);
-        request.getRequestDispatcher("/record/g_form.jsp").forward(request,response);
+        request.setAttribute("list", listByEndDateBeforAndStartAfterAndState);
+        request.getRequestDispatcher("/record/g_form.jsp").forward(request, response);
     }
 }

@@ -11,7 +11,8 @@ import java.lang.annotation.Target;
  * @author waiter
  */
 
-/**标注在实体类的日期型数据上
+/**
+ * 标注在实体类的日期型数据上
  * 实现格式转换
  * 由于Date有sql的和utils
  * 为了转化它们

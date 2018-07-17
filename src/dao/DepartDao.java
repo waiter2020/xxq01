@@ -25,6 +25,7 @@ public interface DepartDao {
 
     /**
      * 通过部门名称查询部门信息
+     *
      * @param departname
      * @return 部门实体类，包含所查找元组
      */
@@ -32,6 +33,7 @@ public interface DepartDao {
 
     /**
      * 向部门信息表插入一条新的数据
+     *
      * @param depart
      * @return 是否成功执行插入操作
      */
@@ -39,6 +41,7 @@ public interface DepartDao {
 
     /**
      * 通过部门名删除一条信息
+     *
      * @param departname
      * @return 是否成功删除成功
      */
@@ -53,6 +56,7 @@ public interface DepartDao {
 
     /**
      * 分页展示部门信息
+     *
      * @param pageBean
      * @return PageBean
      */
@@ -60,6 +64,7 @@ public interface DepartDao {
 
     /**
      * 通过部门id查找部门
+     *
      * @param id 部门id
      * @return Depart
      */
@@ -67,6 +72,7 @@ public interface DepartDao {
 
     /**
      * 查询全部部门表
+     *
      * @return list对象
      */
     LinkedList<Depart> findAll();
