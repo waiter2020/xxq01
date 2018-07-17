@@ -360,7 +360,9 @@ public class StaffServlet extends HttpServlet {
             switch (op) {
                 case "1":
                     Staff byUserName1 = staffService.findByUserName(condition);
-                    pageBean.getPageData().add(byUserName1);
+                    if (byUserName1!=null) {
+                        pageBean.getPageData().add(byUserName1);
+                    }
                     break;
                 case "2":
                     pageBean = staffService.findPageByStaffName(pageBean, condition);
