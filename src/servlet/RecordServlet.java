@@ -47,7 +47,7 @@ public class RecordServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String s;
+
     }
 
     private void lForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
