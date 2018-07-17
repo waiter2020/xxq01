@@ -115,7 +115,12 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> 报表查询<span class="fa arrow"></span></a>
+                        <a <%
+                            active = request.getParameter("active");
+                            if(active=="r-form"||active=="l-form"||active=="b-form"||active=="g-form")
+                                out.println("class=\"active-menu\"");
+                        %>
+                                href="${pageContext.request.contextPath}"><i class="fa fa-sitemap"></i> 报表查询<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a <%
