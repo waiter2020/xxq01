@@ -100,6 +100,7 @@
                                         <div class="form-group">
                                             <label for="disabledSelect-depart">部门</label>
                                             <select id="disabledSelect-depart" class="form-control" name="departMent" onchange="func(this.value)">
+                                                <option> </option>
                                                 <c:choose>
                                                     <c:when test="${not empty requestScope.departs}">
                                                         <c:forEach var="departs" items="${requestScope.departs}" varStatus="vs">
