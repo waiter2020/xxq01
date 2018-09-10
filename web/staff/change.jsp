@@ -23,7 +23,7 @@
 
 </head>
 <body>
-        <jsp:include page="${pageContext.request.contextPath}/commons/nav.jsp">
+        <jsp:include page="/commons/nav.jsp">
             <jsp:param value="staff-list" name="active"/>
         </jsp:include>
         <div id="wrapper">

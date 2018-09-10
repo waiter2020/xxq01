@@ -21,12 +21,15 @@ import java.util.logging.Logger;
 public class LoginServlet extends HttpServlet {
     private UserService userService = UserService.getUserService();
     private Logger logger = Logger.getLogger(this.getClass().getName());
-
+    private String string;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        String substring = uri.substring(1, uri.length());
+        String substring2 = uri.substring(1);
+        string = "/"+substring2.substring(0, substring2.indexOf("/"));
+        String substring = uri.substring(uri.lastIndexOf("/")+1, uri.length());
+        logger.info(substring);
         if ("do_logout".equals(substring)) {
             doLogout(request, response);
         } else {
@@ -37,7 +40,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        String substring = uri.substring(1, uri.length());
+        String substring2 = uri.substring(1);
+        string = "/"+substring2.substring(0, substring2.indexOf("/"));
+        String substring = uri.substring(uri.lastIndexOf("/")+1, uri.length());
+        logger.info(substring);
         if ("do_login".equals(substring)) {
             doLogin(request, response);
         } else if ("do_logout".equals(substring)) {
@@ -59,7 +65,7 @@ public class LoginServlet extends HttpServlet {
             if (byUserName.getStaff().getIsWork()) {
                 logger.info(request.getRemoteAddr() + "尝试使用用户" + username + "登录成功");
                 request.getSession().setAttribute("loginInfo", byUserName);
-                response.sendRedirect("/index.jsp");
+                response.sendRedirect(string+"/index.jsp");
             } else {
                 logger.info(request.getRemoteAddr() + "尝试使用用户" + username + "登录失败");
                 request.setAttribute("msg", "您已离职");

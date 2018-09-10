@@ -24,7 +24,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        String substring = uri.substring(6, uri.length());
+        String substring = uri.substring(uri.lastIndexOf("/")+1, uri.length());
         if ("change".equals(substring)) {
             changeUser(request, response);
         }

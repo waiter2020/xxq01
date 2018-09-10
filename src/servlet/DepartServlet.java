@@ -19,7 +19,7 @@ public class DepartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        String substring = uri.substring(8, uri.length());
+        String substring = uri.substring(uri.lastIndexOf("/")+1, uri.length());
         if ("add".equals(substring)) {
             addDepart(request, response);
         }
@@ -28,7 +28,7 @@ public class DepartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        String substring = uri.substring(8, uri.length());
+        String substring = uri.substring(uri.lastIndexOf("/")+1, uri.length());
         if ("list".equals(substring)) {
             getDpartPage(request, response);
         }

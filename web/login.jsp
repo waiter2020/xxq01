@@ -16,7 +16,7 @@
 				<c:if test="${requestScope.get('msg')!=null}">
 					<script>confirm("${requestScope.get('msg')}")</script>
 				</c:if>
-				<form class="form-login" method="post" action="/do_login">
+				<form class="form-login" method="post" action="${pageContext.request.contextPath}/do_login">
 					<p> Username</p>
 					<script>
                         function t1(value){

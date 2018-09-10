@@ -24,7 +24,7 @@
 </head>
 <body>
 <div id="wrapper">
-	<jsp:include page="${pageContext.request.contextPath}/commons/nav.jsp">
+	<jsp:include page="/commons/nav.jsp">
 		<jsp:param value="station-list" name="active"/>
 	</jsp:include>
 	<div id="page-wrapper" >

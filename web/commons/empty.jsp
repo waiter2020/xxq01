@@ -26,7 +26,7 @@
 </head>
 <body>
 <div id="wrapper">
-    <jsp:include page="${pageContext.request.contextPath}/commons/nav.jsp">
+    <jsp:include page="/commons/nav.jsp">
         <jsp:param value="empty" name="active"/>
     </jsp:include>
 

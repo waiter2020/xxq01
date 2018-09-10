@@ -31,7 +31,7 @@ public class StationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        String substring = uri.substring(9, uri.length());
+        String substring = uri.substring(uri.lastIndexOf("/")+1, uri.length());
         if ("list".equals(substring)) {
             getStationList(request, response);
         } else if ("staff".equals(substring)) {

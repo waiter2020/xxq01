@@ -33,7 +33,7 @@ public class RecordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        String substring = uri.substring(8, uri.length());
+        String substring = uri.substring(uri.lastIndexOf("/")+1, uri.length());
         if ("r_form".equals(substring)) {
             rForm(request, response);
         } else if ("l_form".equals(substring)) {

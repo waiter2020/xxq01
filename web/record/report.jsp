@@ -26,7 +26,7 @@
 </head>
 <body>
 <div id="wrapper">
-    <jsp:include page="${pageContext.request.contextPath}/commons/nav.jsp">
+    <jsp:include page="/commons/nav.jsp">
         <jsp:param value="report" name="active"/>
     </jsp:include>
 <form action="${pageContext.request.contextPath}/record/report" method="post">

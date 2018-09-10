@@ -38,7 +38,7 @@ public class StaffServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        String substring = uri.substring(7, uri.length());
+        String substring = uri.substring(uri.lastIndexOf("/")+1, uri.length());
         if ("change".equals(substring)) {
             changeStaff(request, response);
         } else if ("add".equals(substring)) {
@@ -53,7 +53,7 @@ public class StaffServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        String substring = uri.substring(7, uri.length());
+        String substring = uri.substring(uri.lastIndexOf("/")+1, uri.length());
         if ("list".equals(substring)) {
             getStaffList(request, response);
         } else if ("delete".equals(substring)) {
@@ -223,7 +223,6 @@ public class StaffServlet extends HttpServlet {
 
         Depart byId = departService.findById(Integer.parseInt(departMent));
         Station byId1 = stationService.findById(Integer.parseInt(station));
-        //Station byId1 = stationService.findByNameAndDepart(station, Integer.parseInt(departMent));
         Staff staff = new Staff(userName, staffName, byId, byId1, phoneNum, Integer.parseInt(age), idCard, true, Integer.parseInt(wAges), email, address, Integer.parseInt(sex));
         boolean save = staffService.save(staff);
         staff = staffService.findByUserName(userName);

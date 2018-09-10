@@ -30,7 +30,7 @@
 </head>
 <body>
 <div id="wrapper">
-    <jsp:include page="${pageContext.request.contextPath}/commons/nav.jsp">
+    <jsp:include page="/commons/nav.jsp">
         <jsp:param value="r-form" name="active"/>
     </jsp:include>
 
